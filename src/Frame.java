@@ -1,5 +1,10 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Frame extends JFrame{
     private JPanel mainPanel;
@@ -11,11 +16,26 @@ public class Frame extends JFrame{
         mainPanel = new JPanel(cardLayout);
         buttonClass = new ButtonClass(this);
 
+        //loading screen animation
+        ArrayList<BufferedImage> startingImages = new ArrayList<>();
+        for (int i = 1; i <= 3; i++) {
+            String fileName = "src/images/starting" + i + ".PNG";
+            try {
+                startingImages.add(ImageIO.read(new File(fileName)));
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        JPanelAnimation panel = new JPanelAnimation(this, "StartScreen" ,startingImages, 300, 3);
+        mainPanel.add(panel);
+
+        //create card panels
         JPanel startScreen = PanelClass.createPanel("src/images/start.png");
 
         //manually control button positions
         startScreen.setLayout(null);
 
+        //add buttons
         startScreen.add(buttonClass.getStartbtn());
 
         mainPanel.add(startScreen, "StartScreen");

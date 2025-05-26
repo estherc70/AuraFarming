@@ -31,20 +31,23 @@ public class Frame extends JFrame{
 
         //create card panels
         JPanel startScreen = PanelClass.createPanel("src/images/start.png");
+        JPanel backgroundScreen = PanelClass.createPanel("src/images/background.png");
 
         //manually control button positions
         startScreen.setLayout(null);
+        backgroundScreen.setLayout(null);
 
         //add buttons
         startScreen.add(buttonClass.getUsernameText());
 
         mainPanel.add(startScreen, "StartScreen");
+        mainPanel.add(backgroundScreen, "Background");
 
         Container pane = getContentPane();
         pane.add(mainPanel, BorderLayout.CENTER);
         pane.add(buttonClass.getBtnPanel(), BorderLayout.SOUTH);
 
-        setTitle("CardLayoutOrganized");
+        setTitle("Aura Farming Simulator");
         setSize(1000, 700); // Set the size of the window
         setResizable(false); // Disable resizing the window
         setDefaultCloseOperation(EXIT_ON_CLOSE);

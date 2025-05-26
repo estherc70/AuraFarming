@@ -40,6 +40,7 @@ public class ButtonClass {
         usernameText.addActionListener(e -> {
             player.setUsername(usernameText.getText());
             System.out.println(player.getUsername());
+            cardLayoutPanel.showCard("Background");
         });
     }
 

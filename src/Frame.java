@@ -36,7 +36,7 @@ public class Frame extends JFrame{
         startScreen.setLayout(null);
 
         //add buttons
-        startScreen.add(buttonClass.getStartbtn());
+        startScreen.add(buttonClass.getUsernameText());
 
         mainPanel.add(startScreen, "StartScreen");
 
@@ -50,6 +50,14 @@ public class Frame extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // Center the window on the screen
         setVisible(true);
+
+        //create custom cursor
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Image image = toolkit.getImage("src/images/cursor.png");
+        Point hotSpot = new Point(0, 0);
+
+        Cursor customCursor = toolkit.createCustomCursor(image, hotSpot, "MyCursor");
+        mainPanel.setCursor(customCursor);
     }
 
     public JPanel getMainPanel() {

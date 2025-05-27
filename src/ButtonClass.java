@@ -49,7 +49,7 @@ public class ButtonClass {
     private void addActionListeners() {
         usernameText.addActionListener(e -> {
             player.setUsername(usernameText.getText());
-            System.out.println(player.getUsername());
+            System.out.println("username: " + player.getUsername());
             cardLayoutPanel.showCard("Background");
         });
 

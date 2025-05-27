@@ -35,7 +35,7 @@ public class ButtonClass {
         livestreamApp.setFont(new Font("Serif", Font.ITALIC, 15));
 
         //set button/text field size
-        usernameText.setBounds(150,430,750,100);
+        usernameText.setBounds(150,360,700,75);
         livestreamApp.setBounds(300,150,100,100);
         livestreamChat.setBounds(630,80,280,500);
 

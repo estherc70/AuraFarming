@@ -19,7 +19,7 @@ public class Frame extends JFrame{
         //loading screen animation
         ArrayList<BufferedImage> startingImages = new ArrayList<>();
         for (int i = 1; i <= 5; i++) {
-            String fileName = "src/images/Staring (" + i + ").PNG";
+            String fileName = "src/images/starting" + i + ".png";
             try {
                 startingImages.add(ImageIO.read(new File(fileName)));
             } catch (IOException e) {
@@ -30,7 +30,7 @@ public class Frame extends JFrame{
         mainPanel.add(startPanel);
 
         //create card panels
-        JPanel startScreen = PanelClass.createPanel("src/images/start.png");
+        JPanel startScreen = PanelClass.createPanel("src/images/enteruser.png");
         JPanel backgroundScreen = PanelClass.createPanel("src/images/background.png");
         JPanel livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
 

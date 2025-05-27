@@ -18,8 +18,8 @@ public class Frame extends JFrame{
 
         //loading screen animation
         ArrayList<BufferedImage> startingImages = new ArrayList<>();
-        for (int i = 1; i <= 3; i++) {
-            String fileName = "src/images/starting" + i + ".PNG";
+        for (int i = 1; i <= 5; i++) {
+            String fileName = "src/images/Staring (" + i + ").PNG";
             try {
                 startingImages.add(ImageIO.read(new File(fileName)));
             } catch (IOException e) {

@@ -5,7 +5,8 @@ import java.awt.event.ActionListener;
 
 public class ButtonClass {
     private Player player;
-    private JButton startbtn;
+    private JButton livestreamApp;
+    private JTextArea livestreamChat;
     private JTextField usernameText;
     private JPanel btnPanel;
     private Frame cardLayoutPanel;
@@ -16,23 +17,32 @@ public class ButtonClass {
         player = new Player();
 
         //create buttons
-        startbtn = new JButton();
         usernameText = new JTextField(15);
+        livestreamChat = new JTextArea();
+        livestreamApp = new JButton();
 
         //set opaque
-        customizeButton(startbtn);
+//        customizeButton(livestreamApp);
+        livestreamApp.setOpaque(true);
+        livestreamApp.setContentAreaFilled(true);
+        livestreamApp.setBorderPainted(true);
+
+        livestreamChat.setEditable(true);
+        livestreamChat.setLineWrap(true);
 
         //set text field fonts
         usernameText.setFont(new Font("Serif", Font.BOLD, 60));
+        livestreamApp.setFont(new Font("Serif", Font.ITALIC, 15));
 
         //set button/text field size
-        startbtn.setBounds(1,1,1,1);
         usernameText.setBounds(150,430,750,100);
+        livestreamApp.setBounds(300,150,100,100);
+        livestreamChat.setBounds(630,80,280,500);
 
-        btnPanel.add(startbtn);
         btnPanel.add(usernameText);
+        btnPanel.add(livestreamApp);
+        btnPanel.add(livestreamChat);
 
-        addActionListeners(cardLayoutPanel);
         addActionListeners();
     }
 
@@ -42,14 +52,9 @@ public class ButtonClass {
             System.out.println(player.getUsername());
             cardLayoutPanel.showCard("Background");
         });
-    }
 
-    private void addActionListeners(final Frame cardLayoutPanel) {
-        startbtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayoutPanel.showCard(""); // <--- switch to next screen
-            }
+        livestreamApp.addActionListener(e -> {
+            cardLayoutPanel.showCard("LivestreamScreen");
         });
     }
 
@@ -63,11 +68,15 @@ public class ButtonClass {
         return btnPanel;
     }
 
-    public JButton getStartbtn() {
-        return startbtn;
+    public JButton getLivestreamApp() {
+        return livestreamApp;
     }
 
     public JTextField getUsernameText() {
         return usernameText;
+    }
+
+    public JTextArea getLivestreamChat() {
+        return livestreamChat;
     }
 }

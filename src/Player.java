@@ -15,4 +15,12 @@ public class Player {
         username = newUser;
     }
 
+    public int getFollowers() {
+        return followers;
+    }
+
+    public void addFollowers(int newFollowers) {
+        followers = followers + newFollowers;
+    }
+
 }

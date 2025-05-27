@@ -26,22 +26,27 @@ public class Frame extends JFrame{
                 System.out.println(e.getMessage());
             }
         }
-        JPanelAnimation panel = new JPanelAnimation(this, "StartScreen" ,startingImages, 300, 3);
-        mainPanel.add(panel);
+        JPanelAnimation startPanel = new JPanelAnimation(this, "StartScreen" ,startingImages, 300, 3);
+        mainPanel.add(startPanel);
 
         //create card panels
         JPanel startScreen = PanelClass.createPanel("src/images/start.png");
         JPanel backgroundScreen = PanelClass.createPanel("src/images/background.png");
+        JPanel livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
 
         //manually control button positions
         startScreen.setLayout(null);
         backgroundScreen.setLayout(null);
+        livestreamScreen.setLayout(null);
 
         //add buttons
         startScreen.add(buttonClass.getUsernameText());
+        backgroundScreen.add(buttonClass.getLivestreamApp());
+        livestreamScreen.add(buttonClass.getLivestreamChat());
 
         mainPanel.add(startScreen, "StartScreen");
         mainPanel.add(backgroundScreen, "Background");
+        mainPanel.add(livestreamScreen, "LivestreamScreen");
 
         Container pane = getContentPane();
         pane.add(mainPanel, BorderLayout.CENTER);

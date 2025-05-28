@@ -1,12 +1,7 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class ButtonClass {
     private Player player;
@@ -16,8 +11,10 @@ public class ButtonClass {
     private JPanel btnPanel;
     private Frame cardLayoutPanel;
     private JPanelAnimation animation;
+    private Livestream livestream;
 
     public ButtonClass(Frame cardLayoutPanel) {
+        livestream = new Livestream();
         btnPanel = new JPanel(new BorderLayout());
         this.cardLayoutPanel = cardLayoutPanel;
         player = new Player();
@@ -27,12 +24,9 @@ public class ButtonClass {
         livestreamChat = new JTextArea();
         livestreamApp = new JButton();
         nextButton = new JButton();
-        mailApp = new JButton();
-
-
 
         //set opaque
-        //customizeButton(livestreamApp);
+//        customizeButton(livestreamApp);
         livestreamApp.setOpaque(true);
         livestreamApp.setContentAreaFilled(true);
         livestreamApp.setBorderPainted(true);
@@ -44,10 +38,6 @@ public class ButtonClass {
         livestreamChat.setEditable(true);
         livestreamChat.setLineWrap(true);
 
-        mailApp.setOpaque(true);
-        mailApp.setContentAreaFilled(true);
-        mailApp.setBorderPainted(true);
-
         //set text field fonts
         usernameText.setFont(new Font("Serif", Font.BOLD, 60));
         livestreamApp.setFont(new Font("Serif", Font.ITALIC, 15));
@@ -57,16 +47,13 @@ public class ButtonClass {
         livestreamApp.setBounds(515,165,90,90);
         nextButton.setBounds(515,165,90,90);
         livestreamChat.setBounds(630,80,280,500);
-        mailApp.setBounds(430, 165, 90, 90);
 
         //livestreamApp.setVisible(false);
 
         btnPanel.add(usernameText);
         btnPanel.add(livestreamApp);
-        btnPanel.add(mailApp);
         btnPanel.add(nextButton);
         btnPanel.add(livestreamChat);
-
 
         addActionListeners();
     }
@@ -83,31 +70,9 @@ public class ButtonClass {
             cardLayoutPanel.showCard("LivestreamScreen");
         });
 
-        mailApp.addActionListener(e -> {
-            ArrayList<BufferedImage> mailImages = new ArrayList<>();
-            for (int i = 1; i < 15; i++) {
-                try {
-                    String file = "src/MailImages/" + i + ".png";
-                    BufferedImage mailImg = ImageIO.read(new File(file));
-                    mailImages.add(mailImg);
-                }
-                catch (IOException exception) {
-                    System.out.println(exception.getMessage());
-                }
-            }
-
-            JPanelAnimation mailPanel = new JPanelAnimation(cardLayoutPanel, "MailScreen" ,mailImages, 20, 14);
-            cardLayoutPanel.getMainPanel().add(mailPanel);
-
-            cardLayoutPanel.showCard("MailScreen");
-
-        });
-
         nextButton.addActionListener(e -> {
             cardLayoutPanel.showCard("Background");
         });
-
-
     }
 
     private void customizeButton(JButton button) {
@@ -123,8 +88,6 @@ public class ButtonClass {
     public JButton getLivestreamApp() {
         return livestreamApp;
     }
-
-    public JButton getMailApp() { return mailApp; }
 
     public JButton getNextButton() {
         return nextButton;

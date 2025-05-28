@@ -11,6 +11,7 @@ public class Frame extends JFrame{
     private ButtonClass buttonClass;
     private CardLayout cardLayout;
     private ImageAnimation desktopPet;
+    private JPanelAnimation mailPanel;
 
     public Frame() {
         cardLayout = new CardLayout();
@@ -39,34 +40,69 @@ public class Frame extends JFrame{
             }
         }
 
+        ArrayList<BufferedImage> mailImages = new ArrayList<>();
+        for (int i = 1; i < 15; i++) {
+            try {
+                String file = "src/MailImages/" + i + ".png";
+                BufferedImage mailImg = ImageIO.read(new File(file));
+                mailImages.add(mailImg);
+            }
+            catch (IOException exception) {
+                System.out.println(exception.getMessage());
+            }
+        }
+
+
+
         JPanelAnimation startPanel = new JPanelAnimation(this, "StartScreen" ,startingImages, 300, 3);
         mainPanel.add(startPanel);
+
+
+
+
+
 
         //create card panels
         JPanel startScreen = PanelClass.createPanel("src/images/enteruser.png");
         JPanel tutorialScreen = PanelClass.createPanel("src/images/tutorial.jpeg");
         JPanel backgroundScreen = PanelClass.createPanel("src/images/background.png");
         JPanel livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
+        JPanel mailScreen = PanelClass.createPanel("src/MailImages/1.png");
+
+
 
         ImageAnimation animation = new ImageAnimation(animationFrames, 300);
         tutorialScreen.add(animation.getAnimationPanel());
+        JPanelAnimation mailPanel = new JPanelAnimation(this, "MailScreen" ,mailImages, 300, 3);
+        mailScreen.add(mailPanel);
 
         //manually control button positions
         startScreen.setLayout(null);
         tutorialScreen.setLayout(null);
         backgroundScreen.setLayout(null);
         livestreamScreen.setLayout(null);
+        mailScreen.setLayout(null);
 
         //add buttons
         startScreen.add(buttonClass.getUsernameText());
         tutorialScreen.add(buttonClass.getNextButton());
         backgroundScreen.add(buttonClass.getLivestreamApp());
+        backgroundScreen.add(buttonClass.getMailApp());
         livestreamScreen.add(buttonClass.getLivestreamChat());
+
+
+
+
+
 
         mainPanel.add(startScreen, "StartScreen");
         mainPanel.add(tutorialScreen, "TutorialScreen");
         mainPanel.add(backgroundScreen, "Background");
         mainPanel.add(livestreamScreen, "LivestreamScreen");
+        mainPanel.add(mailScreen, "MailScreen");
+
+
+
 
         Container pane = getContentPane();
         pane.add(mainPanel, BorderLayout.CENTER);
@@ -99,5 +135,9 @@ public class Frame extends JFrame{
 
     public static Frame createFrame() {
         return new Frame();
+    }
+
+    public JPanel getMailScreen() {
+        return mainPanel;
     }
 }

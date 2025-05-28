@@ -10,8 +10,10 @@ public class ButtonClass {
     private JTextField usernameText;
     private JPanel btnPanel;
     private Frame cardLayoutPanel;
+    private Livestream livestream;
 
     public ButtonClass(Frame cardLayoutPanel) {
+        livestream = new Livestream();
         btnPanel = new JPanel(new BorderLayout());
         this.cardLayoutPanel = cardLayoutPanel;
         player = new Player();
@@ -65,6 +67,44 @@ public class ButtonClass {
 
         livestreamApp.addActionListener(e -> {
             cardLayoutPanel.showCard("LivestreamScreen");
+//            while (livestream.checkInBounds()) {
+//                if (livestream.getCurrentChat()[livestream.getChatNum()] != null) {
+//                    livestreamChat.append(livestream.getCurrentChat()[livestream.getChatNum()]);
+//                } else {
+//                    String goodChat = livestream.getRandomGood();
+//                    livestream.setCurrentChat(livestream.getChatNum(), goodChat);
+//                    livestream.incrementChatNum();
+//                    if (livestream.getChatNum() + 1 > livestream.getCurrentChat().length) {
+//                        livestreamChat.remove(0);
+//                    }
+//                }
+
+//
+//
+//                String goodChat = livestream.getRandomGood();
+//                livestreamChat.append(goodChat);
+//                livestream.setCurrentChat(livestream.getChatNum(), goodChat);
+//                livestream.setChatNum(livestream.getChatNum() + 1);
+//
+//                String badChat = livestream.getRandomBad();
+//                livestreamChat.append(badChat);
+//                livestream.setCurrentChat(livestream.getChatNum(), badChat);
+//                livestream.setChatNum(livestream.getChatNum() + 1);
+//
+//                if (livestream.getChatNum() + 1 < livestream.getCurrentChat().length) {
+//                    livestream.setChatNum();
+//                }
+//            }
+
+                String goodChat = livestream.getRandomGood();
+                livestreamChat.append(goodChat);
+
+                livestreamChat.append("\n");
+
+                String badChat = livestream.getRandomBad();
+                livestreamChat.append(badChat);
+
+                livestreamChat.remove(0);
         });
 
         nextButton.addActionListener(e -> {

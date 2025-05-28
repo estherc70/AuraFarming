@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -8,22 +9,42 @@ public class ImageAnimation implements ActionListener {
     private ArrayList<BufferedImage> frames;
     private Timer timer;
     private int currentFrame;
+    private JPanel animationPanel;
 
     public ImageAnimation(ArrayList<BufferedImage> frames, int delay) {
         this.frames = frames;
         currentFrame = 0;
+
+        animationPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                BufferedImage frame = getActiveFrame();
+                if (frame != null) {
+                    g.drawImage(frame, 0, 0, getWidth(), getHeight(), null);
+                }
+            }
+        };
+        animationPanel.setOpaque(false);
+        animationPanel.setBounds(100, 200, 300, 300);
+
         timer = new Timer(delay, this);
         timer.start();
+
+        new Timer(delay, e -> animationPanel.repaint()).start();
     }
 
     public BufferedImage getActiveFrame() {
         return frames.get(currentFrame);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() instanceof Timer) {
-            //move animation to next frame & loops
-            currentFrame = (currentFrame + 1) % frames.size();
-        }
+        currentFrame = (currentFrame + 1) % frames.size();
+    }
+
+    public JPanel getAnimationPanel() {
+        return animationPanel;
     }
 }
+

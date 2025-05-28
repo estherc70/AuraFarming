@@ -10,11 +10,13 @@ public class Frame extends JFrame{
     private JPanel mainPanel;
     private ButtonClass buttonClass;
     private CardLayout cardLayout;
+    private ImageAnimation desktopPet;
 
     public Frame() {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
         buttonClass = new ButtonClass(this);
+        //desktopPet = new ImageAnimation();
 
         //loading screen animation
         ArrayList<BufferedImage> startingImages = new ArrayList<>();
@@ -26,25 +28,43 @@ public class Frame extends JFrame{
                 System.out.println(e.getMessage());
             }
         }
+
+        ArrayList<BufferedImage> animationFrames = new ArrayList<>();
+        for (int i = 0; i < 11; i++) {
+            try {
+                BufferedImage img = ImageIO.read(new File("src/DesktopPetImages/ivan" + i + ".png"));
+                animationFrames.add(img);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
         JPanelAnimation startPanel = new JPanelAnimation(this, "StartScreen" ,startingImages, 300, 3);
         mainPanel.add(startPanel);
 
         //create card panels
         JPanel startScreen = PanelClass.createPanel("src/images/enteruser.png");
+        JPanel tutorialScreen = PanelClass.createPanel("src/images/tutorial.jpeg");
         JPanel backgroundScreen = PanelClass.createPanel("src/images/background.png");
         JPanel livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
 
+        ImageAnimation animation = new ImageAnimation(animationFrames, 300);
+        tutorialScreen.add(animation.getAnimationPanel());
+
         //manually control button positions
         startScreen.setLayout(null);
+        tutorialScreen.setLayout(null);
         backgroundScreen.setLayout(null);
         livestreamScreen.setLayout(null);
 
         //add buttons
         startScreen.add(buttonClass.getUsernameText());
+        tutorialScreen.add(buttonClass.getNextButton());
         backgroundScreen.add(buttonClass.getLivestreamApp());
         livestreamScreen.add(buttonClass.getLivestreamChat());
 
         mainPanel.add(startScreen, "StartScreen");
+        mainPanel.add(tutorialScreen, "TutorialScreen");
         mainPanel.add(backgroundScreen, "Background");
         mainPanel.add(livestreamScreen, "LivestreamScreen");
 

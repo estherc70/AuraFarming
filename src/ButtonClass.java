@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 public class ButtonClass {
     private Player player;
-    private JButton livestreamApp;
+    private JButton livestreamApp, nextButton;
     private JTextArea livestreamChat;
     private JTextField usernameText;
     private JPanel btnPanel;
@@ -20,12 +20,17 @@ public class ButtonClass {
         usernameText = new JTextField(15);
         livestreamChat = new JTextArea();
         livestreamApp = new JButton();
+        nextButton = new JButton();
 
         //set opaque
 //        customizeButton(livestreamApp);
         livestreamApp.setOpaque(true);
         livestreamApp.setContentAreaFilled(true);
         livestreamApp.setBorderPainted(true);
+
+        nextButton.setOpaque(true);
+        nextButton.setContentAreaFilled(true);
+        nextButton.setBorderPainted(true);
 
         livestreamChat.setEditable(true);
         livestreamChat.setLineWrap(true);
@@ -36,11 +41,15 @@ public class ButtonClass {
 
         //set button/text field size
         usernameText.setBounds(150,360,700,75);
-        livestreamApp.setBounds(300,150,100,100);
+        livestreamApp.setBounds(515,165,90,90);
+        nextButton.setBounds(515,165,90,90);
         livestreamChat.setBounds(630,80,280,500);
+
+        //livestreamApp.setVisible(false);
 
         btnPanel.add(usernameText);
         btnPanel.add(livestreamApp);
+        btnPanel.add(nextButton);
         btnPanel.add(livestreamChat);
 
         addActionListeners();
@@ -50,11 +59,16 @@ public class ButtonClass {
         usernameText.addActionListener(e -> {
             player.setUsername(usernameText.getText());
             System.out.println("username: " + player.getUsername());
-            cardLayoutPanel.showCard("Background");
+            //cardLayoutPanel.showCard("Background");
+            cardLayoutPanel.showCard("TutorialScreen");
         });
 
         livestreamApp.addActionListener(e -> {
             cardLayoutPanel.showCard("LivestreamScreen");
+        });
+
+        nextButton.addActionListener(e -> {
+            cardLayoutPanel.showCard("Background");
         });
     }
 
@@ -70,6 +84,10 @@ public class ButtonClass {
 
     public JButton getLivestreamApp() {
         return livestreamApp;
+    }
+
+    public JButton getNextButton() {
+        return nextButton;
     }
 
     public JTextField getUsernameText() {

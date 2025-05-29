@@ -66,7 +66,7 @@ public class ButtonClass {
         nextButton.setBounds(515,165,90,90);
         livestreamChat.setBounds(630,80,280,500);
         mailApp.setBounds(400, 165, 90, 90);
-        homePage.setBounds(500, 180, 40, 40);
+        homePage.setBounds(500, 180, 90, 90);
 
         //livestreamApp.setVisible(false);
 
@@ -104,7 +104,7 @@ public class ButtonClass {
                     System.out.println(exception.getMessage());
                 }
             }
-            JPanelAnimation mailScreenAnimation = new JPanelAnimation(cardLayoutPanel, "MailScreen", mailImages, 10, 1);
+            JPanelAnimation mailScreenAnimation = new JPanelAnimation(cardLayoutPanel, "MailScreen", mailImages, 50, 1);
             cardLayoutPanel.getMainPanel().add(mailScreenAnimation, "MailScreenAnimation");
 
             cardLayoutPanel.showCard("MailScreenAnimation");

@@ -67,7 +67,7 @@ public class Frame extends JFrame{
         JPanel tutorialScreen = PanelClass.createPanel("src/images/tutorial.jpeg");
         JPanel backgroundScreen = PanelClass.createPanel("src/images/background.png");
         JPanel livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
-        JPanel mailScreen = PanelClass.createPanel("src/MailImages/1.png");
+        JPanel mailScreen = PanelClass.createPanel("src/MailImages/mailhomepage.png");
 
 
 
@@ -93,7 +93,6 @@ public class Frame extends JFrame{
         tutorialScreen.setLayout(null);
         backgroundScreen.setLayout(null);
         livestreamScreen.setLayout(null);
-        //mailScreenAnimation.setLayout(null);
         mailScreen.setLayout(null);
 
         //add buttons
@@ -102,8 +101,8 @@ public class Frame extends JFrame{
         backgroundScreen.add(buttonClass.getLivestreamApp());
         backgroundScreen.add(buttonClass.getMailApp());
         livestreamScreen.add(buttonClass.getLivestreamChat());
-        mailScreen.add(buttonClass.getHomePage());
         livestreamScreen.add(buttonClass.getHomePage());
+        mailScreen.add(buttonClass.getHomePage());
 
 
 
@@ -114,7 +113,6 @@ public class Frame extends JFrame{
         mainPanel.add(tutorialScreen, "TutorialScreen");
         mainPanel.add(backgroundScreen, "Background");
         mainPanel.add(livestreamScreen, "LivestreamScreen");
-        //mainPanel.add(mailScreenAnimation, "MailScreenAnimation");
         mainPanel.add(mailScreen, "MailScreen");
 
 

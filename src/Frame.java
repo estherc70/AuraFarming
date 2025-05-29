@@ -40,17 +40,17 @@ public class Frame extends JFrame{
             }
         }
 
-        ArrayList<BufferedImage> mailImages = new ArrayList<>();
-        for (int i = 1; i < 15; i++) {
-            try {
-                String file = "src/MailImages/" + i + ".png";
-                BufferedImage mailImg = ImageIO.read(new File(file));
-                mailImages.add(mailImg);
-            }
-            catch (IOException exception) {
-                System.out.println(exception.getMessage());
-            }
-        }
+//        ArrayList<BufferedImage> mailImages = new ArrayList<>();
+//        for (int i = 1; i < 15; i++) {
+//            try {
+//                String file = "src/MailImages/" + i + ".png";
+//                BufferedImage mailImg = ImageIO.read(new File(file));
+//                mailImages.add(mailImg);
+//            }
+//            catch (IOException exception) {
+//                System.out.println(exception.getMessage());
+//            }
+//        }
 
         JPanelAnimation startPanel = new JPanelAnimation(this, "StartScreen" ,startingImages, 300, 3);
         mainPanel.add(startPanel);
@@ -83,7 +83,7 @@ public class Frame extends JFrame{
         tutorialScreen.setLayout(null);
         backgroundScreen.setLayout(null);
         livestreamScreen.setLayout(null);
-        mailScreenAnimation.setLayout(null);
+        //mailScreenAnimation.setLayout(null);
         mailScreen.setLayout(null);
 
         //add buttons
@@ -97,7 +97,7 @@ public class Frame extends JFrame{
         mainPanel.add(tutorialScreen, "TutorialScreen");
         mainPanel.add(backgroundScreen, "Background");
         mainPanel.add(livestreamScreen, "LivestreamScreen");
-        mainPanel.add(mailScreenAnimation, "MailScreenAnimation");
+        //mainPanel.add(mailScreenAnimation, "MailScreenAnimation");
         mainPanel.add(mailScreen, "MailScreen");
 
         Container pane = getContentPane();

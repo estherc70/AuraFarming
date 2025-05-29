@@ -18,6 +18,13 @@ public class Frame extends JFrame{
         mainPanel = new JPanel(cardLayout);
         buttonClass = new ButtonClass(this);
         //desktopPet = new ImageAnimation();
+        //create card panels
+
+        JPanel startScreen = PanelClass.createPanel("src/images/enteruser.png");
+        JPanel tutorialScreen = PanelClass.createPanel("src/images/tutorial.jpeg");
+        JPanel backgroundScreen = PanelClass.createPanel("src/images/background.png");
+        JPanel livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
+        JPanel mailScreen = PanelClass.createPanel("src/MailImages/1.png");
 
         //loading screen animation
         ArrayList<BufferedImage> startingImages = new ArrayList<>();
@@ -52,36 +59,29 @@ public class Frame extends JFrame{
 //            }
 //        }
 
-
-
         JPanelAnimation startPanel = new JPanelAnimation(this, "StartScreen" ,startingImages, 300, 3);
         mainPanel.add(startPanel);
-
-
-
-
-
-
-        //create card panels
-        JPanel startScreen = PanelClass.createPanel("src/images/enteruser.png");
-        JPanel tutorialScreen = PanelClass.createPanel("src/images/tutorial.jpeg");
-        JPanel backgroundScreen = PanelClass.createPanel("src/images/background.png");
-        JPanel livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
-        JPanel mailScreen = PanelClass.createPanel("src/MailImages/mailhomepage.png");
-
-
-
 
         ImageAnimation animation = new ImageAnimation(animationFrames, 300, 5);
         tutorialScreen.add(animation.getAnimationPanel());
 
-        String[] paths = {
+        ArrayList<BufferedImage> speechImages = new ArrayList<>();
+        for (int i = 0; i < 11; i++) {
+            String fileName = "src/DesktopPetImages/Speech/speech" + i + ".png";
+            try {
+                speechImages.add(ImageIO.read(new File(fileName)));
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        /*String[] paths = {
                 "src/DesktopPetImages/Speech/speech0.png",
                 "src/DesktopPetImages/Speech/speech1.png",
                 "src/DesktopPetImages/Speech/speech2.png",
                 "src/DesktopPetImages/Speech/speech3.png"
-        };
-        SpacebarImageSwitcher switcher = new SpacebarImageSwitcher(paths);
+        };*/
+        SpacebarImageSwitcher switcher = new SpacebarImageSwitcher(speechImages);
         switcher.setBounds(360, 200, 200, 100);
         tutorialScreen.add(switcher);
 
@@ -104,19 +104,11 @@ public class Frame extends JFrame{
         livestreamScreen.add(buttonClass.getHomePage());
         mailScreen.add(buttonClass.getHomePage());
 
-
-
-
-
-
         mainPanel.add(startScreen, "StartScreen");
         mainPanel.add(tutorialScreen, "TutorialScreen");
         mainPanel.add(backgroundScreen, "Background");
         mainPanel.add(livestreamScreen, "LivestreamScreen");
         mainPanel.add(mailScreen, "MailScreen");
-
-
-
 
         Container pane = getContentPane();
         pane.add(mainPanel, BorderLayout.CENTER);

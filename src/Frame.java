@@ -93,7 +93,6 @@ public class Frame extends JFrame{
         tutorialScreen.setLayout(null);
         backgroundScreen.setLayout(null);
         livestreamScreen.setLayout(null);
-        //mailScreenAnimation.setLayout(null);
         mailScreen.setLayout(null);
 
         //add buttons
@@ -102,14 +101,13 @@ public class Frame extends JFrame{
         backgroundScreen.add(buttonClass.getLivestreamApp());
         backgroundScreen.add(buttonClass.getMailApp());
         livestreamScreen.add(buttonClass.getLivestreamChat());
-        mailScreen.add(buttonClass.getHomePage());
         livestreamScreen.add(buttonClass.getHomePage());
+        mailScreen.add(buttonClass.getHomePage());
 
         mainPanel.add(startScreen, "StartScreen");
         mainPanel.add(tutorialScreen, "TutorialScreen");
         mainPanel.add(backgroundScreen, "Background");
         mainPanel.add(livestreamScreen, "LivestreamScreen");
-        //mainPanel.add(mailScreenAnimation, "MailScreenAnimation");
         mainPanel.add(mailScreen, "MailScreen");
 
         Container pane = getContentPane();

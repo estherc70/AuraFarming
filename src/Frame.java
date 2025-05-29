@@ -76,10 +76,6 @@ public class Frame extends JFrame{
         tutorialScreen.add(animation.getAnimationPanel());
 
 
-
-
-
-
         //manually control button positions
         startScreen.setLayout(null);
         tutorialScreen.setLayout(null);

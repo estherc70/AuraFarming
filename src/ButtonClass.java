@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class ButtonClass {
     private Player player;
-    private JButton livestreamApp, nextButton, mailApp;
+    private JButton livestreamApp, nextButton, mailApp, homePage;
     private JTextArea livestreamChat;
     private JTextField usernameText;
     private JPanel btnPanel;
@@ -31,6 +31,8 @@ public class ButtonClass {
         livestreamApp = new JButton();
         nextButton = new JButton();
         mailApp = new JButton();
+        //testing
+        homePage = new JButton();
 
         //set opaque
 //        customizeButton(livestreamApp);
@@ -46,6 +48,11 @@ public class ButtonClass {
         mailApp.setContentAreaFilled(true);
         mailApp.setBorderPainted(true);
 
+        //testing
+        homePage.setOpaque(true);
+        homePage.setContentAreaFilled(true);
+        homePage.setBorderPainted(true);
+
         livestreamChat.setEditable(true);
         livestreamChat.setLineWrap(true);
 
@@ -59,6 +66,7 @@ public class ButtonClass {
         nextButton.setBounds(515,165,90,90);
         livestreamChat.setBounds(630,80,280,500);
         mailApp.setBounds(400, 165, 90, 90);
+        homePage.setBounds(500, 180, 40, 40);
 
         //livestreamApp.setVisible(false);
 
@@ -67,6 +75,7 @@ public class ButtonClass {
         btnPanel.add(nextButton);
         btnPanel.add(livestreamChat);
         btnPanel.add(mailApp);
+        btnPanel.add(homePage);
 
         addActionListeners();
     }
@@ -100,6 +109,10 @@ public class ButtonClass {
 
             cardLayoutPanel.showCard("MailScreenAnimation");
 
+        });
+
+        homePage.addActionListener(e ->  {
+            cardLayoutPanel.showCard("Background");
         });
 
         nextButton.addActionListener(e -> {

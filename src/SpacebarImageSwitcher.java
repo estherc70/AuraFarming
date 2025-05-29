@@ -7,8 +7,7 @@ public class SpacebarImageSwitcher extends JPanel {
     private ImageIcon[] images;
     private int currentIndex;
 
-    public SpacebarImageSwitcher(String[] imagePaths, int width, int height) {
-        this.setPreferredSize(new Dimension(width, height));
+    public SpacebarImageSwitcher(String[] imagePaths) {
         this.setFocusable(true);
         this.setLayout(null);
         setOpaque(false);
@@ -19,7 +18,6 @@ public class SpacebarImageSwitcher extends JPanel {
         }
 
         currentIndex = 0;
-
         setupKeyBinding();
     }
 

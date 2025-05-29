@@ -34,8 +34,6 @@ public class ImageAnimation implements ActionListener {
 
         timer = new Timer(delay, this);
         timer.start();
-
-        new Timer(delay, e -> animationPanel.repaint()).start();
     }
 
     public BufferedImage getActiveFrame() {
@@ -48,10 +46,13 @@ public class ImageAnimation implements ActionListener {
         if (currentFrame >= frames.size()) {
             currentFrame = 0;
             loopCount++;
+            System.out.println("Loop count: " + loopCount + " / " + maxLoops);
             if (loopCount >= maxLoops) {
                 timer.stop();
+                System.out.println("Timer stopped");
             }
         }
+        animationPanel.repaint();
     }
 
     public JPanel getAnimationPanel() {

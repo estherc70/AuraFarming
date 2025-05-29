@@ -40,17 +40,17 @@ public class Frame extends JFrame{
             }
         }
 
-//        ArrayList<BufferedImage> mailImages = new ArrayList<>();
-//        for (int i = 1; i < 15; i++) {
-//            try {
-//                String file = "src/MailImages/" + i + ".png";
-//                BufferedImage mailImg = ImageIO.read(new File(file));
-//                mailImages.add(mailImg);
-//            }
-//            catch (IOException exception) {
-//                System.out.println(exception.getMessage());
-//            }
-//        }
+        ArrayList<BufferedImage> mailImages = new ArrayList<>();
+        for (int i = 1; i < 15; i++) {
+            try {
+                String file = "src/MailImages/" + i + ".png";
+                BufferedImage mailImg = ImageIO.read(new File(file));
+                mailImages.add(mailImg);
+            }
+            catch (IOException exception) {
+                System.out.println(exception.getMessage());
+            }
+        }
 
         JPanelAnimation startPanel = new JPanelAnimation(this, "StartScreen" ,startingImages, 300, 3);
         mainPanel.add(startPanel);
@@ -71,8 +71,8 @@ public class Frame extends JFrame{
                 "src/DesktopPetImages/Speech/speech2.png",
                 "src/DesktopPetImages/Speech/speech3.png"
         };
-        SpacebarImageSwitcher switcher = new SpacebarImageSwitcher(paths, 200, 100);
-        switcher.setBounds(300, 125, 200, 100);
+        SpacebarImageSwitcher switcher = new SpacebarImageSwitcher(paths);
+        switcher.setBounds(360, 200, 200, 100);
         tutorialScreen.add(switcher);
 
         JPanelAnimation mailScreenAnimation = new JPanelAnimation(this, "MailScreen", mailImages, 100, 6);

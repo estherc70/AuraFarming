@@ -24,6 +24,7 @@ public class ButtonClass {
         livestreamChat = new JTextArea();
         livestreamApp = new JButton();
         nextButton = new JButton();
+        mailApp = new JButton();
 
         //set opaque
 //        customizeButton(livestreamApp);
@@ -34,6 +35,10 @@ public class ButtonClass {
         nextButton.setOpaque(true);
         nextButton.setContentAreaFilled(true);
         nextButton.setBorderPainted(true);
+
+        mailApp.setOpaque(true);
+        mailApp.setContentAreaFilled(true);
+        mailApp.setBorderPainted(true);
 
         livestreamChat.setEditable(true);
         livestreamChat.setLineWrap(true);
@@ -47,6 +52,7 @@ public class ButtonClass {
         livestreamApp.setBounds(515,165,90,90);
         nextButton.setBounds(515,165,90,90);
         livestreamChat.setBounds(630,80,280,500);
+        mailApp.setBounds(400, 165, 90, 90);
 
         //livestreamApp.setVisible(false);
 
@@ -54,6 +60,7 @@ public class ButtonClass {
         btnPanel.add(livestreamApp);
         btnPanel.add(nextButton);
         btnPanel.add(livestreamChat);
+        btnPanel.add(mailApp);
 
         addActionListeners();
     }
@@ -68,6 +75,10 @@ public class ButtonClass {
 
         livestreamApp.addActionListener(e -> {
             cardLayoutPanel.showCard("LivestreamScreen");
+        });
+
+        mailApp.addActionListener(e -> {
+            cardLayoutPanel.showCard("MailScreen");
         });
 
         nextButton.addActionListener(e -> {
@@ -99,5 +110,9 @@ public class ButtonClass {
 
     public JTextArea getLivestreamChat() {
         return livestreamChat;
+    }
+
+    public JButton getMailApp() {
+        return mailApp;
     }
 }

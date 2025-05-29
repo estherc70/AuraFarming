@@ -67,14 +67,14 @@ public class Frame extends JFrame{
         JPanel tutorialScreen = PanelClass.createPanel("src/images/tutorial.jpeg");
         JPanel backgroundScreen = PanelClass.createPanel("src/images/background.png");
         JPanel livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
-        JPanel mailScreen = PanelClass.createPanel("src/MailImages/1.png");
+        //JPanel mailScreen = PanelClass.createPanel("src/MailImages/1.png");
 
 
 
         ImageAnimation animation = new ImageAnimation(animationFrames, 300);
         tutorialScreen.add(animation.getAnimationPanel());
-        JPanelAnimation mailPanel = new JPanelAnimation(this, "MailScreen" ,mailImages, 300, 3);
-        mailScreen.add(mailPanel);
+        JPanelAnimation mailScreen = new JPanelAnimation(this, "MailScreen", mailImages, 300, 14);
+        mainPanel.add(mailScreen, "MailScreen");
 
         //manually control button positions
         startScreen.setLayout(null);
@@ -132,6 +132,7 @@ public class Frame extends JFrame{
     public void showCard(String cardName) {
         cardLayout.show(mainPanel, cardName);
     }
+
 
     public static Frame createFrame() {
         return new Frame();

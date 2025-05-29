@@ -72,7 +72,7 @@ public class Frame extends JFrame{
 
 
 
-        ImageAnimation animation = new ImageAnimation(animationFrames, 300);
+        ImageAnimation animation = new ImageAnimation(animationFrames, 300, 5);
         tutorialScreen.add(animation.getAnimationPanel());
 
         String[] paths = {
@@ -85,8 +85,8 @@ public class Frame extends JFrame{
         switcher.setBounds(360, 200, 200, 100);
         tutorialScreen.add(switcher);
 
-        JPanelAnimation mailScreenAnimation = new JPanelAnimation(this, "MailScreen", mailImages, 100, 6);
-        mainPanel.add(mailScreenAnimation, "MailScreenAnimation");
+//        JPanelAnimation mailScreenAnimation = new JPanelAnimation(this, "MailScreen", mailImages, 100, 6);
+//        mainPanel.add(mailScreenAnimation, "MailScreenAnimation");
 
         //manually control button positions
         startScreen.setLayout(null);
@@ -102,6 +102,8 @@ public class Frame extends JFrame{
         backgroundScreen.add(buttonClass.getLivestreamApp());
         backgroundScreen.add(buttonClass.getMailApp());
         livestreamScreen.add(buttonClass.getLivestreamChat());
+        mailScreen.add(buttonClass.getHomePage());
+        livestreamScreen.add(buttonClass.getHomePage());
 
 
 

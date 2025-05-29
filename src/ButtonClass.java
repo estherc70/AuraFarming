@@ -104,7 +104,7 @@ public class ButtonClass {
                     System.out.println(exception.getMessage());
                 }
             }
-            JPanelAnimation mailScreenAnimation = new JPanelAnimation(cardLayoutPanel, "MailScreen", mailImages, 100, 1);
+            JPanelAnimation mailScreenAnimation = new JPanelAnimation(cardLayoutPanel, "MailScreen", mailImages, 10, 1);
             cardLayoutPanel.getMainPanel().add(mailScreenAnimation, "MailScreenAnimation");
 
             cardLayoutPanel.showCard("MailScreenAnimation");
@@ -148,6 +148,10 @@ public class ButtonClass {
 
     public JButton getMailApp() {
         return mailApp;
+    }
+
+    public JButton getHomePage() {
+        return homePage;
     }
 
 

@@ -75,6 +75,18 @@ public class Frame extends JFrame{
         ImageAnimation animation = new ImageAnimation(animationFrames, 300);
         tutorialScreen.add(animation.getAnimationPanel());
 
+        String[] paths = {
+                "src/DesktopPetImages/Speech/speech0.png",
+                "src/DesktopPetImages/Speech/speech1.png",
+                "src/DesktopPetImages/Speech/speech2.png",
+                "src/DesktopPetImages/Speech/speech3.png"
+        };
+        SpacebarImageSwitcher switcher = new SpacebarImageSwitcher(paths);
+        switcher.setBounds(360, 200, 200, 100);
+        tutorialScreen.add(switcher);
+
+        JPanelAnimation mailScreenAnimation = new JPanelAnimation(this, "MailScreen", mailImages, 100, 6);
+        mainPanel.add(mailScreenAnimation, "MailScreenAnimation");
 
         //manually control button positions
         startScreen.setLayout(null);

@@ -1,7 +1,12 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class ButtonClass {
     private Player player;
@@ -12,6 +17,7 @@ public class ButtonClass {
     private Frame cardLayoutPanel;
     private JPanelAnimation animation;
     private Livestream livestream;
+
 
     public ButtonClass(Frame cardLayoutPanel) {
         livestream = new Livestream();
@@ -78,7 +84,22 @@ public class ButtonClass {
         });
 
         mailApp.addActionListener(e -> {
+            ArrayList<BufferedImage> mailImages = new ArrayList<>();
+            for (int i = 1; i < 15; i++) {
+                try {
+                    String file = "src/MailImages/" + i + ".png";
+                    BufferedImage mailImg = ImageIO.read(new File(file));
+                    mailImages.add(mailImg);
+                }
+                catch (IOException exception) {
+                    System.out.println(exception.getMessage());
+                }
+            }
+            JPanelAnimation mailScreenAnimation = new JPanelAnimation(cardLayoutPanel, "MailScreen", mailImages, 100, 1);
+            cardLayoutPanel.getMainPanel().add(mailScreenAnimation, "MailScreenAnimation");
+
             cardLayoutPanel.showCard("MailScreenAnimation");
+
         });
 
         nextButton.addActionListener(e -> {
@@ -115,4 +136,6 @@ public class ButtonClass {
     public JButton getMailApp() {
         return mailApp;
     }
+
+
 }

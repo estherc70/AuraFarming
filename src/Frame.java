@@ -40,17 +40,17 @@ public class Frame extends JFrame{
             }
         }
 
-        ArrayList<BufferedImage> mailImages = new ArrayList<>();
-        for (int i = 1; i < 15; i++) {
-            try {
-                String file = "src/MailImages/" + i + ".png";
-                BufferedImage mailImg = ImageIO.read(new File(file));
-                mailImages.add(mailImg);
-            }
-            catch (IOException exception) {
-                System.out.println(exception.getMessage());
-            }
-        }
+//        ArrayList<BufferedImage> mailImages = new ArrayList<>();
+//        for (int i = 1; i < 15; i++) {
+//            try {
+//                String file = "src/MailImages/" + i + ".png";
+//                BufferedImage mailImg = ImageIO.read(new File(file));
+//                mailImages.add(mailImg);
+//            }
+//            catch (IOException exception) {
+//                System.out.println(exception.getMessage());
+//            }
+//        }
 
 
 
@@ -74,15 +74,18 @@ public class Frame extends JFrame{
 
         ImageAnimation animation = new ImageAnimation(animationFrames, 300);
         tutorialScreen.add(animation.getAnimationPanel());
-        JPanelAnimation mailScreenAnimation = new JPanelAnimation(this, "MailScreen", mailImages, 100, 6);
-        mainPanel.add(mailScreenAnimation, "MailScreenAnimation");
+
+
+
+
+
 
         //manually control button positions
         startScreen.setLayout(null);
         tutorialScreen.setLayout(null);
         backgroundScreen.setLayout(null);
         livestreamScreen.setLayout(null);
-        mailScreenAnimation.setLayout(null);
+        //mailScreenAnimation.setLayout(null);
         mailScreen.setLayout(null);
 
         //add buttons
@@ -101,7 +104,7 @@ public class Frame extends JFrame{
         mainPanel.add(tutorialScreen, "TutorialScreen");
         mainPanel.add(backgroundScreen, "Background");
         mainPanel.add(livestreamScreen, "LivestreamScreen");
-        mainPanel.add(mailScreenAnimation, "MailScreenAnimation");
+        //mainPanel.add(mailScreenAnimation, "MailScreenAnimation");
         mainPanel.add(mailScreen, "MailScreen");
 
 

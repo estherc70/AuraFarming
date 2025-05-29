@@ -52,15 +52,8 @@ public class Frame extends JFrame{
             }
         }
 
-
-
         JPanelAnimation startPanel = new JPanelAnimation(this, "StartScreen" ,startingImages, 300, 3);
         mainPanel.add(startPanel);
-
-
-
-
-
 
         //create card panels
         JPanel startScreen = PanelClass.createPanel("src/images/enteruser.png");
@@ -69,11 +62,19 @@ public class Frame extends JFrame{
         JPanel livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
         JPanel mailScreen = PanelClass.createPanel("src/MailImages/1.png");
 
-
-
-
-        ImageAnimation animation = new ImageAnimation(animationFrames, 300);
+        ImageAnimation animation = new ImageAnimation(animationFrames, 300,5);
         tutorialScreen.add(animation.getAnimationPanel());
+
+        String[] paths = {
+                "src/DesktopPetImages/Speech/speech0.png",
+                "src/DesktopPetImages/Speech/speech1.png",
+                "src/DesktopPetImages/Speech/speech2.png",
+                "src/DesktopPetImages/Speech/speech3.png"
+        };
+        SpacebarImageSwitcher switcher = new SpacebarImageSwitcher(paths, 200, 100);
+        switcher.setBounds(300, 125, 200, 100);
+        tutorialScreen.add(switcher);
+
         JPanelAnimation mailScreenAnimation = new JPanelAnimation(this, "MailScreen", mailImages, 100, 6);
         mainPanel.add(mailScreenAnimation, "MailScreenAnimation");
 
@@ -92,20 +93,12 @@ public class Frame extends JFrame{
         backgroundScreen.add(buttonClass.getMailApp());
         livestreamScreen.add(buttonClass.getLivestreamChat());
 
-
-
-
-
-
         mainPanel.add(startScreen, "StartScreen");
         mainPanel.add(tutorialScreen, "TutorialScreen");
         mainPanel.add(backgroundScreen, "Background");
         mainPanel.add(livestreamScreen, "LivestreamScreen");
         mainPanel.add(mailScreenAnimation, "MailScreenAnimation");
         mainPanel.add(mailScreen, "MailScreen");
-
-
-
 
         Container pane = getContentPane();
         pane.add(mainPanel, BorderLayout.CENTER);

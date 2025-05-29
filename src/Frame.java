@@ -13,7 +13,7 @@ public class Frame extends JFrame{
     private ImageAnimation desktopPet;
     private JPanelAnimation mailPanel;
 
-    public Frame() {
+    public Frame() throws IOException {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
         buttonClass = new ButtonClass(this);
@@ -148,7 +148,7 @@ public class Frame extends JFrame{
     }
 
 
-    public static Frame createFrame() {
+    public static Frame createFrame() throws IOException {
         return new Frame();
     }
 

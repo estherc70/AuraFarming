@@ -17,13 +17,15 @@ public class ButtonClass {
     private Frame cardLayoutPanel;
     private JPanelAnimation animation;
     private Livestream livestream;
+    private Sponsors sponsors;
 
 
-    public ButtonClass(Frame cardLayoutPanel) {
+    public ButtonClass(Frame cardLayoutPanel) throws IOException {
         livestream = new Livestream();
         btnPanel = new JPanel(new BorderLayout());
         this.cardLayoutPanel = cardLayoutPanel;
         player = new Player();
+        sponsors = new Sponsors();
 
         //create buttons
         usernameText = new JTextField(15);

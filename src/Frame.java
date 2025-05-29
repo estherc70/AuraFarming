@@ -67,20 +67,22 @@ public class Frame extends JFrame{
         JPanel tutorialScreen = PanelClass.createPanel("src/images/tutorial.jpeg");
         JPanel backgroundScreen = PanelClass.createPanel("src/images/background.png");
         JPanel livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
-        //JPanel mailScreen = PanelClass.createPanel("src/MailImages/1.png");
+        JPanel mailScreen = PanelClass.createPanel("src/MailImages/1.png");
+
 
 
 
         ImageAnimation animation = new ImageAnimation(animationFrames, 300);
         tutorialScreen.add(animation.getAnimationPanel());
-        JPanelAnimation mailScreen = new JPanelAnimation(this, "MailScreen", mailImages, 300, 14);
-        mainPanel.add(mailScreen, "MailScreen");
+        JPanelAnimation mailScreenAnimation = new JPanelAnimation(this, "MailScreen", mailImages, 100, 6);
+        mainPanel.add(mailScreenAnimation, "MailScreenAnimation");
 
         //manually control button positions
         startScreen.setLayout(null);
         tutorialScreen.setLayout(null);
         backgroundScreen.setLayout(null);
         livestreamScreen.setLayout(null);
+        mailScreenAnimation.setLayout(null);
         mailScreen.setLayout(null);
 
         //add buttons
@@ -99,6 +101,7 @@ public class Frame extends JFrame{
         mainPanel.add(tutorialScreen, "TutorialScreen");
         mainPanel.add(backgroundScreen, "Background");
         mainPanel.add(livestreamScreen, "LivestreamScreen");
+        mainPanel.add(mailScreenAnimation, "MailScreenAnimation");
         mainPanel.add(mailScreen, "MailScreen");
 
 

@@ -78,7 +78,7 @@ public class ButtonClass {
         });
 
         mailApp.addActionListener(e -> {
-            cardLayoutPanel.showCard("MailScreen");
+            cardLayoutPanel.showCard("MailScreenAnimation");
         });
 
         nextButton.addActionListener(e -> {

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Frame extends JFrame{
-    private JPanel mainPanel;
+    private JPanel mainPanel, livestreamScreen;
     private JScrollPane scrollPane;
     private ButtonClass buttonClass;
     private CardLayout cardLayout;
@@ -28,7 +28,8 @@ public class Frame extends JFrame{
         JPanel startScreen = PanelClass.createPanel("src/images/enteruser.png");
         JPanel tutorialScreen = PanelClass.createPanel("src/images/tutorial.jpeg");
         JPanel backgroundScreen = PanelClass.createPanel("src/images/background.png");
-        JPanel livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
+        //testing
+        livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
         JPanel mailScreen = PanelClass.createPanel("src/MailImages/mailhomepage.png");
 
         ImageIcon tutorialImageIcon = new ImageIcon("src/DesktopPetImages/book.png");
@@ -198,5 +199,9 @@ public class Frame extends JFrame{
 
     public JPanel getMailScreen() {
         return mainPanel;
+    }
+
+    public JPanel getLivestreamScreen() {
+        return livestreamScreen;
     }
 }

@@ -21,6 +21,7 @@ public class ButtonClass {
     private Livestream livestream;
     private Sponsors sponsors;
     private boolean livestreamExited;
+    private boolean next;
 
 
     public ButtonClass(Frame cardLayoutPanel)  {
@@ -105,15 +106,30 @@ public class ButtonClass {
         });
 
         livestreamApp.addActionListener(e -> {
+            new Thread(() -> {
+                while (!livestreamExited) {
+                    String textToAppend = "";
+                    int goodOrBad = (int) (Math.random() * 2);
+                    if (goodOrBad == 1) {
+                        textToAppend = livestream.getRandomGood() + "\n";
+                    } else {
+                        textToAppend = livestream.getRandomBad() + "\n";
+                    }
+                    String finalTextToAppend = textToAppend;
+                    SwingUtilities.invokeLater(() -> {
+                        livestreamChat.append(finalTextToAppend);
+                        livestreamChat.setCaretPosition(livestreamChat.getDocument().getLength()); // scroll to bottom
+                        cardLayoutPanel.getLivestreamScreen().revalidate();
+                        cardLayoutPanel.getLivestreamScreen().repaint();
+                    });
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException f) {
+                        f.printStackTrace();
+                    }
+                }
+            }).start();
             cardLayoutPanel.showCard("LivestreamScreen");
-            int i = 0;
-            while (i < 10) {
-                livestreamChat.append(livestream.getRandomGood());
-                livestreamChat.append("\n");
-                livestreamChat.append(livestream.getRandomBad());
-                livestreamChat.append("\n");
-                i++;
-            }
         });
 
         mailApp.addActionListener(e -> {

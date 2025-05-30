@@ -1,4 +1,5 @@
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -9,8 +10,10 @@ public class Sponsors {
     private ArrayList<BufferedImage> currentSponsors;
     private ArrayList<Integer> usedSponsors;
 
-    public Sponsors() throws IOException {
+    public Sponsors() {
         sponsors = new ArrayList<>();
+        currentSponsors = new ArrayList<>();
+        usedSponsors = new ArrayList<>();
         for (int i = 1; i < 13; i++) {
             try {
                 String name = "src/MailImages/sponsors/" + i + ".png";
@@ -25,7 +28,30 @@ public class Sponsors {
         }
     }
 
+    public ArrayList<BufferedImage> getRandomSponsors() {
+        currentSponsors = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            int randint = (int) (Math.random() * 12) + 1;
+            if (!used(randint)) {
+                currentSponsors.add(sponsors.get(i));
+                usedSponsors.add(i);
+            }
+            else {
+                i--;
+            }
+        }
+        return currentSponsors;
 
+    }
+
+    public boolean used(int ind) {
+        for (int i = 0; i < usedSponsors.size(); i++) {
+            if (usedSponsors.get(i) == ind) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
     public ArrayList<BufferedImage> getSponsors() {

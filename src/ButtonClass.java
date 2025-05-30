@@ -20,6 +20,8 @@ public class ButtonClass {
     private JPanelAnimation animation;
     private Livestream livestream;
     private Sponsors sponsors;
+    private boolean livestreamExited;
+    private boolean next;
     private boolean bookBtnPressed;
 
 
@@ -29,6 +31,7 @@ public class ButtonClass {
         this.cardLayoutPanel = cardLayoutPanel;
         player = new Player();
         sponsors = new Sponsors();
+        livestreamExited = false;
         bookBtnPressed = false;
 
         //create buttons
@@ -57,9 +60,10 @@ public class ButtonClass {
         nextButton.setContentAreaFilled(true);
         nextButton.setBorderPainted(true);
 
-        mailApp.setOpaque(true);
-        mailApp.setContentAreaFilled(true);
-        mailApp.setBorderPainted(true);
+        customizeButton(mailApp);
+//        mailApp.setOpaque(true);
+//        mailApp.setContentAreaFilled(true);
+//        mailApp.setBorderPainted(true);
 
         editApp.setOpaque(true);
         editApp.setContentAreaFilled(true);
@@ -86,7 +90,7 @@ public class ButtonClass {
         usernameText.setBounds(150,360,700,75);
         livestreamApp.setBounds(515,165,90,90);
         nextButton.setBounds(515,165,90,90);
-        mailApp.setBounds(375, 165, 90, 90);
+        mailApp.setBounds(386, 167, 90, 90);
         editApp.setBounds(375, 275, 90, 90);
         bookBtn.setBounds(625, 285, 145, 125);
         homePage.setBounds(500, 180, 90, 90);
@@ -113,8 +117,30 @@ public class ButtonClass {
         });
 
         livestreamApp.addActionListener(e -> {
+            new Thread(() -> {
+                while (!livestreamExited) {
+                    String textToAppend = "";
+                    int goodOrBad = (int) (Math.random() * 2);
+                    if (goodOrBad == 1) {
+                        textToAppend = livestream.getRandomGood() + "\n";
+                    } else {
+                        textToAppend = livestream.getRandomBad() + "\n";
+                    }
+                    String finalTextToAppend = textToAppend;
+                    SwingUtilities.invokeLater(() -> {
+                        livestreamChat.append(finalTextToAppend);
+                        livestreamChat.setCaretPosition(livestreamChat.getDocument().getLength()); // scroll to bottom
+                        cardLayoutPanel.getLivestreamScreen().revalidate();
+                        cardLayoutPanel.getLivestreamScreen().repaint();
+                    });
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException f) {
+                        f.printStackTrace();
+                    }
+                }
+            }).start();
             cardLayoutPanel.showCard("LivestreamScreen");
-            livestreamChat.append(livestream.getRandomBad());
         });
 
         mailApp.addActionListener(e -> {
@@ -141,6 +167,7 @@ public class ButtonClass {
 
         homePage.addActionListener(e ->  {
             cardLayoutPanel.showCard("Background");
+            livestreamExited = true;
         });
 
         nextButton.addActionListener(e -> {

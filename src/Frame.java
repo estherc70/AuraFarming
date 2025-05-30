@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Frame extends JFrame{
-    private JPanel mainPanel;
+    private JPanel mainPanel, livestreamScreen;
     private JScrollPane scrollPane;
     private ButtonClass buttonClass;
     private CardLayout cardLayout;
@@ -28,7 +28,8 @@ public class Frame extends JFrame{
         JPanel startScreen = PanelClass.createPanel("src/images/enteruser.png");
         JPanel tutorialScreen = PanelClass.createPanel("src/images/tutorial.jpeg");
         JPanel backgroundScreen = PanelClass.createPanel("src/images/background.png");
-        JPanel livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
+        //testing
+        livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
         JPanel mailScreen = PanelClass.createPanel("src/MailImages/mailhomepage.png");
 
         ImageIcon tutorialImageIcon = new ImageIcon("src/DesktopPetImages/book.png");
@@ -143,7 +144,6 @@ public class Frame extends JFrame{
         backgroundScreen.add(buttonClass.getMailApp());
         backgroundScreen.add(buttonClass.getEditApp());
         livestreamScreen.add(buttonClass.getScrollPane(), BorderLayout.CENTER);
-        livestreamScreen.add(buttonClass.getHomePage());
         mailScreen.add(buttonClass.getHomePage());
         livestreamScreen.add(buttonClass.getHomePage());
 
@@ -156,7 +156,7 @@ public class Frame extends JFrame{
         livestreamScreen.add(scrollPane);
 
         ArrayList<BufferedImage> currentSponsor = sponsors.getRandomSponsors();
-        int y = 50;
+        int y = 138;
         for (int i = 0; i < currentSponsor.size(); i++) {
             BufferedImage image = currentSponsor.get(i);
             ImageIcon icon = new ImageIcon(image);
@@ -166,8 +166,8 @@ public class Frame extends JFrame{
             button.setContentAreaFilled(true);
             button.setBorderPainted(true);
             mailScreen.add(button);
-            button.setBounds(10, y, 1498, 168);
-            y += 30;
+            button.setBounds(33, y, 938, 93);
+            y += 82;
         }
 
         Container pane = getContentPane();
@@ -217,5 +217,9 @@ public class Frame extends JFrame{
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    public JPanel getLivestreamScreen() {
+        return livestreamScreen;
     }
 }

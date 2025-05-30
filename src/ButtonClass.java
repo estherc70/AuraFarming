@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class ButtonClass {
     private Player player;
-    private JButton livestreamApp, nextButton, mailApp, homePage, bookBtn;
+    private JButton livestreamApp, nextButton, mailApp, homePage, bookBtn, editApp;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
     private JTextField usernameText;
@@ -22,6 +22,7 @@ public class ButtonClass {
     private Sponsors sponsors;
     private boolean livestreamExited;
     private boolean next;
+    private boolean bookBtnPressed;
 
 
     public ButtonClass(Frame cardLayoutPanel)  {
@@ -31,6 +32,7 @@ public class ButtonClass {
         player = new Player();
         sponsors = new Sponsors();
         livestreamExited = false;
+        bookBtnPressed = false;
 
         //create buttons
         usernameText = new JTextField(15);
@@ -43,8 +45,10 @@ public class ButtonClass {
         nextButton = new JButton();
         mailApp = new JButton();
         bookBtn = new JButton();
+        bookBtn.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("SPACE"), "none");
         //testing
         homePage = new JButton();
+        editApp = new JButton();
 
         //set opaque
         customizeButton(livestreamApp);
@@ -54,6 +58,10 @@ public class ButtonClass {
         nextButton.setBorderPainted(true);
 
         customizeButton(mailApp);
+
+        editApp.setOpaque(true);
+        editApp.setContentAreaFilled(true);
+        editApp.setBorderPainted(true);
 
         bookBtn.setOpaque(true);
         bookBtn.setContentAreaFilled(true);
@@ -77,6 +85,7 @@ public class ButtonClass {
         livestreamApp.setBounds(523,170,90,90);
         nextButton.setBounds(515,165,90,90);
         mailApp.setBounds(386, 167, 90, 90);
+        editApp.setBounds(375, 275, 90, 90);
         bookBtn.setBounds(625, 285, 145, 125);
         homePage.setBounds(500, 180, 90, 90);
 
@@ -87,6 +96,7 @@ public class ButtonClass {
         btnPanel.add(nextButton);
         btnPanel.add(mailApp);
         btnPanel.add(bookBtn);
+        btnPanel.add(editApp);
         btnPanel.add(homePage);
 
         addActionListeners();
@@ -157,6 +167,10 @@ public class ButtonClass {
         nextButton.addActionListener(e -> {
             cardLayoutPanel.showCard("Background");
         });
+
+        bookBtn.addActionListener(e -> {
+            bookBtnPressed = true;
+        });
     }
 
     private void customizeButton(JButton button) {
@@ -199,5 +213,13 @@ public class ButtonClass {
 
     public JScrollPane getScrollPane() {
         return scrollPane;
+    }
+
+    public boolean isBookBtnPressed() {
+        return bookBtnPressed;
+    }
+
+    public JButton getEditApp() {
+        return editApp;
     }
 }

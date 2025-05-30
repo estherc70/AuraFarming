@@ -149,7 +149,7 @@ public class Frame extends JFrame{
         livestreamScreen.add(scrollPane);
 
         ArrayList<BufferedImage> currentSponsor = sponsors.getRandomSponsors();
-        int y = 50;
+        int y = 138;
         for (int i = 0; i < currentSponsor.size(); i++) {
             BufferedImage image = currentSponsor.get(i);
             ImageIcon icon = new ImageIcon(image);
@@ -159,8 +159,8 @@ public class Frame extends JFrame{
             button.setContentAreaFilled(true);
             button.setBorderPainted(true);
             mailScreen.add(button);
-            button.setBounds(10, y, 1498, 168);
-            y += 30;
+            button.setBounds(33, y, 938, 93);
+            y += 82;
         }
 
         Container pane = getContentPane();

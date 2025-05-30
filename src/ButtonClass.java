@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class ButtonClass {
     private Player player;
-    private JButton livestreamApp, nextButton, mailApp, homePage;
+    private JButton livestreamApp, nextButton, mailApp, homePage, bookBtn;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
     private JTextField usernameText;
@@ -19,13 +19,15 @@ public class ButtonClass {
     private Frame cardLayoutPanel;
     private JPanelAnimation animation;
     private Livestream livestream;
+    private Sponsors sponsors;
 
 
-    public ButtonClass(Frame cardLayoutPanel) {
+    public ButtonClass(Frame cardLayoutPanel)  {
         livestream = new Livestream();
         btnPanel = new JPanel(new BorderLayout());
         this.cardLayoutPanel = cardLayoutPanel;
         player = new Player();
+        sponsors = new Sponsors();
 
         //create buttons
         usernameText = new JTextField(15);
@@ -37,6 +39,7 @@ public class ButtonClass {
         livestreamApp = new JButton();
         nextButton = new JButton();
         mailApp = new JButton();
+        bookBtn = new JButton();
         //testing
         homePage = new JButton();
 
@@ -53,6 +56,10 @@ public class ButtonClass {
         mailApp.setOpaque(true);
         mailApp.setContentAreaFilled(true);
         mailApp.setBorderPainted(true);
+
+        bookBtn.setOpaque(true);
+        bookBtn.setContentAreaFilled(true);
+        bookBtn.setBorderPainted(true);
 
         //testing
         homePage.setOpaque(true);
@@ -72,7 +79,8 @@ public class ButtonClass {
         livestreamApp.setBounds(515,165,90,90);
         nextButton.setBounds(515,165,90,90);
         mailApp.setBounds(400, 165, 90, 90);
-        homePage.setBounds(500, 180, 40, 40);
+        bookBtn.setBounds(625, 285, 145, 125);
+        homePage.setBounds(500, 180, 90, 90);
 
         //livestreamApp.setVisible(false);
 
@@ -80,6 +88,7 @@ public class ButtonClass {
         btnPanel.add(livestreamApp);
         btnPanel.add(nextButton);
         btnPanel.add(mailApp);
+        btnPanel.add(bookBtn);
         btnPanel.add(homePage);
 
         addActionListeners();
@@ -99,6 +108,7 @@ public class ButtonClass {
         });
 
         mailApp.addActionListener(e -> {
+            //animation
             ArrayList<BufferedImage> mailImages = new ArrayList<>();
             for (int i = 1; i < 15; i++) {
                 try {
@@ -110,10 +120,12 @@ public class ButtonClass {
                     System.out.println(exception.getMessage());
                 }
             }
-            JPanelAnimation mailScreenAnimation = new JPanelAnimation(cardLayoutPanel, "MailScreen", mailImages, 10, 1);
+            JPanelAnimation mailScreenAnimation = new JPanelAnimation(cardLayoutPanel, "MailScreen", mailImages, 50, 1);
             cardLayoutPanel.getMainPanel().add(mailScreenAnimation, "MailScreenAnimation");
 
+
             cardLayoutPanel.showCard("MailScreenAnimation");
+
 
         });
 
@@ -142,6 +154,10 @@ public class ButtonClass {
 
     public JButton getNextButton() {
         return nextButton;
+    }
+
+    public JButton getBookBtn() {
+        return bookBtn;
     }
 
     public JTextField getUsernameText() {

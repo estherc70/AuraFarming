@@ -9,15 +9,11 @@ public class ImageAnimation implements ActionListener {
     private ArrayList<BufferedImage> frames;
     private Timer timer;
     private int currentFrame;
-    private int loopCount;
-    private int maxLoops;
     private JPanel animationPanel;
 
-    public ImageAnimation(ArrayList<BufferedImage> frames, int delay, int maxLoops) {
+    public ImageAnimation(ArrayList<BufferedImage> frames, int delay) {
         this.frames = frames;
-        this.maxLoops = maxLoops;
         currentFrame = 0;
-        loopCount = 0;
 
         animationPanel = new JPanel() {
             @Override
@@ -42,16 +38,13 @@ public class ImageAnimation implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        currentFrame++;
-        if (currentFrame >= frames.size()) {
-            currentFrame = 0;
-            loopCount++;
-            System.out.println("Loop count: " + loopCount + " / " + maxLoops);
-            if (loopCount >= maxLoops) {
-                timer.stop();
-                System.out.println("Timer stopped");
-            }
-        }
+        currentFrame = (currentFrame + 1) % frames.size();
+        animationPanel.repaint();
+    }
+
+    public void updateFrames(ArrayList<BufferedImage> newFrames) {
+        this.frames = newFrames;
+        currentFrame = 0;
         animationPanel.repaint();
     }
 
@@ -59,4 +52,5 @@ public class ImageAnimation implements ActionListener {
         return animationPanel;
     }
 }
+
 

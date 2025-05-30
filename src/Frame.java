@@ -50,24 +50,30 @@ public class Frame extends JFrame{
 
         ArrayList<BufferedImage> animationFrames = new ArrayList<>();
         ArrayList<BufferedImage> animationFrames2 = new ArrayList<>();
+        ArrayList<BufferedImage> animationFrames3 = new ArrayList<>();
+        BufferedImage img = ImageIO.read(new File("src/DesktopPetImages/Ivan/ivan11.png"));
+        animationFrames3.add(img);
 
-        for (int i = 0; i < 7; i++) {
-            try {
-                BufferedImage img = ImageIO.read(new File("src/DesktopPetImages/Ivan/ivan" + i + ".png"));
-                animationFrames.add(img);
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+        initailizeIvanImages(animationFrames,0,7);
+        initailizeIvanImages(animationFrames2,7,11);
 
-        for (int i = 7; i < 11; i++) {
-            try {
-                BufferedImage img = ImageIO.read(new File("src/DesktopPetImages/Ivan/ivan" + i + ".png"));
-                animationFrames2.add(img);
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+//        for (int i = 0; i < 7; i++) {
+//            try {
+//                BufferedImage img = ImageIO.read(new File("src/DesktopPetImages/Ivan/ivan" + i + ".png"));
+//                animationFrames.add(img);
+//            } catch (IOException e) {
+//                System.out.println(e.getMessage());
+//            }
+//        }
+//
+//        for (int i = 7; i < 11; i++) {
+//            try {
+//                BufferedImage img = ImageIO.read(new File("src/DesktopPetImages/Ivan/ivan" + i + ".png"));
+//                animationFrames2.add(img);
+//            } catch (IOException e) {
+//                System.out.println(e.getMessage());
+//            }
+//        }
 
 //        ArrayList<BufferedImage> mailImages = new ArrayList<>();
 //        for (int i = 1; i < 15; i++) {
@@ -135,6 +141,7 @@ public class Frame extends JFrame{
         tutorialScreen.add(buttonClass.getBookBtn());
         backgroundScreen.add(buttonClass.getLivestreamApp());
         backgroundScreen.add(buttonClass.getMailApp());
+        backgroundScreen.add(buttonClass.getEditApp());
         livestreamScreen.add(buttonClass.getScrollPane(), BorderLayout.CENTER);
         livestreamScreen.add(buttonClass.getHomePage());
         mailScreen.add(buttonClass.getHomePage());
@@ -199,5 +206,16 @@ public class Frame extends JFrame{
 
     public JPanel getMailScreen() {
         return mainPanel;
+    }
+
+    private void initailizeIvanImages (ArrayList<BufferedImage> frames, int start, int end) {
+        for (int i = start; i < end; i++) {
+            try {
+                BufferedImage img = ImageIO.read(new File("src/DesktopPetImages/Ivan/ivan" + i + ".png"));
+                frames.add(img);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }

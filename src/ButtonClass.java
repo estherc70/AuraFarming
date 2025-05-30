@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class ButtonClass {
     private Player player;
-    private JButton livestreamApp, nextButton, mailApp, homePage;
+    private JButton livestreamApp, nextButton, mailApp, homePage, bookBtn;
     private JTextArea livestreamChat;
     private JTextField usernameText;
     private JPanel btnPanel;
@@ -33,6 +33,7 @@ public class ButtonClass {
         livestreamApp = new JButton();
         nextButton = new JButton();
         mailApp = new JButton();
+        bookBtn = new JButton();
         //testing
         homePage = new JButton();
 
@@ -49,6 +50,10 @@ public class ButtonClass {
         mailApp.setOpaque(true);
         mailApp.setContentAreaFilled(true);
         mailApp.setBorderPainted(true);
+
+        bookBtn.setOpaque(true);
+        bookBtn.setContentAreaFilled(true);
+        bookBtn.setBorderPainted(true);
 
         //testing
         homePage.setOpaque(true);
@@ -68,6 +73,7 @@ public class ButtonClass {
         nextButton.setBounds(515,165,90,90);
         livestreamChat.setBounds(630,80,280,500);
         mailApp.setBounds(400, 165, 90, 90);
+        bookBtn.setBounds(625, 285, 145, 125);
         homePage.setBounds(500, 180, 90, 90);
 
         //livestreamApp.setVisible(false);
@@ -77,6 +83,7 @@ public class ButtonClass {
         btnPanel.add(nextButton);
         btnPanel.add(livestreamChat);
         btnPanel.add(mailApp);
+        btnPanel.add(bookBtn);
         btnPanel.add(homePage);
 
         addActionListeners();
@@ -138,6 +145,10 @@ public class ButtonClass {
 
     public JButton getNextButton() {
         return nextButton;
+    }
+
+    public JButton getBookBtn() {
+        return bookBtn;
     }
 
     public JTextField getUsernameText() {

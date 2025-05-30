@@ -26,6 +26,12 @@ public class Frame extends JFrame{
         JPanel livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
         JPanel mailScreen = PanelClass.createPanel("src/MailImages/1.png");
 
+        ImageIcon tutorialImageIcon = new ImageIcon("src/DesktopPetImages/book.png");
+        JLabel tutorialLabel = new JLabel(tutorialImageIcon);
+        tutorialLabel.setBounds(0, 0, tutorialImageIcon.getIconWidth(), tutorialImageIcon.getIconHeight());
+        tutorialScreen.add(tutorialLabel);
+
+
         //loading screen animation
         ArrayList<BufferedImage> startingImages = new ArrayList<>();
         for (int i = 1; i <= 5; i++) {
@@ -38,10 +44,21 @@ public class Frame extends JFrame{
         }
 
         ArrayList<BufferedImage> animationFrames = new ArrayList<>();
-        for (int i = 0; i < 11; i++) {
+        ArrayList<BufferedImage> animationFrames2 = new ArrayList<>();
+
+        for (int i = 0; i < 7; i++) {
             try {
-                BufferedImage img = ImageIO.read(new File("src/DesktopPetImages/ivan" + i + ".png"));
+                BufferedImage img = ImageIO.read(new File("src/DesktopPetImages/Ivan/ivan" + i + ".png"));
                 animationFrames.add(img);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        for (int i = 7; i < 11; i++) {
+            try {
+                BufferedImage img = ImageIO.read(new File("src/DesktopPetImages/Ivan/ivan" + i + ".png"));
+                animationFrames2.add(img);
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
@@ -62,7 +79,7 @@ public class Frame extends JFrame{
         JPanelAnimation startPanel = new JPanelAnimation(this, "StartScreen" ,startingImages, 300, 3);
         mainPanel.add(startPanel);
 
-        ImageAnimation animation = new ImageAnimation(animationFrames, 300, 5);
+        ImageAnimation animation = new ImageAnimation(animationFrames, 300);
         tutorialScreen.add(animation.getAnimationPanel());
 
         ArrayList<BufferedImage> speechImages = new ArrayList<>();
@@ -85,6 +102,17 @@ public class Frame extends JFrame{
         switcher.setBounds(360, 200, 200, 100);
         tutorialScreen.add(switcher);
 
+        switcher.setDialogueChangeListener(pressCount -> {
+            if (pressCount == 1) {
+                animation.updateFrames(animationFrames2);
+            }
+
+            if (pressCount > 5) {
+                switcher.setEnabled(false);
+                System.out.println("Max dialogue presses reached");
+            }
+        });
+
 //        JPanelAnimation mailScreenAnimation = new JPanelAnimation(this, "MailScreen", mailImages, 100, 6);
 //        mainPanel.add(mailScreenAnimation, "MailScreenAnimation");
 
@@ -98,6 +126,7 @@ public class Frame extends JFrame{
         //add buttons
         startScreen.add(buttonClass.getUsernameText());
         tutorialScreen.add(buttonClass.getNextButton());
+        tutorialScreen.add(buttonClass.getBookBtn());
         backgroundScreen.add(buttonClass.getLivestreamApp());
         backgroundScreen.add(buttonClass.getMailApp());
         livestreamScreen.add(buttonClass.getLivestreamChat());

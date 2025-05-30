@@ -10,6 +10,7 @@ public class Sponsors {
     private ArrayList<Integer> usedSponsors;
 
     public Sponsors() throws IOException {
+        sponsors = new ArrayList<>();
         for (int i = 1; i < 13; i++) {
             try {
                 String name = "src/MailImages/sponsors/" + i + ".png";

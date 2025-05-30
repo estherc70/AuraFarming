@@ -56,9 +56,10 @@ public class ButtonClass {
         nextButton.setContentAreaFilled(true);
         nextButton.setBorderPainted(true);
 
-        mailApp.setOpaque(true);
-        mailApp.setContentAreaFilled(true);
-        mailApp.setBorderPainted(true);
+        customizeButton(mailApp);
+//        mailApp.setOpaque(true);
+//        mailApp.setContentAreaFilled(true);
+//        mailApp.setBorderPainted(true);
 
         bookBtn.setOpaque(true);
         bookBtn.setContentAreaFilled(true);
@@ -81,7 +82,7 @@ public class ButtonClass {
         usernameText.setBounds(150,360,700,75);
         livestreamApp.setBounds(515,165,90,90);
         nextButton.setBounds(515,165,90,90);
-        mailApp.setBounds(400, 165, 90, 90);
+        mailApp.setBounds(386, 167, 90, 90);
         bookBtn.setBounds(625, 285, 145, 125);
         homePage.setBounds(500, 180, 90, 90);
 

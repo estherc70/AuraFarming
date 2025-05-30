@@ -12,11 +12,13 @@ public class Frame extends JFrame{
     private CardLayout cardLayout;
     private ImageAnimation desktopPet;
     private JPanelAnimation mailPanel;
+    private Sponsors sponsors;
 
     public Frame() throws IOException {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
         buttonClass = new ButtonClass(this);
+        sponsors = new Sponsors();
         //desktopPet = new ImageAnimation();
         //create card panels
 
@@ -24,7 +26,7 @@ public class Frame extends JFrame{
         JPanel tutorialScreen = PanelClass.createPanel("src/images/tutorial.jpeg");
         JPanel backgroundScreen = PanelClass.createPanel("src/images/background.png");
         JPanel livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
-        JPanel mailScreen = PanelClass.createPanel("src/MailImages/1.png");
+        JPanel mailScreen = PanelClass.createPanel("src/MailImages/mailhomepage.png");
 
         //loading screen animation
         ArrayList<BufferedImage> startingImages = new ArrayList<>();
@@ -109,6 +111,21 @@ public class Frame extends JFrame{
         mainPanel.add(backgroundScreen, "Background");
         mainPanel.add(livestreamScreen, "LivestreamScreen");
         mainPanel.add(mailScreen, "MailScreen");
+
+        ArrayList<BufferedImage> currentSponsor = sponsors.getRandomSponsors();
+        int y = 50;
+        for (int i = 0; i < currentSponsor.size(); i++) {
+            BufferedImage image = currentSponsor.get(i);
+            ImageIcon icon = new ImageIcon(image);
+            JButton button = new JButton();
+            button.setIcon(icon);
+            button.setOpaque(true);
+            button.setContentAreaFilled(true);
+            button.setBorderPainted(true);
+            mailScreen.add(button);
+            button.setBounds(10, y, 1498, 168);
+            y += 30;
+        }
 
         Container pane = getContentPane();
         pane.add(mainPanel, BorderLayout.CENTER);

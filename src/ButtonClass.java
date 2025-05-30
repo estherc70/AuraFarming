@@ -20,7 +20,7 @@ public class ButtonClass {
     private Sponsors sponsors;
 
 
-    public ButtonClass(Frame cardLayoutPanel) throws IOException {
+    public ButtonClass(Frame cardLayoutPanel)  {
         livestream = new Livestream();
         btnPanel = new JPanel(new BorderLayout());
         this.cardLayoutPanel = cardLayoutPanel;
@@ -95,6 +95,7 @@ public class ButtonClass {
         });
 
         mailApp.addActionListener(e -> {
+            //animation
             ArrayList<BufferedImage> mailImages = new ArrayList<>();
             for (int i = 1; i < 15; i++) {
                 try {
@@ -109,7 +110,9 @@ public class ButtonClass {
             JPanelAnimation mailScreenAnimation = new JPanelAnimation(cardLayoutPanel, "MailScreen", mailImages, 50, 1);
             cardLayoutPanel.getMainPanel().add(mailScreenAnimation, "MailScreenAnimation");
 
+
             cardLayoutPanel.showCard("MailScreenAnimation");
+
 
         });
 

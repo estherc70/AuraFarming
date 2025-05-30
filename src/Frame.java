@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class Frame extends JFrame{
     private JPanel mainPanel;
+    private JScrollPane scrollPane;
     private ButtonClass buttonClass;
     private CardLayout cardLayout;
     private ImageAnimation desktopPet;
@@ -18,6 +19,8 @@ public class Frame extends JFrame{
         mainPanel = new JPanel(cardLayout);
         buttonClass = new ButtonClass(this);
         //desktopPet = new ImageAnimation();
+        scrollPane = buttonClass.getScrollPane();
+
 
         //loading screen animation
         ArrayList<BufferedImage> startingImages = new ArrayList<>();
@@ -53,13 +56,8 @@ public class Frame extends JFrame{
 //        }
 
 
-
         JPanelAnimation startPanel = new JPanelAnimation(this, "StartScreen" ,startingImages, 300, 3);
         mainPanel.add(startPanel);
-
-
-
-
 
 
         //create card panels
@@ -68,8 +66,6 @@ public class Frame extends JFrame{
         JPanel backgroundScreen = PanelClass.createPanel("src/images/background.png");
         JPanel livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
         JPanel mailScreen = PanelClass.createPanel("src/MailImages/1.png");
-
-
 
 
         ImageAnimation animation = new ImageAnimation(animationFrames, 300, 5);
@@ -101,14 +97,9 @@ public class Frame extends JFrame{
         tutorialScreen.add(buttonClass.getNextButton());
         backgroundScreen.add(buttonClass.getLivestreamApp());
         backgroundScreen.add(buttonClass.getMailApp());
-        livestreamScreen.add(buttonClass.getLivestreamChat());
+        livestreamScreen.add(buttonClass.getScrollPane(), BorderLayout.CENTER);
         mailScreen.add(buttonClass.getHomePage());
         livestreamScreen.add(buttonClass.getHomePage());
-
-
-
-
-
 
         mainPanel.add(startScreen, "StartScreen");
         mainPanel.add(tutorialScreen, "TutorialScreen");
@@ -117,7 +108,7 @@ public class Frame extends JFrame{
         //mainPanel.add(mailScreenAnimation, "MailScreenAnimation");
         mainPanel.add(mailScreen, "MailScreen");
 
-
+        livestreamScreen.add(scrollPane);
 
 
         Container pane = getContentPane();

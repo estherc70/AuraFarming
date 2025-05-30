@@ -1,5 +1,6 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +13,7 @@ public class ButtonClass {
     private Player player;
     private JButton livestreamApp, nextButton, mailApp, homePage;
     private JTextArea livestreamChat;
+    private JScrollPane scrollPane;
     private JTextField usernameText;
     private JPanel btnPanel;
     private Frame cardLayoutPanel;
@@ -27,7 +29,11 @@ public class ButtonClass {
 
         //create buttons
         usernameText = new JTextField(15);
-        livestreamChat = new JTextArea();
+        livestreamChat = new JTextArea(280,500);
+        scrollPane = new JScrollPane(livestreamChat);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setBounds(630, 80, 280, 500);
+
         livestreamApp = new JButton();
         nextButton = new JButton();
         mailApp = new JButton();
@@ -56,6 +62,7 @@ public class ButtonClass {
         livestreamChat.setEditable(true);
         livestreamChat.setLineWrap(true);
 
+
         //set text field fonts
         usernameText.setFont(new Font("Serif", Font.BOLD, 60));
         livestreamApp.setFont(new Font("Serif", Font.ITALIC, 15));
@@ -64,7 +71,6 @@ public class ButtonClass {
         usernameText.setBounds(150,360,700,75);
         livestreamApp.setBounds(515,165,90,90);
         nextButton.setBounds(515,165,90,90);
-        livestreamChat.setBounds(630,80,280,500);
         mailApp.setBounds(400, 165, 90, 90);
         homePage.setBounds(500, 180, 40, 40);
 
@@ -73,7 +79,6 @@ public class ButtonClass {
         btnPanel.add(usernameText);
         btnPanel.add(livestreamApp);
         btnPanel.add(nextButton);
-        btnPanel.add(livestreamChat);
         btnPanel.add(mailApp);
         btnPanel.add(homePage);
 
@@ -90,6 +95,7 @@ public class ButtonClass {
 
         livestreamApp.addActionListener(e -> {
             cardLayoutPanel.showCard("LivestreamScreen");
+            livestreamChat.append(livestream.getRandomBad());
         });
 
         mailApp.addActionListener(e -> {
@@ -154,5 +160,7 @@ public class ButtonClass {
         return homePage;
     }
 
-
+    public JScrollPane getScrollPane() {
+        return scrollPane;
+    }
 }

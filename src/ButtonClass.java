@@ -47,19 +47,13 @@ public class ButtonClass {
         homePage = new JButton();
 
         //set opaque
-//        customizeButton(livestreamApp);
-        livestreamApp.setOpaque(true);
-        livestreamApp.setContentAreaFilled(true);
-        livestreamApp.setBorderPainted(true);
+        customizeButton(livestreamApp);
 
         nextButton.setOpaque(true);
         nextButton.setContentAreaFilled(true);
         nextButton.setBorderPainted(true);
 
         customizeButton(mailApp);
-//        mailApp.setOpaque(true);
-//        mailApp.setContentAreaFilled(true);
-//        mailApp.setBorderPainted(true);
 
         bookBtn.setOpaque(true);
         bookBtn.setContentAreaFilled(true);
@@ -80,7 +74,7 @@ public class ButtonClass {
 
         //set button/text field size
         usernameText.setBounds(150,360,700,75);
-        livestreamApp.setBounds(515,165,90,90);
+        livestreamApp.setBounds(523,170,90,90);
         nextButton.setBounds(515,165,90,90);
         mailApp.setBounds(386, 167, 90, 90);
         bookBtn.setBounds(625, 285, 145, 125);
@@ -109,7 +103,7 @@ public class ButtonClass {
         livestreamApp.addActionListener(e -> {
             new Thread(() -> {
                 while (!livestreamExited) {
-                    String textToAppend = "";
+                    String textToAppend;
                     int goodOrBad = (int) (Math.random() * 2);
                     if (goodOrBad == 1) {
                         textToAppend = livestream.getRandomGood() + "\n";
@@ -124,7 +118,7 @@ public class ButtonClass {
                         cardLayoutPanel.getLivestreamScreen().repaint();
                     });
                     try {
-                        Thread.sleep(500);
+                        Thread.sleep(600);
                     } catch (InterruptedException f) {
                         f.printStackTrace();
                     }

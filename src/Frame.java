@@ -136,7 +136,6 @@ public class Frame extends JFrame{
         backgroundScreen.add(buttonClass.getLivestreamApp());
         backgroundScreen.add(buttonClass.getMailApp());
         livestreamScreen.add(buttonClass.getScrollPane(), BorderLayout.CENTER);
-        livestreamScreen.add(buttonClass.getHomePage());
         mailScreen.add(buttonClass.getHomePage());
         livestreamScreen.add(buttonClass.getHomePage());
 

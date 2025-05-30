@@ -20,6 +20,7 @@ public class ButtonClass {
     private JPanelAnimation animation;
     private Livestream livestream;
     private Sponsors sponsors;
+    private boolean livestreamExited;
 
 
     public ButtonClass(Frame cardLayoutPanel)  {
@@ -28,6 +29,7 @@ public class ButtonClass {
         this.cardLayoutPanel = cardLayoutPanel;
         player = new Player();
         sponsors = new Sponsors();
+        livestreamExited = false;
 
         //create buttons
         usernameText = new JTextField(15);
@@ -104,7 +106,14 @@ public class ButtonClass {
 
         livestreamApp.addActionListener(e -> {
             cardLayoutPanel.showCard("LivestreamScreen");
-            livestreamChat.append(livestream.getRandomBad());
+            int i = 0;
+            while (i < 10) {
+                livestreamChat.append(livestream.getRandomGood());
+                livestreamChat.append("\n");
+                livestreamChat.append(livestream.getRandomBad());
+                livestreamChat.append("\n");
+                i++;
+            }
         });
 
         mailApp.addActionListener(e -> {
@@ -131,6 +140,7 @@ public class ButtonClass {
 
         homePage.addActionListener(e ->  {
             cardLayoutPanel.showCard("Background");
+            livestreamExited = true;
         });
 
         nextButton.addActionListener(e -> {

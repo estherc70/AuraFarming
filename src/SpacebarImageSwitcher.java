@@ -10,7 +10,7 @@ public class SpacebarImageSwitcher extends JPanel {
     private int currentIndex;
     private int spacePressCount;
     private DialogueChangeListener dialogueChangeListener;
-    private boolean enabled;
+    private boolean isSwitcherActive;
 
     public interface DialogueChangeListener {
         void onSpacePressed(int pressCount);
@@ -28,7 +28,7 @@ public class SpacebarImageSwitcher extends JPanel {
 
         currentIndex = 0;
         spacePressCount = 0;
-        enabled = true;
+        isSwitcherActive = true;
         setupKeyBinding();
     }
 
@@ -41,12 +41,18 @@ public class SpacebarImageSwitcher extends JPanel {
         actionMap.put("nextImage", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!enabled) return;
+                System.out.println("[DEBUG] Space pressed. isSwitcherActive = " + isSwitcherActive);
+                if (!isSwitcherActive) {
+                    System.out.println("[DEBUG] Space ignored because switcher is disabled.");
+                    return;
+                }
 
                 currentIndex = (currentIndex + 1) % images.length;
                 repaint();
 
                 spacePressCount++;
+                System.out.println("[DEBUG] spacePressCount = " + spacePressCount);
+
                 if (dialogueChangeListener != null) {
                     dialogueChangeListener.onSpacePressed(spacePressCount);
                 }
@@ -58,17 +64,17 @@ public class SpacebarImageSwitcher extends JPanel {
         this.dialogueChangeListener = listener;
     }
 
-    public void updateImages(ArrayList<BufferedImage> newImages) {
-        images = new ImageIcon[newImages.size()];
-        for (int i = 0; i < newImages.size(); i++) {
-            images[i] = new ImageIcon(newImages.get(i));
-        }
-        currentIndex = 0;
-        repaint();
-    }
+//    public void updateImages(ArrayList<BufferedImage> newImages) {
+//        images = new ImageIcon[newImages.size()];
+//        for (int i = 0; i < newImages.size(); i++) {
+//            images[i] = new ImageIcon(newImages.get(i));
+//        }
+//        currentIndex = 0;
+//        repaint();
+//    }
 
-    public void setEnabled(boolean enable) {
-        this.enabled = enable;
+    public void setSwitcherActive(boolean active) {
+        this.isSwitcherActive = active;
     }
 
     @Override

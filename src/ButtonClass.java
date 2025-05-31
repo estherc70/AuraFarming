@@ -21,8 +21,6 @@ public class ButtonClass {
     private Livestream livestream;
     private Sponsors sponsors;
     private boolean livestreamExited;
-    private boolean next;
-    private boolean bookBtnPressed;
 
 
     public ButtonClass(Frame cardLayoutPanel)  {
@@ -32,7 +30,6 @@ public class ButtonClass {
         player = new Player();
         sponsors = new Sponsors();
         livestreamExited = false;
-        bookBtnPressed = false;
 
         //create buttons
         usernameText = new JTextField(15);
@@ -46,6 +43,7 @@ public class ButtonClass {
         mailApp = new JButton();
         bookBtn = new JButton();
         bookBtn.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("SPACE"), "none");
+        nextButton.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("SPACE"), "none");
         //testing
         homePage = new JButton();
         editApp = new JButton();
@@ -167,11 +165,11 @@ public class ButtonClass {
         nextButton.addActionListener(e -> {
             cardLayoutPanel.showCard("Background");
         });
-
-        bookBtn.addActionListener(e -> {
-            bookBtnPressed = true;
-        });
     }
+
+//    public void setContinueButtonListener(ActionListener listener) {
+//        bookBtn.addActionListener(listener);
+//    }
 
     private void customizeButton(JButton button) {
         button.setOpaque(false);
@@ -213,10 +211,6 @@ public class ButtonClass {
 
     public JScrollPane getScrollPane() {
         return scrollPane;
-    }
-
-    public boolean isBookBtnPressed() {
-        return bookBtnPressed;
     }
 
     public JButton getEditApp() {

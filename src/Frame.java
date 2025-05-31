@@ -11,16 +11,16 @@ public class Frame extends JFrame{
     private JScrollPane scrollPane;
     private ButtonClass buttonClass;
     private CardLayout cardLayout;
-    private ImageAnimation desktopPet;
     private JPanelAnimation mailPanel;
     private Sponsors sponsors;
+    private SpacebarImageSwitcher switcher;
 
     public Frame() throws IOException {
+        System.out.println("[DEBUG] Created switcher: " + switcher);
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
         buttonClass = new ButtonClass(this);
         sponsors = new Sponsors();
-        //desktopPet = new ImageAnimation();
         scrollPane = buttonClass.getScrollPane();
 
         //create card panels
@@ -54,40 +54,12 @@ public class Frame extends JFrame{
         ArrayList<BufferedImage> animationFrames3 = new ArrayList<>();
         BufferedImage img = ImageIO.read(new File("src/DesktopPetImages/Ivan/ivan11.png"));
         animationFrames3.add(img);
+        ArrayList<BufferedImage> animationFrames4 = new ArrayList<>();
+
 
         initailizeIvanImages(animationFrames,0,7);
         initailizeIvanImages(animationFrames2,7,11);
-
-//        for (int i = 0; i < 7; i++) {
-//            try {
-//                BufferedImage img = ImageIO.read(new File("src/DesktopPetImages/Ivan/ivan" + i + ".png"));
-//                animationFrames.add(img);
-//            } catch (IOException e) {
-//                System.out.println(e.getMessage());
-//            }
-//        }
-//
-//        for (int i = 7; i < 11; i++) {
-//            try {
-//                BufferedImage img = ImageIO.read(new File("src/DesktopPetImages/Ivan/ivan" + i + ".png"));
-//                animationFrames2.add(img);
-//            } catch (IOException e) {
-//                System.out.println(e.getMessage());
-//            }
-//        }
-
-//        ArrayList<BufferedImage> mailImages = new ArrayList<>();
-//        for (int i = 1; i < 15; i++) {
-//            try {
-//                String file = "src/MailImages/" + i + ".png";
-//                BufferedImage mailImg = ImageIO.read(new File(file));
-//                mailImages.add(mailImg);
-//            }
-//            catch (IOException exception) {
-//                System.out.println(exception.getMessage());
-//            }
-//        }
-
+        initailizeIvanImages(animationFrames4,12,14);
 
         JPanelAnimation startPanel = new JPanelAnimation(this, "StartScreen" ,startingImages, 300, 3);
         mainPanel.add(startPanel);
@@ -111,19 +83,40 @@ public class Frame extends JFrame{
                 "src/DesktopPetImages/Speech/speech2.png",
                 "src/DesktopPetImages/Speech/speech3.png"
         };*/
-        SpacebarImageSwitcher switcher = new SpacebarImageSwitcher(speechImages);
+        switcher = new SpacebarImageSwitcher(speechImages);
         switcher.setBounds(360, 200, 200, 100);
         tutorialScreen.add(switcher);
 
         switcher.setDialogueChangeListener(pressCount -> {
+            System.out.println("[DEBUG] DialogueChangeListener: pressCount = " + pressCount);
+
             if (pressCount == 1) {
                 animation.updateFrames(animationFrames2);
             }
 
-            if (pressCount > 5) {
-                switcher.setEnabled(false);
-                System.out.println("Max dialogue presses reached");
+            if (pressCount == 4) {
+                switcher.setSwitcherActive(false);
+                System.out.println("[DEBUG] Disabled switcher at pressCount == 5");
             }
+
+            if (pressCount >= 5) {
+                if (pressCount == 5) {
+                    animation.updateFrames(animationFrames3);
+                }
+                if (pressCount > 5) {
+                    animation.updateFrames(animationFrames4);
+                    System.out.println("[DEBUG] Disabled switcher at pressCount > 5");
+                    if (pressCount > 7) {
+                        showCard("Background");
+                    }
+                }
+            }
+        });
+
+
+        buttonClass.getBookBtn().addActionListener(e -> {
+            switcher.setSwitcherActive(true);  // or switcher.setEnabled(true); if you didn't rename
+            System.out.println("Book button clicked. Dialogue resumed.");
         });
 
 //        JPanelAnimation mailScreenAnimation = new JPanelAnimation(this, "MailScreen", mailImages, 100, 6);
@@ -194,7 +187,6 @@ public class Frame extends JFrame{
         return mainPanel;
     }
 
-    //switch through card panels ((used in ButtonPanel for ActionListeners)
     public void showCard(String cardName) {
         cardLayout.show(mainPanel, cardName);
     }

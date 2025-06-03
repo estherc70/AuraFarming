@@ -102,103 +102,31 @@ public class TicTacToe extends JFrame {
 
     private void addActionListeners() {
         buttons[0].addActionListener(e -> {
-            if (!position[0]) {
-                buttons[0].setIcon(xIcon);
-                position[0] = true;
-                layout[0] = "X";
-                if (!checkAllFilled()) {
-                    setRandomPosition();
-                }
-            }
-            checkWinner();
+            getButtonReady(0);
         });
         buttons[1].addActionListener(e -> {
-            if (!position[1]) {
-                buttons[1].setIcon(xIcon);
-                position[1] = true;
-                layout[1] = "X";
-                if (!checkAllFilled()) {
-                    setRandomPosition();
-                }
-            }
-            checkWinner();
+            getButtonReady(1);
         });
         buttons[2].addActionListener(e -> {
-            if (!position[2]) {
-                buttons[2].setIcon(xIcon);
-                position[2] = true;
-                layout[2] = "X";
-                if (!checkAllFilled()) {
-                    setRandomPosition();
-                }
-            }
-            checkWinner();
+            getButtonReady(2);
         });
         buttons[3].addActionListener(e -> {
-            if (!position[3]) {
-                buttons[3].setIcon(xIcon);
-                position[3] = true;
-                layout[3] = "X";
-                if (!checkAllFilled()) {
-                    setRandomPosition();
-                }
-            }
-            checkWinner();
+            getButtonReady(3);
         });
         buttons[4].addActionListener(e -> {
-            if (!position[4]) {
-                buttons[4].setIcon(xIcon);
-                position[4] = true;
-                layout[4] = "X";
-                if (!checkAllFilled()) {
-                    setRandomPosition();
-                }
-            }
-            checkWinner();
+            getButtonReady(4);
         });
         buttons[5].addActionListener(e -> {
-            if (!position[5]) {
-                buttons[5].setIcon(xIcon);
-                position[5] = true;
-                layout[5] = "X";
-                if (!checkAllFilled()) {
-                    setRandomPosition();
-                }
-            }
-            checkWinner();
+            getButtonReady(5);
         });
         buttons[6].addActionListener(e -> {
-            if (!position[6]) {
-                buttons[6].setIcon(xIcon);
-                position[6] = true;
-                layout[6] = "X";
-                if (!checkAllFilled()) {
-                    setRandomPosition();
-                }
-            }
-            checkWinner();
+            getButtonReady(6);
         });
         buttons[7].addActionListener(e -> {
-            if (!position[7]) {
-                buttons[7].setIcon(xIcon);
-                position[7] = true;
-                layout[7] = "X";
-                if (!checkAllFilled()) {
-                    setRandomPosition();
-                }
-            }
-            checkWinner();
+            getButtonReady(7);
         });
         buttons[8].addActionListener(e -> {
-            if (!position[8]) {
-                buttons[8].setIcon(xIcon);
-                position[8] = true;
-                layout[8] = "X";
-                if (!checkAllFilled()) {
-                    setRandomPosition();
-                }
-            }
-            checkWinner();
+            getButtonReady(8);
         });
     }
 
@@ -307,6 +235,18 @@ public class TicTacToe extends JFrame {
             gameEnd = true;
         }
         System.out.println(winner);
+    }
+
+    public void getButtonReady(int buttonNum) {
+        if (!position[buttonNum]) {
+            buttons[buttonNum].setIcon(xIcon);
+            position[buttonNum] = true;
+            layout[buttonNum] = "X";
+            if (!checkAllFilled()) {
+                setRandomPosition();
+            }
+        }
+        checkWinner();
     }
 
     public static void main(String[] args) {

@@ -64,8 +64,15 @@ public class Frame extends JFrame{
         JPanelAnimation startPanel = new JPanelAnimation(this, "StartScreen" ,startingImages, 300, 3);
         mainPanel.add(startPanel);
 
-        ImageAnimation animation = new ImageAnimation(animationFrames, 300);
+        ImageAnimation animation = new ImageAnimation(animationFrames, 300, 100, 200);
         tutorialScreen.add(animation.getAnimationPanel());
+
+//        ArrayList<BufferedImage> animationFrames5 = new ArrayList<>();
+//        BufferedImage img2 = ImageIO.read(new File("src/DesktopPetImages/Ivan/ivan14.png"));
+//        animationFrames5.add(img2);
+
+        ImageAnimation animation2 = new ImageAnimation(animationFrames3, 300,175,125);
+        backgroundScreen.add(animation2.getAnimationPanel());
 
         ArrayList<BufferedImage> speechImages = new ArrayList<>();
         for (int i = 0; i < 11; i++) {

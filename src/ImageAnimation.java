@@ -11,7 +11,7 @@ public class ImageAnimation implements ActionListener {
     private int currentFrame;
     private JPanel animationPanel;
 
-    public ImageAnimation(ArrayList<BufferedImage> frames, int delay) {
+    public ImageAnimation(ArrayList<BufferedImage> frames, int delay,int x, int y) {
         this.frames = frames;
         currentFrame = 0;
 
@@ -26,7 +26,7 @@ public class ImageAnimation implements ActionListener {
             }
         };
         animationPanel.setOpaque(false);
-        animationPanel.setBounds(100, 200, 300, 300);
+        animationPanel.setBounds(x, y, 300, 300);
 
         timer = new Timer(delay, this);
         timer.start();

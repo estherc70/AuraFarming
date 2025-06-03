@@ -49,13 +49,13 @@ public class ButtonClass {
         editApp = new JButton();
 
         //set opaque
-        customizeButton(livestreamApp);
+        //customizeButton(livestreamApp);
 
         nextButton.setOpaque(true);
         nextButton.setContentAreaFilled(true);
         nextButton.setBorderPainted(true);
 
-        customizeButton(mailApp);
+        //customizeButton(mailApp);
 
         editApp.setOpaque(true);
         editApp.setContentAreaFilled(true);

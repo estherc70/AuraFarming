@@ -52,14 +52,14 @@ public class Frame extends JFrame{
         ArrayList<BufferedImage> animationFrames = new ArrayList<>();
         ArrayList<BufferedImage> animationFrames2 = new ArrayList<>();
         ArrayList<BufferedImage> animationFrames3 = new ArrayList<>();
-        BufferedImage img = ImageIO.read(new File("src/DesktopPetImages/Ivan/ivan11.png"));
+        BufferedImage img = ImageIO.read(new File("src/DesktopPetImages/Ivan1/ivan11.png"));
         animationFrames3.add(img);
         ArrayList<BufferedImage> animationFrames4 = new ArrayList<>();
 
 
-        initailizeIvanImages(animationFrames,0,7);
-        initailizeIvanImages(animationFrames2,7,11);
-        initailizeIvanImages(animationFrames4,12,14);
+        initailizeIvanImages(animationFrames,0,7,"Ivan1");
+        initailizeIvanImages(animationFrames2,7,11,"Ivan1");
+        initailizeIvanImages(animationFrames4,12,14,"Ivan1");
 
         JPanelAnimation startPanel = new JPanelAnimation(this, "StartScreen" ,startingImages, 300, 3);
         mainPanel.add(startPanel);
@@ -71,7 +71,10 @@ public class Frame extends JFrame{
 //        BufferedImage img2 = ImageIO.read(new File("src/DesktopPetImages/Ivan/ivan14.png"));
 //        animationFrames5.add(img2);
 
-        ImageAnimation animation2 = new ImageAnimation(animationFrames3, 300,175,125);
+        ArrayList<BufferedImage> animationFrames5 = new ArrayList<>();
+        initailizeIvanImages(animationFrames5,15,22,"Ivan2");
+
+        ImageAnimation animation2 = new ImageAnimation(animationFrames5, 300,175,125);
         backgroundScreen.add(animation2.getAnimationPanel());
 
         ArrayList<BufferedImage> speechImages = new ArrayList<>();
@@ -207,10 +210,10 @@ public class Frame extends JFrame{
         return mainPanel;
     }
 
-    private void initailizeIvanImages (ArrayList<BufferedImage> frames, int start, int end) {
+    private void initailizeIvanImages (ArrayList<BufferedImage> frames, int start, int end, String src) {
         for (int i = start; i < end; i++) {
             try {
-                BufferedImage img = ImageIO.read(new File("src/DesktopPetImages/Ivan/ivan" + i + ".png"));
+                BufferedImage img = ImageIO.read(new File("src/DesktopPetImages/" + src + "/ivan" + i + ".png"));
                 frames.add(img);
             } catch (IOException e) {
                 System.out.println(e.getMessage());

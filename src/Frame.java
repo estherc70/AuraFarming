@@ -41,6 +41,10 @@ public class Frame extends JFrame implements ActionListener {
         livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
         JPanel mailScreen = PanelClass.createPanel("src/MailImages/mailhomepage.png");
 
+//        username.setBounds(100,100,getWidth(),getHeight());
+//        add(username);
+//        loginInScreen.add(username);
+
         ImageIcon tutorialImageIcon = new ImageIcon("src/DesktopPetImages/book.png");
         JLabel tutorialLabel = new JLabel(tutorialImageIcon);
         tutorialLabel.setBounds(0, 0, tutorialImageIcon.getIconWidth(), tutorialImageIcon.getIconHeight());
@@ -199,7 +203,6 @@ public class Frame extends JFrame implements ActionListener {
         mainPanel.add(appScreen, "AppScreen");
 
         livestreamScreen.add(scrollPane);
-        loginInScreen.add(username);
 
         ArrayList<BufferedImage> currentSponsor = sponsors.getRandomSponsors();
         int y = 138;

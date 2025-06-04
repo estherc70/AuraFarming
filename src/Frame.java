@@ -186,8 +186,6 @@ public class Frame extends JFrame implements ActionListener {
         appScreen.add(buttonClass.getMailApp());
         appScreen.add(buttonClass.getEditApp());
         livestreamScreen.add(buttonClass.getScrollPane(), BorderLayout.CENTER);
-        mailScreen.add(buttonClass.getHomePage());
-        livestreamScreen.add(buttonClass.getHomePage());
 
         mainPanel.add(startScreen, "StartScreen");
         mainPanel.add(tutorialScreen, "TutorialScreen");

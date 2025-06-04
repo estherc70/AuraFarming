@@ -30,6 +30,7 @@ public class Sponsors {
 
     public ArrayList<BufferedImage> getRandomSponsors() {
         currentSponsors = new ArrayList<>();
+        usedSponsors = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             int randint = (int) (Math.random() * 12) + 1;
             if (!used(randint)) {

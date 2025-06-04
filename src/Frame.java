@@ -1,15 +1,18 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Frame extends JFrame{
-    private JPanel mainPanel, livestreamScreen;
-    private JLabel username;
+
+public class Frame extends JFrame implements ActionListener {
+    private JPanel mainPanel, livestreamScreen, mail2;
     private JScrollPane scrollPane;
+    private JLabel username;
     private ButtonClass buttonClass;
     private CardLayout cardLayout;
     private JPanelAnimation mailPanel;
@@ -207,6 +210,9 @@ public class Frame extends JFrame{
             button.setOpaque(true);
             button.setContentAreaFilled(true);
             button.setBorderPainted(true);
+            int num = i + 1;
+            button.setActionCommand("sponsor" + num);
+            button.addActionListener(this);
             mailScreen.add(button);
             button.setBounds(33, y, 938, 93);
             y += 82;
@@ -262,5 +268,18 @@ public class Frame extends JFrame{
 
     public JPanel getLivestreamScreen() {
         return livestreamScreen;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String command = e.getActionCommand();
+        String num = command.substring(command.length() - 2);
+
+        if (e.getSource() == command) {
+            JPanel mail2 = PanelClass.createPanel("src/MailImages/mails/" + num + ".png");
+            mainPanel.add(mail2, "mail2");
+            mail2.setLayout(null);
+            showCard("mail2");;
+        }
     }
 }

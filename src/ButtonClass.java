@@ -36,8 +36,8 @@ public class ButtonClass {
         usernameText = new JTextField(15);
         livestreamChat = new JTextArea(280,500);
         scrollPane = new JScrollPane(livestreamChat);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.setBounds(630, 80, 280, 500);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        scrollPane.setBounds(604, 105, 180, 335);
 
         livestreamApp = new JButton();
         nextButton = new JButton();

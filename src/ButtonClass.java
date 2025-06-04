@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class ButtonClass {
     private Player player;
-    private JButton livestreamApp, nextButton, mailApp, homePage, bookBtn, editApp;
+    private JButton livestreamApp, nextButton, mailApp, homePage, bookBtn, editApp, powerOn;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
     private JTextField usernameText;
@@ -47,6 +47,7 @@ public class ButtonClass {
         //testing
         homePage = new JButton();
         editApp = new JButton();
+        powerOn = new JButton();
 
         //set opaque
         //customizeButton(livestreamApp);
@@ -70,6 +71,11 @@ public class ButtonClass {
         homePage.setContentAreaFilled(true);
         homePage.setBorderPainted(true);
 
+        customizeButton(powerOn);
+//        powerOn.setOpaque(true);
+//        powerOn.setContentAreaFilled(true);
+//        powerOn.setBorderPainted(true);
+
         livestreamChat.setEditable(true);
         livestreamChat.setLineWrap(true);
 
@@ -82,10 +88,11 @@ public class ButtonClass {
         usernameText.setBounds(150,360,700,75);
         livestreamApp.setBounds(523,170,90,90);
         nextButton.setBounds(515,165,90,90);
-        mailApp.setBounds(386, 167, 90, 90);
+        mailApp.setBounds(320, 220, 65, 65);
         editApp.setBounds(375, 275, 90, 90);
         bookBtn.setBounds(625, 285, 145, 125);
         homePage.setBounds(500, 180, 90, 90);
+        powerOn.setBounds(680,455,80,18);
 
         //livestreamApp.setVisible(false);
 
@@ -96,6 +103,7 @@ public class ButtonClass {
         btnPanel.add(bookBtn);
         btnPanel.add(editApp);
         btnPanel.add(homePage);
+        btnPanel.add(powerOn);
 
         addActionListeners();
     }
@@ -106,6 +114,10 @@ public class ButtonClass {
             System.out.println("username: " + player.getUsername());
             //cardLayoutPanel.showCard("Background");
             cardLayoutPanel.showCard("TutorialScreen");
+        });
+
+        powerOn.addActionListener(e -> {
+            cardLayoutPanel.showCard("AppScreen");
         });
 
         livestreamApp.addActionListener(e -> {
@@ -215,5 +227,9 @@ public class ButtonClass {
 
     public JButton getEditApp() {
         return editApp;
+    }
+
+    public JButton getPowerOn() {
+        return powerOn;
     }
 }

@@ -185,9 +185,7 @@ public class ButtonClass {
             JPanelAnimation mailScreenAnimation = new JPanelAnimation(cardLayoutPanel, "MailScreen", mailImages, 50, 1);
             cardLayoutPanel.getMainPanel().add(mailScreenAnimation, "MailScreenAnimation");
 
-
             cardLayoutPanel.showCard("MailScreenAnimation");
-
 
         });
 

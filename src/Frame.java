@@ -1,20 +1,25 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Frame extends JFrame{
-    private JPanel mainPanel, livestreamScreen;
+
+public class Frame extends JFrame implements ActionListener {
+    private JPanel mainPanel, livestreamScreen, mail2;
     private JScrollPane scrollPane;
     private ButtonClass buttonClass;
     private CardLayout cardLayout;
     private JPanelAnimation mailPanel;
     private Sponsors sponsors;
     private SpacebarImageSwitcher switcher;
+    private int counter;
     private SpacebarImageSwitcher switcher2;
+
 
     public Frame() throws IOException {
         System.out.println("[DEBUG] Created switcher: " + switcher);
@@ -29,10 +34,10 @@ public class Frame extends JFrame{
         JPanel startScreen = PanelClass.createPanel("src/images/enteruser.png");
         JPanel tutorialScreen = PanelClass.createPanel("src/images/tutorial.jpeg");
         JPanel backgroundScreen = PanelClass.createPanel("src/images/background.png");
-        JPanel appScreen = PanelClass.createPanel("src/images/appScreen.png");
+        //testing
         livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
         JPanel mailScreen = PanelClass.createPanel("src/MailImages/mailhomepage.png");
-
+        JPanel appScreen = PanelClass.createPanel("src/images/appScreen.png");
         ImageIcon tutorialImageIcon = new ImageIcon("src/DesktopPetImages/book.png");
         JLabel tutorialLabel = new JLabel(tutorialImageIcon);
         tutorialLabel.setBounds(0, 0, tutorialImageIcon.getIconWidth(), tutorialImageIcon.getIconHeight());
@@ -88,16 +93,6 @@ public class Frame extends JFrame{
             }
         }
 
-        ArrayList<BufferedImage> speechImages2 = new ArrayList<>();
-        for (int i = 8; i < 12; i++) {
-            String fileName = "src/DesktopPetImages/Speech2/speech" + i + ".png";
-            try {
-                speechImages2.add(ImageIO.read(new File(fileName)));
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-
         /*String[] paths = {
                 "src/DesktopPetImages/Speech/speech0.png",
                 "src/DesktopPetImages/Speech/speech1.png",
@@ -134,14 +129,6 @@ public class Frame extends JFrame{
             }
         });
 
-        switcher2 = new SpacebarImageSwitcher(speechImages2);
-        switcher2.setBounds(450, 175, 200, 100);
-        backgroundScreen.add(switcher2);
-
-        switcher2.setDialogueChangeListener(pressCount -> {
-            System.out.println("[DEBUG] DialogueChangeListener: pressCount2 = " + pressCount);
-        });
-
 
         buttonClass.getBookBtn().addActionListener(e -> {
             switcher.setSwitcherActive(true);  // or switcher.setEnabled(true); if you didn't rename
@@ -155,7 +142,6 @@ public class Frame extends JFrame{
         startScreen.setLayout(null);
         tutorialScreen.setLayout(null);
         backgroundScreen.setLayout(null);
-        appScreen.setLayout(null);
         livestreamScreen.setLayout(null);
         mailScreen.setLayout(null);
 
@@ -163,13 +149,9 @@ public class Frame extends JFrame{
         startScreen.add(buttonClass.getUsernameText());
         tutorialScreen.add(buttonClass.getNextButton());
         tutorialScreen.add(buttonClass.getBookBtn());
-        backgroundScreen.add(buttonClass.getPowerOn());
-        appScreen.add(buttonClass.getLivestreamApp());
-        appScreen.add(buttonClass.getMailApp());
-        appScreen.add(buttonClass.getEditApp());
-        appScreen.add(buttonClass.getGamesApp());
-        appScreen.add(buttonClass.getShopApp());
-        appScreen.add(buttonClass.getEndDay());
+        backgroundScreen.add(buttonClass.getLivestreamApp());
+        backgroundScreen.add(buttonClass.getMailApp());
+        backgroundScreen.add(buttonClass.getEditApp());
         livestreamScreen.add(buttonClass.getScrollPane(), BorderLayout.CENTER);
         mailScreen.add(buttonClass.getHomePage());
         livestreamScreen.add(buttonClass.getHomePage());
@@ -193,6 +175,9 @@ public class Frame extends JFrame{
             button.setOpaque(true);
             button.setContentAreaFilled(true);
             button.setBorderPainted(true);
+            int num = i + 1;
+            button.setActionCommand("sponsor" + num);
+            button.addActionListener(this);
             mailScreen.add(button);
             button.setBounds(33, y, 938, 93);
             y += 82;
@@ -248,5 +233,18 @@ public class Frame extends JFrame{
 
     public JPanel getLivestreamScreen() {
         return livestreamScreen;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String command = e.getActionCommand();
+        String num = command.substring(command.length() - 2);
+
+        if (e.getSource() == command) {
+            JPanel mail2 = PanelClass.createPanel("src/MailImages/mails/" + num + ".png");
+            mainPanel.add(mail2, "mail2");
+            mail2.setLayout(null);
+            showCard("mail2");;
+        }
     }
 }

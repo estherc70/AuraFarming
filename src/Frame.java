@@ -28,7 +28,7 @@ public class Frame extends JFrame{
         JPanel startScreen = PanelClass.createPanel("src/images/enteruser.png");
         JPanel tutorialScreen = PanelClass.createPanel("src/images/tutorial.jpeg");
         JPanel backgroundScreen = PanelClass.createPanel("src/images/background.png");
-        //testing
+        JPanel appScreen = PanelClass.createPanel("src/images/appScreen.png");
         livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
         JPanel mailScreen = PanelClass.createPanel("src/MailImages/mailhomepage.png");
 
@@ -136,6 +136,7 @@ public class Frame extends JFrame{
         startScreen.setLayout(null);
         tutorialScreen.setLayout(null);
         backgroundScreen.setLayout(null);
+        appScreen.setLayout(null);
         livestreamScreen.setLayout(null);
         mailScreen.setLayout(null);
 
@@ -143,9 +144,10 @@ public class Frame extends JFrame{
         startScreen.add(buttonClass.getUsernameText());
         tutorialScreen.add(buttonClass.getNextButton());
         tutorialScreen.add(buttonClass.getBookBtn());
-        backgroundScreen.add(buttonClass.getLivestreamApp());
-        backgroundScreen.add(buttonClass.getMailApp());
-        backgroundScreen.add(buttonClass.getEditApp());
+        backgroundScreen.add(buttonClass.getPowerOn());
+        appScreen.add(buttonClass.getLivestreamApp());
+        appScreen.add(buttonClass.getMailApp());
+        appScreen.add(buttonClass.getEditApp());
         livestreamScreen.add(buttonClass.getScrollPane(), BorderLayout.CENTER);
         mailScreen.add(buttonClass.getHomePage());
         livestreamScreen.add(buttonClass.getHomePage());
@@ -155,6 +157,7 @@ public class Frame extends JFrame{
         mainPanel.add(backgroundScreen, "Background");
         mainPanel.add(livestreamScreen, "LivestreamScreen");
         mainPanel.add(mailScreen, "MailScreen");
+        mainPanel.add(appScreen, "AppScreen");
 
         livestreamScreen.add(scrollPane);
 

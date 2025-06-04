@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class ButtonClass {
     private Player player;
-    private JButton livestreamApp, nextButton, mailApp, homePage, bookBtn,
+    private JButton livestreamApp, nextButton, mailApp, bookBtn,
             editApp, powerOn, shopApp, gamesApp, endDay;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
@@ -46,7 +46,6 @@ public class ButtonClass {
         bookBtn.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("SPACE"), "none");
         nextButton.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("SPACE"), "none");
         //testing
-        homePage = new JButton();
         editApp = new JButton();
         powerOn = new JButton();
         shopApp = new JButton();
@@ -83,10 +82,6 @@ public class ButtonClass {
         bookBtn.setBorderPainted(true);
 
         //testing
-        homePage.setOpaque(true);
-        homePage.setContentAreaFilled(true);
-        homePage.setBorderPainted(true);
-
         customizeButton(powerOn);
 //        powerOn.setOpaque(true);
 //        powerOn.setContentAreaFilled(true);
@@ -110,7 +105,6 @@ public class ButtonClass {
         endDay.setBounds(600,345,65,65);
         nextButton.setBounds(515,165,90,90);
         bookBtn.setBounds(625, 285, 145, 125);
-        homePage.setBounds(500, 180, 90, 90);
         powerOn.setBounds(680,455,80,18);
 
         //livestreamApp.setVisible(false);
@@ -121,7 +115,6 @@ public class ButtonClass {
         btnPanel.add(mailApp);
         btnPanel.add(bookBtn);
         btnPanel.add(editApp);
-        btnPanel.add(homePage);
         btnPanel.add(powerOn);
         btnPanel.add(gamesApp);
         btnPanel.add(shopApp);
@@ -189,11 +182,6 @@ public class ButtonClass {
 
         });
 
-        homePage.addActionListener(e ->  {
-            cardLayoutPanel.showCard("Background");
-            livestreamExited = true;
-        });
-
         nextButton.addActionListener(e -> {
             cardLayoutPanel.showCard("Background");
         });
@@ -235,10 +223,6 @@ public class ButtonClass {
 
     public JButton getMailApp() {
         return mailApp;
-    }
-
-    public JButton getHomePage() {
-        return homePage;
     }
 
     public JScrollPane getScrollPane() {

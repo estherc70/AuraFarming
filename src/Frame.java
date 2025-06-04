@@ -14,6 +14,7 @@ public class Frame extends JFrame{
     private JPanelAnimation mailPanel;
     private Sponsors sponsors;
     private SpacebarImageSwitcher switcher;
+    private SpacebarImageSwitcher switcher2;
 
     public Frame() throws IOException {
         System.out.println("[DEBUG] Created switcher: " + switcher);
@@ -87,6 +88,16 @@ public class Frame extends JFrame{
             }
         }
 
+        ArrayList<BufferedImage> speechImages2 = new ArrayList<>();
+        for (int i = 8; i < 12; i++) {
+            String fileName = "src/DesktopPetImages/Speech2/speech" + i + ".png";
+            try {
+                speechImages2.add(ImageIO.read(new File(fileName)));
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
         /*String[] paths = {
                 "src/DesktopPetImages/Speech/speech0.png",
                 "src/DesktopPetImages/Speech/speech1.png",
@@ -121,6 +132,14 @@ public class Frame extends JFrame{
                     }
                 }
             }
+        });
+
+        switcher2 = new SpacebarImageSwitcher(speechImages2);
+        switcher2.setBounds(450, 175, 200, 100);
+        backgroundScreen.add(switcher2);
+
+        switcher2.setDialogueChangeListener(pressCount -> {
+            System.out.println("[DEBUG] DialogueChangeListener: pressCount2 = " + pressCount);
         });
 
 

@@ -34,8 +34,8 @@ public class Sponsors {
         for (int i = 0; i < 6; i++) {
             int randint = (int) (Math.random() * 12) + 1;
             if (!used(randint)) {
-                currentSponsors.add(sponsors.get(i));
-                usedSponsors.add(i);
+                currentSponsors.add(sponsors.get(randint - 1));
+                usedSponsors.add(randint);
             }
             else {
                 i--;
@@ -57,5 +57,9 @@ public class Sponsors {
 
     public ArrayList<BufferedImage> getSponsors() {
         return sponsors;
+    }
+
+    public ArrayList<Integer> getUsedSponsors() {
+        return usedSponsors;
     }
 }

@@ -202,6 +202,7 @@ public class Frame extends JFrame implements ActionListener {
         loginInScreen.add(username);
 
         ArrayList<BufferedImage> currentSponsor = sponsors.getRandomSponsors();
+        ArrayList<Integer> usedSponsor = sponsors.getUsedSponsors();
         int y = 138;
         for (int i = 0; i < currentSponsor.size(); i++) {
             BufferedImage image = currentSponsor.get(i);
@@ -211,7 +212,7 @@ public class Frame extends JFrame implements ActionListener {
             button.setOpaque(true);
             button.setContentAreaFilled(true);
             button.setBorderPainted(true);
-            int num = i + 1;
+            int num = usedSponsor.get(i);
             button.setActionCommand("sponsor" + num);
             button.addActionListener(this);
             mailScreen.add(button);
@@ -274,13 +275,16 @@ public class Frame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
-        String num = command.substring(command.length() - 2);
+        String num = command.replaceAll("\\D+", "");
+        String panelName = "mail" + num;
 
-        if (e.getSource() == command) {
-            JPanel mail2 = PanelClass.createPanel("src/MailImages/mails/" + num + ".png");
-            mainPanel.add(mail2, "mail2");
-            mail2.setLayout(null);
-            showCard("mail2");;
+        // Only add if not already added
+        if (!((CardLayout) mainPanel.getLayout()).toString().contains(panelName)) {
+            JPanel mailPanel = PanelClass.createPanel("src/MailImages/mails/" + num + ".png");
+            mailPanel.setLayout(null);
+            mainPanel.add(mailPanel, panelName);
         }
+
+        showCard(panelName);
     }
 }

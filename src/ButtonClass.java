@@ -117,7 +117,7 @@ public class ButtonClass {
         });
 
         powerOn.addActionListener(e -> {
-            cardLayoutPanel.showCard("AppScreen");
+            cardLayoutPanel.showCard("LoginInScreen");
         });
 
         livestreamApp.addActionListener(e -> {

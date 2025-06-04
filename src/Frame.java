@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class Frame extends JFrame{
     private JPanel mainPanel, livestreamScreen;
+    private JLabel username;
     private JScrollPane scrollPane;
     private ButtonClass buttonClass;
     private CardLayout cardLayout;
@@ -15,6 +16,7 @@ public class Frame extends JFrame{
     private Sponsors sponsors;
     private SpacebarImageSwitcher switcher;
     private SpacebarImageSwitcher switcher2;
+    private Player player;
 
     public Frame() throws IOException {
         System.out.println("[DEBUG] Created switcher: " + switcher);
@@ -23,12 +25,15 @@ public class Frame extends JFrame{
         buttonClass = new ButtonClass(this);
         sponsors = new Sponsors();
         scrollPane = buttonClass.getScrollPane();
-
+        username = new JLabel();
+        player = new Player();
+        username.setText(player.getUsername());
         //create card panels
 
         JPanel startScreen = PanelClass.createPanel("src/images/enteruser.png");
         JPanel tutorialScreen = PanelClass.createPanel("src/images/tutorial.jpeg");
         JPanel backgroundScreen = PanelClass.createPanel("src/images/background.png");
+        JPanel loginInScreen = PanelClass.createPanel("src/images/loginInScreen.png");
         JPanel appScreen = PanelClass.createPanel("src/images/appScreen.png");
         livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
         JPanel mailScreen = PanelClass.createPanel("src/MailImages/mailhomepage.png");
@@ -74,6 +79,10 @@ public class Frame extends JFrame{
 
         ArrayList<BufferedImage> animationFrames5 = new ArrayList<>();
         initailizeIvanImages(animationFrames5,15,22,"Ivan2");
+
+        ArrayList<BufferedImage> animationFrames6 = new ArrayList<>();
+        BufferedImage img2 = ImageIO.read(new File("src/DesktopPetImages/Ivan1/ivan14.png"));
+        animationFrames6.add(img2);
 
         ImageAnimation animation2 = new ImageAnimation(animationFrames5, 300,175,125);
         backgroundScreen.add(animation2.getAnimationPanel());
@@ -140,6 +149,11 @@ public class Frame extends JFrame{
 
         switcher2.setDialogueChangeListener(pressCount -> {
             System.out.println("[DEBUG] DialogueChangeListener: pressCount2 = " + pressCount);
+            if (pressCount == 3) {
+                animation2.updateFrames(animationFrames6);
+                switcher2.setSwitcherActive(false);
+                System.out.println("[DEBUG] Disabled switcher at pressCount == 5");
+            }
         });
 
 
@@ -155,6 +169,7 @@ public class Frame extends JFrame{
         startScreen.setLayout(null);
         tutorialScreen.setLayout(null);
         backgroundScreen.setLayout(null);
+        loginInScreen.setLayout(null);
         appScreen.setLayout(null);
         livestreamScreen.setLayout(null);
         mailScreen.setLayout(null);
@@ -174,11 +189,13 @@ public class Frame extends JFrame{
         mainPanel.add(startScreen, "StartScreen");
         mainPanel.add(tutorialScreen, "TutorialScreen");
         mainPanel.add(backgroundScreen, "Background");
+        mainPanel.add(loginInScreen,"LoginInScreen");
         mainPanel.add(livestreamScreen, "LivestreamScreen");
         mainPanel.add(mailScreen, "MailScreen");
         mainPanel.add(appScreen, "AppScreen");
 
         livestreamScreen.add(scrollPane);
+        loginInScreen.add(username);
 
         ArrayList<BufferedImage> currentSponsor = sponsors.getRandomSponsors();
         int y = 138;

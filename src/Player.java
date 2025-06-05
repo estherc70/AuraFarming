@@ -1,10 +1,12 @@
 public class Player {
     private String username;
     private int followers;
+    private int password;
 
     public Player() {
         username = "";
         followers = 0;
+        password = 0000;
     }
 
     public String getUsername() {
@@ -23,4 +25,11 @@ public class Player {
         followers = followers + newFollowers;
     }
 
+    public int getPassword() {
+        return password;
+    }
+
+    public void setPassword(int password) {
+        this.password = password;
+    }
 }

@@ -51,6 +51,11 @@ public class ImageAnimation implements ActionListener {
     public JPanel getAnimationPanel() {
         return animationPanel;
     }
+
+    public void updateLocation(int x, int y) {
+        animationPanel.setBounds(x, y, animationPanel.getWidth(), animationPanel.getHeight());
+    }
+
 }
 
 

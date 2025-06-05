@@ -10,9 +10,9 @@ import java.util.ArrayList;
 
 
 public class Frame extends JFrame implements ActionListener {
-    private JPanel mainPanel, livestreamScreen, mail2;
+    private JPanel mainPanel, livestreamScreen, mail2, loginInScreen ;
     private JScrollPane scrollPane;
-    private JLabel username;
+    //private JLabel username;
     private ButtonClass buttonClass;
     private CardLayout cardLayout;
     private JPanelAnimation mailPanel;
@@ -25,24 +25,29 @@ public class Frame extends JFrame implements ActionListener {
         System.out.println("[DEBUG] Created switcher: " + switcher);
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
-        buttonClass = new ButtonClass(this);
+        player = new Player();
+        buttonClass = new ButtonClass(this,player);
         sponsors = new Sponsors();
         scrollPane = buttonClass.getScrollPane();
-        username = new JLabel();
-        player = new Player();
-        username.setText(player.getUsername());
-        //create card panels
 
         JPanel startScreen = PanelClass.createPanel("src/images/enteruser.png");
         JPanel tutorialScreen = PanelClass.createPanel("src/images/tutorial.jpeg");
         JPanel backgroundScreen = PanelClass.createPanel("src/images/background.png");
-        JPanel loginInScreen = PanelClass.createPanel("src/images/loginInScreen.png");
+        loginInScreen = PanelClass.createPanel("src/images/loginInScreen.png");
         JPanel appScreen = PanelClass.createPanel("src/images/appScreen.png");
         livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
         JPanel mailScreen = PanelClass.createPanel("src/MailImages/mailhomepage.png");
 
+//        try {
+//            Font pressStartFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/fonts/PressStart2P-Regular.ttf"))
+//                    .deriveFont(Font.PLAIN, 24f);
+//            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+//            ge.registerFont(pressStartFont);
+//        } catch (FontFormatException | IOException e1) {
+//            e1.printStackTrace();
+//        }
+
 //        username.setBounds(100,100,getWidth(),getHeight());
-//        add(username);
 //        loginInScreen.add(username);
 
         ImageIcon tutorialImageIcon = new ImageIcon("src/DesktopPetImages/book.png");
@@ -157,7 +162,9 @@ public class Frame extends JFrame implements ActionListener {
         switcher2.setDialogueChangeListener(pressCount -> {
             System.out.println("[DEBUG] DialogueChangeListener: pressCount2 = " + pressCount);
             if (pressCount == 3) {
+                animation2.updateLocation(450, 265);
                 animation2.updateFrames(animationFrames6);
+                switcher2.setBounds(700, 275, 200, 100);
                 switcher2.setSwitcherActive(false);
                 System.out.println("[DEBUG] Disabled switcher at pressCount == 5");
             }
@@ -186,6 +193,7 @@ public class Frame extends JFrame implements ActionListener {
         tutorialScreen.add(buttonClass.getNextButton());
         tutorialScreen.add(buttonClass.getBookBtn());
         backgroundScreen.add(buttonClass.getPowerOn());
+        loginInScreen.add(buttonClass.getPasswordText());
         appScreen.add(buttonClass.getLivestreamApp());
         appScreen.add(buttonClass.getMailApp());
         appScreen.add(buttonClass.getEditApp());
@@ -222,6 +230,16 @@ public class Frame extends JFrame implements ActionListener {
             button.setBounds(33, y, 938, 93);
             y += 82;
         }
+
+//        System.out.println("Username: " + player.getUsername());
+//        String inputUsername = buttonClass.getUsernameText().getText();
+//        player.setUsername(inputUsername);
+//        JLabel username = new JLabel(player.getUsername());
+//        username.setFont(new Font("Arial", Font.BOLD, 24));
+//        username.setForeground(Color.WHITE);
+//        username.setBounds(100, 100, 300, 50);
+//        loginInScreen.setLayout(null);
+//        loginInScreen.add(username);
 
         Container pane = getContentPane();
         pane.add(mainPanel, BorderLayout.CENTER);
@@ -260,6 +278,10 @@ public class Frame extends JFrame implements ActionListener {
         return mainPanel;
     }
 
+    public JPanel getLoginInScreen() {
+        return loginInScreen;
+    }
+
     private void initailizeIvanImages (ArrayList<BufferedImage> frames, int start, int end, String src) {
         for (int i = start; i < end; i++) {
             try {
@@ -274,6 +296,8 @@ public class Frame extends JFrame implements ActionListener {
     public JPanel getLivestreamScreen() {
         return livestreamScreen;
     }
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {

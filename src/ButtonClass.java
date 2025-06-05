@@ -1,9 +1,8 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -15,25 +14,27 @@ public class ButtonClass {
             editApp, powerOn, shopApp, gamesApp, endDay;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
-    private JTextField usernameText;
+    private JTextField usernameText, passwordText;
     private JPanel btnPanel;
     private Frame cardLayoutPanel;
     private JPanelAnimation animation;
     private Livestream livestream;
     private Sponsors sponsors;
     private boolean livestreamExited;
+    private Font pressStartFont;
 
 
-    public ButtonClass(Frame cardLayoutPanel)  {
+    public ButtonClass(Frame cardLayoutPanel,Player player)  {
         livestream = new Livestream();
         btnPanel = new JPanel(new BorderLayout());
         this.cardLayoutPanel = cardLayoutPanel;
-        player = new Player();
+        this.player = player;
         sponsors = new Sponsors();
         livestreamExited = false;
 
         //create buttons
         usernameText = new JTextField(15);
+        passwordText = new JTextField(4);
         livestreamChat = new JTextArea(280,500);
         scrollPane = new JScrollPane(livestreamChat);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
@@ -51,6 +52,15 @@ public class ButtonClass {
         shopApp = new JButton();
         gamesApp = new JButton();
         endDay = new JButton();
+
+        try {
+            pressStartFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/PressStart2P-Regular.ttf"))
+                    .deriveFont(Font.PLAIN, 24f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(pressStartFont);
+        } catch (FontFormatException | IOException e1) {
+            e1.printStackTrace();
+        }
 
         //set opaque
         //customizeButton(livestreamApp);
@@ -77,9 +87,9 @@ public class ButtonClass {
         endDay.setContentAreaFilled(true);
         endDay.setBorderPainted(true);
 
-        bookBtn.setOpaque(true);
-        bookBtn.setContentAreaFilled(true);
-        bookBtn.setBorderPainted(true);
+        bookBtn.setOpaque(false);
+        bookBtn.setContentAreaFilled(false);
+        bookBtn.setBorderPainted(false);
 
         //testing
         customizeButton(powerOn);
@@ -93,10 +103,13 @@ public class ButtonClass {
 
         //set text field fonts
         usernameText.setFont(new Font("Serif", Font.BOLD, 60));
+        passwordText.setFont(pressStartFont);
+//        passwordText.setFont(new Font("Serif", Font.BOLD, 60));
         livestreamApp.setFont(new Font("Serif", Font.ITALIC, 15));
 
         //set button/text field size
         usernameText.setBounds(150,360,700,75);
+        passwordText.setBounds(505,298,135,30);
         mailApp.setBounds(323, 220, 65, 65);
         livestreamApp.setBounds(460,220,65,65);
         gamesApp.setBounds(600,220,65,65);
@@ -110,6 +123,7 @@ public class ButtonClass {
         //livestreamApp.setVisible(false);
 
         btnPanel.add(usernameText);
+        btnPanel.add(passwordText);
         btnPanel.add(livestreamApp);
         btnPanel.add(nextButton);
         btnPanel.add(mailApp);
@@ -131,9 +145,50 @@ public class ButtonClass {
             cardLayoutPanel.showCard("TutorialScreen");
         });
 
+        passwordText.addActionListener(e -> {
+            String input = passwordText.getText();
+
+            if (input.matches("\\d{4}")) {
+                int passwordInt = Integer.parseInt(input);
+                player.setPassword(passwordInt);
+                System.out.println("password: " + player.getPassword());
+                cardLayoutPanel.showCard("AppScreen");
+            } else {
+                JOptionPane.showMessageDialog(null, "Please enter exactly 4 digits.");
+            }
+        });
+
+        passwordText.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+
+                if (!Character.isDigit(c)) {
+                    e.consume();
+                }
+
+                if (passwordText.getText().length() >= 4) {
+                    e.consume();
+                }
+            }
+        });
+
         powerOn.addActionListener(e -> {
             //cardLayoutPanel.showCard("LoginInScreen");
-            cardLayoutPanel.showCard("AppScreen");
+            //cardLayoutPanel.showCard("AppScreen");
+
+            JLabel usernameLabel = new JLabel(player.getUsername());
+            usernameLabel.setFont(pressStartFont);
+            usernameLabel.setForeground(Color.WHITE);
+            usernameLabel.setBounds(350, 250, 300, 50);
+
+            JPanel loginInScreen = cardLayoutPanel.getLoginInScreen();
+            loginInScreen.setLayout(null);
+            loginInScreen.add(usernameLabel);
+            loginInScreen.revalidate();
+            loginInScreen.repaint();
+
+            cardLayoutPanel.showCard("LoginInScreen");
         });
 
         livestreamApp.addActionListener(e -> {
@@ -216,6 +271,10 @@ public class ButtonClass {
 
     public JTextField getUsernameText() {
         return usernameText;
+    }
+
+    public JTextField getPasswordText() {
+        return passwordText;
     }
 
     public JTextArea getLivestreamChat() {

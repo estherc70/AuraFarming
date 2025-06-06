@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 
 public class Frame extends JFrame implements ActionListener {
-    private JPanel mainPanel, livestreamScreen, mail2, loginInScreen, auraInfo;
+    private JPanel mainPanel, livestreamScreen, mail2, loginInScreen, auraInfo, appScreen;
     private JScrollPane scrollPane;
     //private JLabel username;
     private ButtonClass buttonClass;
@@ -34,7 +34,8 @@ public class Frame extends JFrame implements ActionListener {
         JPanel tutorialScreen = PanelClass.createPanel("src/images/tutorial.jpeg");
         JPanel backgroundScreen = PanelClass.createPanel("src/images/background.png");
         loginInScreen = PanelClass.createPanel("src/images/loginInScreen.png");
-        JPanel appScreen = PanelClass.createPanel("src/images/appScreen.png");
+        appScreen = PanelClass.createPanel("src/images/appScreen.png");
+        JPanel editAppScreen = PanelClass.createPanel("src/images/EditAppScreen.png");
         livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
         JPanel mailScreen = PanelClass.createPanel("src/MailImages/mailhomepage.png");
         auraInfo = PanelClass.createPanel("src/images/tutorial.jpeg");
@@ -187,6 +188,7 @@ public class Frame extends JFrame implements ActionListener {
         backgroundScreen.setLayout(null);
         loginInScreen.setLayout(null);
         appScreen.setLayout(null);
+        editAppScreen.setLayout(null);
         livestreamScreen.setLayout(null);
         mailScreen.setLayout(null);
         auraInfo.setLayout(null);
@@ -209,6 +211,7 @@ public class Frame extends JFrame implements ActionListener {
         mainPanel.add(tutorialScreen, "TutorialScreen");
         mainPanel.add(backgroundScreen, "Background");
         mainPanel.add(loginInScreen,"LoginInScreen");
+        mainPanel.add(editAppScreen,"EditAppScreen");
         mainPanel.add(livestreamScreen, "LivestreamScreen");
         mainPanel.add(mailScreen, "MailScreen");
         mainPanel.add(appScreen, "AppScreen");
@@ -338,5 +341,9 @@ public class Frame extends JFrame implements ActionListener {
         }
 
         showCard(panelName);
+    }
+
+    public JPanel getAppScreen() {
+        return appScreen;
     }
 }

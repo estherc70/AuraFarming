@@ -133,7 +133,8 @@ public class ButtonClass {
 
 
         //set text field fonts
-        usernameText.setFont(new Font("Serif", Font.BOLD, 60));
+        //usernameText.setFont(new Font("Serif", Font.BOLD, 60));
+        usernameText.setFont(pressStartFont);
         passwordText.setFont(pressStartFont);
 //        passwordText.setFont(new Font("Serif", Font.BOLD, 60));
         livestreamApp.setFont(new Font("Serif", Font.ITALIC, 15));
@@ -184,6 +185,7 @@ public class ButtonClass {
                 int passwordInt = Integer.parseInt(input);
                 player.setPassword(passwordInt);
                 System.out.println("password: " + player.getPassword());
+                addPassword();
                 cardLayoutPanel.showCard("AppScreen");
             } else {
                 JOptionPane.showMessageDialog(null, "Please enter exactly 4 digits.");
@@ -213,6 +215,7 @@ public class ButtonClass {
             usernameLabel.setFont(pressStartFont);
             usernameLabel.setForeground(Color.WHITE);
             usernameLabel.setBounds(350, 250, 300, 50);
+            usernameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
             JPanel loginInScreen = cardLayoutPanel.getLoginInScreen();
             loginInScreen.setLayout(null);
@@ -248,6 +251,10 @@ public class ButtonClass {
                 }
             }).start();
             cardLayoutPanel.showCard("LivestreamScreen");
+        });
+
+        editApp.addActionListener(e -> {
+            cardLayoutPanel.showCard("EditAppScreen");
         });
 
         mailApp.addActionListener(e -> {
@@ -377,5 +384,19 @@ public class ButtonClass {
 
     public JButton getDecline() {
         return decline;
+    }
+
+    public void addPassword() {
+        JLabel passwordLabel = new JLabel(String.valueOf(player.getPassword()));
+        passwordLabel.setFont(pressStartFont);
+        Color color = Color.decode("#1a37ac");
+        passwordLabel.setForeground(color);
+        passwordLabel.setBounds(50, 325, 100, 50);
+
+        JPanel appScreen = cardLayoutPanel.getAppScreen();
+        appScreen.setLayout(null);
+        appScreen.add(passwordLabel);
+        appScreen.revalidate();
+        appScreen.repaint();
     }
 }

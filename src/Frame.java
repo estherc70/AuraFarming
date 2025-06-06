@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 
 public class Frame extends JFrame implements ActionListener {
-    private JPanel mainPanel, livestreamScreen, mail2, loginInScreen, auraInfo;
+    private JPanel mainPanel, livestreamScreen, mail2, loginInScreen, auraInfo, ticTacToe, gamesScreen;
     private JScrollPane scrollPane;
     //private JLabel username;
     private ButtonClass buttonClass;
@@ -38,6 +38,7 @@ public class Frame extends JFrame implements ActionListener {
         livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
         JPanel mailScreen = PanelClass.createPanel("src/MailImages/mailhomepage.png");
         auraInfo = PanelClass.createPanel("src/images/tutorial.jpeg");
+        JPanel gamesScreen = PanelClass.createPanel("src/images/GamesScreen.png");
 
 
 //        try {
@@ -190,6 +191,7 @@ public class Frame extends JFrame implements ActionListener {
         livestreamScreen.setLayout(null);
         mailScreen.setLayout(null);
         auraInfo.setLayout(null);
+        gamesScreen.setUI(null);
 
         //add buttons
         startScreen.add(buttonClass.getUsernameText());
@@ -203,6 +205,7 @@ public class Frame extends JFrame implements ActionListener {
         appScreen.add(buttonClass.getGamesApp());
         appScreen.add(buttonClass.getShopApp());
         appScreen.add(buttonClass.getEndDay());
+        gamesScreen.add(buttonClass.getTicTacToe());
         livestreamScreen.add(buttonClass.getScrollPane(), BorderLayout.CENTER);
 
         mainPanel.add(startScreen, "StartScreen");
@@ -213,6 +216,7 @@ public class Frame extends JFrame implements ActionListener {
         mainPanel.add(mailScreen, "MailScreen");
         mainPanel.add(appScreen, "AppScreen");
         mainPanel.add(auraInfo, "auraInfo");
+        mainPanel.add(gamesScreen, "GamesScreen");
 
 
 

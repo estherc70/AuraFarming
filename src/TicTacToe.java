@@ -16,12 +16,12 @@ public class TicTacToe extends JFrame {
         gameEnd = false;
         winner = "";
 
-        JPanel mainPanel = PanelClass.createPanel("src/images/tictactoebg.PNG");
+        JPanel mainPanel = PanelClass.createPanel("src/images/TicTacToe.png");
         mainPanel.setLayout(null);
         setContentPane(mainPanel);
 
         xIcon = new ImageIcon("src/images/tictactoeX.PNG");
-        yIcon = new ImageIcon("src/images/tictactoeY.PNG");
+        yIcon = new ImageIcon("src/images/tictactoeO.PNG");
 
         buttons[0] = new JButton();
         buttons[1] = new JButton();
@@ -33,41 +33,41 @@ public class TicTacToe extends JFrame {
         buttons[7] = new JButton();
         buttons[8] = new JButton();
 
-        buttons[0].setOpaque(true);
-        buttons[0].setContentAreaFilled(true);
-        buttons[0].setBorderPainted(true);
+        buttons[0].setOpaque(false);
+        buttons[0].setContentAreaFilled(false);
+        buttons[0].setBorderPainted(false);
 
-        buttons[1].setOpaque(true);
-        buttons[1].setContentAreaFilled(true);
-        buttons[1].setBorderPainted(true);
+        buttons[1].setOpaque(false);
+        buttons[1].setContentAreaFilled(false);
+        buttons[1].setBorderPainted(false);
 
-        buttons[2].setOpaque(true);
-        buttons[2].setContentAreaFilled(true);
-        buttons[2].setBorderPainted(true);
+        buttons[2].setOpaque(false);
+        buttons[2].setContentAreaFilled(false);
+        buttons[2].setBorderPainted(false);
 
-        buttons[3].setOpaque(true);
-        buttons[3].setContentAreaFilled(true);
-        buttons[3].setBorderPainted(true);
+        buttons[3].setOpaque(false);
+        buttons[3].setContentAreaFilled(false);
+        buttons[3].setBorderPainted(false);
 
-        buttons[4].setOpaque(true);
-        buttons[4].setContentAreaFilled(true);
-        buttons[4].setBorderPainted(true);
+        buttons[4].setOpaque(false);
+        buttons[4].setContentAreaFilled(false);
+        buttons[4].setBorderPainted(false);
 
-        buttons[5].setOpaque(true);
-        buttons[5].setContentAreaFilled(true);
-        buttons[5].setBorderPainted(true);
+        buttons[5].setOpaque(false);
+        buttons[5].setContentAreaFilled(false);
+        buttons[5].setBorderPainted(false);
 
-        buttons[6].setOpaque(true);
-        buttons[6].setContentAreaFilled(true);
-        buttons[6].setBorderPainted(true);
+        buttons[6].setOpaque(false);
+        buttons[6].setContentAreaFilled(false);
+        buttons[6].setBorderPainted(false);
 
-        buttons[7].setOpaque(true);
-        buttons[7].setContentAreaFilled(true);
-        buttons[7].setBorderPainted(true);
+        buttons[7].setOpaque(false);
+        buttons[7].setContentAreaFilled(false);
+        buttons[7].setBorderPainted(false);
 
-        buttons[8].setOpaque(true);
-        buttons[8].setContentAreaFilled(true);
-        buttons[8].setBorderPainted(true);
+        buttons[8].setOpaque(false);
+        buttons[8].setContentAreaFilled(false);
+        buttons[8].setBorderPainted(false);
 
         buttons[0].setBounds(0,0,166,166);
         buttons[1].setBounds(166,0,166,166);

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ButtonClass {
     private Player player;
     private JButton livestreamApp, nextButton, mailApp, bookBtn,
-            editApp, powerOn, shopApp, gamesApp, endDay, accept, decline, next;
+            editApp, powerOn, shopApp, gamesApp, endDay, accept, decline, next, ticTacToe;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
     private JTextField usernameText, passwordText;
@@ -55,6 +55,7 @@ public class ButtonClass {
         shopApp = new JButton();
         gamesApp = new JButton();
         endDay = new JButton();
+        ticTacToe = new JButton();
 
         try {
             pressStartFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/PressStart2P-Regular.ttf"))
@@ -122,6 +123,10 @@ public class ButtonClass {
         next.setContentAreaFilled(true);
         next.setBorderPainted(true);
 
+        ticTacToe.setOpaque(true);
+        ticTacToe.setContentAreaFilled(true);
+        ticTacToe.setBorderPainted(true);
+
         //testing
         customizeButton(powerOn);
 //        powerOn.setOpaque(true);
@@ -151,6 +156,7 @@ public class ButtonClass {
         bookBtn.setBounds(625, 285, 145, 125);
         powerOn.setBounds(680,455,80,18);
         next.setBounds(400, 400, 70, 30);
+        ticTacToe.setBounds(350,350,65,65);
 
         //livestreamApp.setVisible(false);
 
@@ -165,6 +171,7 @@ public class ButtonClass {
         btnPanel.add(gamesApp);
         btnPanel.add(shopApp);
         btnPanel.add(endDay);
+        btnPanel.add(ticTacToe);
 
         addActionListeners();
     }
@@ -303,6 +310,10 @@ public class ButtonClass {
         next.addActionListener(e -> {
             cardLayoutPanel.showCard("AppScreen");
         });
+
+        gamesApp.addActionListener(e -> {
+            cardLayoutPanel.showCard("GamesScreen");
+        });
     }
 
 //    public void setContinueButtonListener(ActionListener listener) {
@@ -377,5 +388,9 @@ public class ButtonClass {
 
     public JButton getDecline() {
         return decline;
+    }
+
+    public JButton getTicTacToe() {
+        return ticTacToe;
     }
 }

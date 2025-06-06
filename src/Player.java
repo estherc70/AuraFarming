@@ -3,7 +3,6 @@ public class Player {
     private int followers;
     private int password;
     private int aura;
-
     public Player() {
         username = "";
         followers = 0;
@@ -11,8 +10,16 @@ public class Player {
         password = 0000;
     }
 
-    public void addAura(int auraToAdd) {
+    public int addAura() {
+        int auraToAdd = (int) (Math.random() * 1001);
         aura += auraToAdd;
+        return auraToAdd;
+    }
+
+    public int deleteAura() {
+        int auraToDelete = (int) (Math.random() * 101);
+        aura -= auraToDelete;
+        return auraToDelete;
     }
 
     public int getAura() {

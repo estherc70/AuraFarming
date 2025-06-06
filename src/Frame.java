@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 
 public class Frame extends JFrame implements ActionListener {
-    private JPanel mainPanel, livestreamScreen, mail2, loginInScreen ;
+    private JPanel mainPanel, livestreamScreen, mail2, loginInScreen, auraInfo;
     private JScrollPane scrollPane;
     //private JLabel username;
     private ButtonClass buttonClass;
@@ -37,6 +37,8 @@ public class Frame extends JFrame implements ActionListener {
         JPanel appScreen = PanelClass.createPanel("src/images/appScreen.png");
         livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
         JPanel mailScreen = PanelClass.createPanel("src/MailImages/mailhomepage.png");
+        auraInfo = PanelClass.createPanel("src/images/tutorial.jpeg");
+
 
 //        try {
 //            Font pressStartFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/fonts/PressStart2P-Regular.ttf"))
@@ -187,6 +189,7 @@ public class Frame extends JFrame implements ActionListener {
         appScreen.setLayout(null);
         livestreamScreen.setLayout(null);
         mailScreen.setLayout(null);
+        auraInfo.setLayout(null);
 
         //add buttons
         startScreen.add(buttonClass.getUsernameText());
@@ -209,6 +212,9 @@ public class Frame extends JFrame implements ActionListener {
         mainPanel.add(livestreamScreen, "LivestreamScreen");
         mainPanel.add(mailScreen, "MailScreen");
         mainPanel.add(appScreen, "AppScreen");
+        mainPanel.add(auraInfo, "auraInfo");
+
+
 
         livestreamScreen.add(scrollPane);
 
@@ -265,6 +271,10 @@ public class Frame extends JFrame implements ActionListener {
         return mainPanel;
     }
 
+    public JPanel getAuraInfo() {
+        return auraInfo;
+    }
+
     public void showCard(String cardName) {
         cardLayout.show(mainPanel, cardName);
     }
@@ -282,6 +292,8 @@ public class Frame extends JFrame implements ActionListener {
         return loginInScreen;
     }
 
+
+
     private void initailizeIvanImages (ArrayList<BufferedImage> frames, int start, int end, String src) {
         for (int i = start; i < end; i++) {
             try {
@@ -296,6 +308,7 @@ public class Frame extends JFrame implements ActionListener {
     public JPanel getLivestreamScreen() {
         return livestreamScreen;
     }
+
 
 
 

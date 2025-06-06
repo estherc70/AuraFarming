@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ButtonClass {
     private Player player;
     private JButton livestreamApp, nextButton, mailApp, bookBtn,
-            editApp, powerOn, shopApp, gamesApp, endDay, accept, decline;
+            editApp, powerOn, shopApp, gamesApp, endDay, accept, decline, next;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
     private JTextField usernameText, passwordText;
@@ -46,6 +46,7 @@ public class ButtonClass {
         bookBtn = new JButton();
         accept = new JButton();
         decline = new JButton();
+        next = new JButton("NEXT");
         bookBtn.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("SPACE"), "none");
         nextButton.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("SPACE"), "none");
         //testing
@@ -117,6 +118,10 @@ public class ButtonClass {
         decline.setContentAreaFilled(true);
         decline.setBorderPainted(true);
 
+        next.setOpaque(true);
+        next.setContentAreaFilled(true);
+        next.setBorderPainted(true);
+
         //testing
         customizeButton(powerOn);
 //        powerOn.setOpaque(true);
@@ -145,6 +150,7 @@ public class ButtonClass {
         nextButton.setBounds(515,165,90,90);
         bookBtn.setBounds(625, 285, 145, 125);
         powerOn.setBounds(680,455,80,18);
+        next.setBounds(400, 400, 70, 30);
 
         //livestreamApp.setVisible(false);
 
@@ -269,10 +275,32 @@ public class ButtonClass {
         });
 
         accept.addActionListener(e -> {
-            cardLayoutPanel.showCard("AppScreen");
+            int added = player.addAura();
+            JLabel label = new JLabel("You gained " + added + " aura!");
+            label.setText("PT Serif Caption");
+            label.setBounds(400, 350, 100, 50);
+            cardLayoutPanel.getAuraInfo().add(label);
+            cardLayoutPanel.getAuraInfo().add(next);
+            cardLayoutPanel.getAuraInfo().revalidate();
+            cardLayoutPanel.getAuraInfo().repaint();
+            cardLayoutPanel.showCard("auraInfo");
+            //cardLayoutPanel.showCard("AppScreen");
         });
 
         decline.addActionListener(e -> {
+            int deleted = player.deleteAura();
+            JLabel label = new JLabel("You lost " + deleted + " aura!");
+            label.setText("PT Serif Caption");
+            label.setBounds(400, 350, 100, 50);
+            cardLayoutPanel.getAuraInfo().revalidate();
+            cardLayoutPanel.getAuraInfo().repaint();
+            cardLayoutPanel.getAuraInfo().add(label);
+            cardLayoutPanel.getAuraInfo().add(next);
+            cardLayoutPanel.showCard("auraInfo");
+            //cardLayoutPanel.showCard("AppScreen");
+        });
+
+        next.addActionListener(e -> {
             cardLayoutPanel.showCard("AppScreen");
         });
     }

@@ -2,13 +2,22 @@ public class Player {
     private String username;
     private int followers;
     private int password;
+    private int aura;
 
     public Player() {
         username = "";
         followers = 0;
+        aura = 0;
         password = 0000;
     }
 
+    public void addAura(int auraToAdd) {
+        aura += auraToAdd;
+    }
+
+    public int getAura() {
+        return aura;
+    }
     public String getUsername() {
         return username;
     }

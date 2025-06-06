@@ -310,6 +310,18 @@ public class Frame extends JFrame implements ActionListener {
             JPanel mailPanel = PanelClass.createPanel("src/MailImages/mails/" + num + ".png");
             mailPanel.setLayout(null);
             mainPanel.add(mailPanel, panelName);
+            buttonClass.getAccept().setBounds(400, 590, 150, 40);
+            buttonClass.getDecline().setBounds(650,590, 150,40);
+            if (buttonClass.getAccept().getParent() != null) {
+                buttonClass.getAccept().getParent().remove(buttonClass.getAccept());
+            }
+            if (buttonClass.getDecline().getParent() != null) {
+                buttonClass.getDecline().getParent().remove(buttonClass.getDecline());
+            }
+            mailPanel.add(buttonClass.getAccept());
+            mailPanel.add(buttonClass.getDecline());
+            mailPanel.revalidate();
+            mailPanel.repaint();
         }
 
         showCard(panelName);

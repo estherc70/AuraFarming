@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ButtonClass {
     private Player player;
     private JButton livestreamApp, nextButton, mailApp, bookBtn,
-            editApp, powerOn, shopApp, gamesApp, endDay;
+            editApp, powerOn, shopApp, gamesApp, endDay, accept, decline;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
     private JTextField usernameText, passwordText;
@@ -44,6 +44,8 @@ public class ButtonClass {
         nextButton = new JButton();
         mailApp = new JButton();
         bookBtn = new JButton();
+        accept = new JButton();
+        decline = new JButton();
         bookBtn.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("SPACE"), "none");
         nextButton.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("SPACE"), "none");
         //testing
@@ -61,6 +63,22 @@ public class ButtonClass {
         } catch (FontFormatException | IOException e1) {
             e1.printStackTrace();
         }
+
+        ImageIcon acceptIcon = new ImageIcon();
+        ImageIcon declineIcon = new ImageIcon();
+        try {
+            BufferedImage acceptImage = ImageIO.read(new File("src/MailImages/mails/accept.png"));
+            BufferedImage declineImage = ImageIO.read(new File("src/MailImages/mails/decline.png"));
+            acceptIcon = new ImageIcon(acceptImage);
+            declineIcon = new ImageIcon(declineImage);
+            assert false;
+        }
+        catch (IOException ex){
+            System.out.println(ex.getMessage());
+        }
+
+        accept.setIcon(acceptIcon);
+        decline.setIcon(declineIcon);
 
         //set opaque
         //customizeButton(livestreamApp);
@@ -90,6 +108,14 @@ public class ButtonClass {
         bookBtn.setOpaque(false);
         bookBtn.setContentAreaFilled(false);
         bookBtn.setBorderPainted(false);
+
+        accept.setOpaque(true);
+        accept.setContentAreaFilled(true);
+        accept.setBorderPainted(true);
+
+        decline.setOpaque(true);
+        decline.setContentAreaFilled(true);
+        decline.setBorderPainted(true);
 
         //testing
         customizeButton(powerOn);
@@ -241,6 +267,14 @@ public class ButtonClass {
         nextButton.addActionListener(e -> {
             cardLayoutPanel.showCard("Background");
         });
+
+        accept.addActionListener(e -> {
+            cardLayoutPanel.showCard("AppScreen");
+        });
+
+        decline.addActionListener(e -> {
+            cardLayoutPanel.showCard("AppScreen");
+        });
     }
 
 //    public void setContinueButtonListener(ActionListener listener) {
@@ -307,5 +341,13 @@ public class ButtonClass {
 
     public JButton getEndDay() {
         return endDay;
+    }
+
+    public JButton getAccept() {
+        return accept;
+    }
+
+    public JButton getDecline() {
+        return decline;
     }
 }

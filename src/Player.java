@@ -3,10 +3,12 @@ public class Player {
     private int followers;
     private int password;
     private int aura;
+    private int ads;
     public Player() {
         username = "";
         followers = 0;
         aura = 0;
+        ads = 0;
         password = 0000;
     }
 
@@ -24,6 +26,14 @@ public class Player {
 
     public int getAura() {
         return aura;
+    }
+
+    public void addAds(int add) {
+        ads += add;
+    }
+
+    public int getAds() {
+        return ads;
     }
     public String getUsername() {
         return username;

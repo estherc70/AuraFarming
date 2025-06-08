@@ -46,7 +46,7 @@ public class ButtonClass {
         bookBtn = new JButton();
         accept = new JButton();
         decline = new JButton();
-        next = new JButton("NEXT");
+        next = new JButton();
         bookBtn.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("SPACE"), "none");
         nextButton.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("SPACE"), "none");
         //testing
@@ -68,9 +68,12 @@ public class ButtonClass {
 
         ImageIcon acceptIcon = new ImageIcon();
         ImageIcon declineIcon = new ImageIcon();
+        ImageIcon nextIcon = new ImageIcon();
         try {
             BufferedImage acceptImage = ImageIO.read(new File("src/MailImages/mails/accept.png"));
             BufferedImage declineImage = ImageIO.read(new File("src/MailImages/mails/decline.png"));
+            BufferedImage nextImage = ImageIO.read(new File("src/images/next.png"));
+            nextIcon = new ImageIcon(nextImage);
             acceptIcon = new ImageIcon(acceptImage);
             declineIcon = new ImageIcon(declineImage);
             assert false;
@@ -81,6 +84,8 @@ public class ButtonClass {
 
         accept.setIcon(acceptIcon);
         decline.setIcon(declineIcon);
+        next.setIcon(nextIcon);
+        next.setBounds(350, 400, 400, 100);
 
         //set opaque
         //customizeButton(livestreamApp);
@@ -156,7 +161,6 @@ public class ButtonClass {
         nextButton.setBounds(515,165,90,90);
         bookBtn.setBounds(625, 285, 145, 125);
         powerOn.setBounds(680,455,80,18);
-        next.setBounds(400, 400, 70, 30);
         ticTacToe.setBounds(350,350,65,65);
 
         //livestreamApp.setVisible(false);
@@ -221,7 +225,7 @@ public class ButtonClass {
             JLabel usernameLabel = new JLabel(player.getUsername());
             usernameLabel.setFont(pressStartFont);
             usernameLabel.setForeground(Color.WHITE);
-            usernameLabel.setBounds(350, 250, 300, 50);
+            usernameLabel.setBounds(300, 250, 300, 50);
             usernameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
             JPanel loginInScreen = cardLayoutPanel.getLoginInScreen();
@@ -290,9 +294,10 @@ public class ButtonClass {
 
         accept.addActionListener(e -> {
             int added = player.addAura();
+            player.addAds(1);
             JLabel label = new JLabel("You gained " + added + " aura!");
-            label.setText("PT Serif Caption");
-            label.setBounds(400, 350, 100, 50);
+            label.setFont(pressStartFont);
+            label.setBounds(280, 150, 1000, 400);
             cardLayoutPanel.getAuraInfo().add(label);
             cardLayoutPanel.getAuraInfo().add(next);
             cardLayoutPanel.getAuraInfo().revalidate();
@@ -304,12 +309,12 @@ public class ButtonClass {
         decline.addActionListener(e -> {
             int deleted = player.deleteAura();
             JLabel label = new JLabel("You lost " + deleted + " aura!");
-            label.setText("PT Serif Caption");
-            label.setBounds(400, 350, 100, 50);
-            cardLayoutPanel.getAuraInfo().revalidate();
-            cardLayoutPanel.getAuraInfo().repaint();
+            label.setFont(pressStartFont);
+            label.setBounds(280, 150, 1000, 400);
             cardLayoutPanel.getAuraInfo().add(label);
             cardLayoutPanel.getAuraInfo().add(next);
+            cardLayoutPanel.getAuraInfo().revalidate();
+            cardLayoutPanel.getAuraInfo().repaint();
             cardLayoutPanel.showCard("auraInfo");
             //cardLayoutPanel.showCard("AppScreen");
         });

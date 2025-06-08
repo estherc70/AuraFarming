@@ -209,7 +209,7 @@ public class Frame extends JFrame implements ActionListener {
         appScreen.add(buttonClass.getGamesApp());
         appScreen.add(buttonClass.getShopApp());
         appScreen.add(buttonClass.getEndDay());
-        gamesScreen.add(buttonClass.getTicTacToe());
+        gamesScreen.add(buttonClass.getTicTacToeApp());
         livestreamScreen.add(buttonClass.getScrollPane(), BorderLayout.CENTER);
         gamesScreen.add(buttonClass.getRpsGame());
 

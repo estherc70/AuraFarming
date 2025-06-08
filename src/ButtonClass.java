@@ -11,7 +11,9 @@ import java.util.ArrayList;
 public class ButtonClass {
     private Player player;
     private JButton livestreamApp, nextButton, mailApp, bookBtn,
-            editApp, powerOn, shopApp, gamesApp, endDay, accept, decline, next, ticTacToe, rpsGame, singleBtn, doubleBtn;
+            editApp, powerOn, shopApp, gamesApp, endDay, accept,
+            decline, next, ticTacToeApp, rpsGame, singleBtn, doubleBtn;
+    private JButton tic1,tic2, tic3, tic4, tic5, tic6, tic7, tic8, tic9;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
     private JTextField usernameText, passwordText;
@@ -22,6 +24,7 @@ public class ButtonClass {
     private Sponsors sponsors;
     private boolean livestreamExited;
     private Font pressStartFont;
+    private TicTacToe ticTacToe;
 
 
     public ButtonClass(Frame cardLayoutPanel,Player player)  {
@@ -31,6 +34,7 @@ public class ButtonClass {
         this.player = player;
         sponsors = new Sponsors();
         livestreamExited = false;
+        ticTacToe = new TicTacToe();
 
         //create buttons
         usernameText = new JTextField(15);
@@ -55,7 +59,16 @@ public class ButtonClass {
         shopApp = new JButton();
         gamesApp = new JButton();
         endDay = new JButton();
-        ticTacToe = new JButton();
+        ticTacToeApp = new JButton();
+        tic1 = ticTacToe.getButton(0);
+        tic2 = ticTacToe.getButton(1);
+        tic3 = ticTacToe.getButton(2);
+        tic4 = ticTacToe.getButton(3);
+        tic5 = ticTacToe.getButton(4);
+        tic6 = ticTacToe.getButton(5);
+        tic7 = ticTacToe.getButton(6);
+        tic8 = ticTacToe.getButton(7);
+        tic9 = ticTacToe.getButton(8);
         rpsGame = new JButton();
         singleBtn = new JButton();
         doubleBtn = new JButton();
@@ -93,59 +106,33 @@ public class ButtonClass {
         //set opaque
         //customizeButton(livestreamApp);
 
-        nextButton.setOpaque(true);
-        nextButton.setContentAreaFilled(true);
-        nextButton.setBorderPainted(true);
+        setButtonOpaque(nextButton);
 
         //customizeButton(mailApp);
 
-        editApp.setOpaque(true);
-        editApp.setContentAreaFilled(true);
-        editApp.setBorderPainted(true);
+        setButtonOpaque(editApp);
 
-        gamesApp.setOpaque(true);
-        gamesApp.setContentAreaFilled(true);
-        gamesApp.setBorderPainted(true);
+        setButtonOpaque(gamesApp);
 
-        shopApp.setOpaque(true);
-        shopApp.setContentAreaFilled(true);
-        shopApp.setBorderPainted(true);
+        setButtonOpaque(shopApp);
 
-        endDay.setOpaque(true);
-        endDay.setContentAreaFilled(true);
-        endDay.setBorderPainted(true);
+        setButtonOpaque(endDay);
 
-        bookBtn.setOpaque(false);
-        bookBtn.setContentAreaFilled(false);
-        bookBtn.setBorderPainted(false);
+        setButtonOpaque(bookBtn);
 
-        accept.setOpaque(true);
-        accept.setContentAreaFilled(true);
-        accept.setBorderPainted(true);
+        setButtonOpaque(accept);
 
-        decline.setOpaque(true);
-        decline.setContentAreaFilled(true);
-        decline.setBorderPainted(true);
+        setButtonOpaque(decline);
 
-        next.setOpaque(true);
-        next.setContentAreaFilled(true);
-        next.setBorderPainted(true);
+        setButtonOpaque(next);
 
-        ticTacToe.setOpaque(true);
-        ticTacToe.setContentAreaFilled(true);
-        ticTacToe.setBorderPainted(true);
+        setButtonOpaque(ticTacToeApp);
 
-        rpsGame.setOpaque(true);
-        rpsGame.setContentAreaFilled(true);
-        rpsGame.setBorderPainted(true);
+        setButtonOpaque(rpsGame);
 
-        singleBtn.setOpaque(true);
-        singleBtn.setContentAreaFilled(true);
-        singleBtn.setBorderPainted(true);
+        setButtonOpaque(singleBtn);
 
-        doubleBtn.setOpaque(true);
-        doubleBtn.setContentAreaFilled(true);
-        doubleBtn.setBorderPainted(true);
+        setButtonOpaque(doubleBtn);
 
         //testing
         customizeButton(powerOn);
@@ -177,7 +164,7 @@ public class ButtonClass {
         nextButton.setBounds(515,165,90,90);
         bookBtn.setBounds(625, 285, 145, 125);
         powerOn.setBounds(680,455,80,18);
-        ticTacToe.setBounds(380,275,65,65);
+        ticTacToeApp.setBounds(380,275,65,65);
         rpsGame.setBounds(520,275,65,65);
 
         //livestreamApp.setVisible(false);
@@ -193,7 +180,7 @@ public class ButtonClass {
         btnPanel.add(gamesApp);
         btnPanel.add(shopApp);
         btnPanel.add(endDay);
-        btnPanel.add(ticTacToe);
+        btnPanel.add(ticTacToeApp);
         btnPanel.add(rpsGame);
         btnPanel.add(singleBtn);
         btnPanel.add(doubleBtn);
@@ -362,6 +349,12 @@ public class ButtonClass {
         button.setBorderPainted(false);
     }
 
+    private void setButtonOpaque(JButton button) {
+        button.setOpaque(true);
+        button.setContentAreaFilled(true);
+        button.setBorderPainted(true);
+    }
+
     public JPanel getBtnPanel() {
         return btnPanel;
     }
@@ -426,8 +419,8 @@ public class ButtonClass {
         return decline;
     }
 
-    public JButton getTicTacToe() {
-        return ticTacToe;
+    public JButton getTicTacToeApp() {
+        return ticTacToeApp;
     }
 
     public JButton getRpsGame() {

@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class TicTacToe extends JFrame {
+//    private JButton btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
     private JButton[] buttons;
     private boolean[] position;
     private String[] layout;
@@ -249,8 +250,12 @@ public class TicTacToe extends JFrame {
         checkWinner();
     }
 
-    public static void main(String[] args) {
-        new TicTacToe();
+    public JButton getButton(int index) {
+        return buttons[index];
     }
 
+//    public static void main(String[] args) {
+//        new TicTacToe();
+//    }
+//
 }

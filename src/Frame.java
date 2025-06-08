@@ -40,6 +40,7 @@ public class Frame extends JFrame implements ActionListener {
         JPanel mailScreen = PanelClass.createPanel("src/MailImages/mailhomepage.png");
         auraInfo = PanelClass.createPanel("src/images/tutorial.jpeg");
         JPanel gamesScreen = PanelClass.createPanel("src/images/GamesScreen.png");
+        JPanel rpsScreen = PanelClass.createPanel("src/images/RockPaperScissorsGame/startScreen.png");
 
 
 //        try {
@@ -193,7 +194,8 @@ public class Frame extends JFrame implements ActionListener {
         livestreamScreen.setLayout(null);
         mailScreen.setLayout(null);
         auraInfo.setLayout(null);
-        gamesScreen.setUI(null);
+        gamesScreen.setLayout(null);
+        rpsScreen.setLayout(null);
 
         //add buttons
         startScreen.add(buttonClass.getUsernameText());
@@ -209,6 +211,7 @@ public class Frame extends JFrame implements ActionListener {
         appScreen.add(buttonClass.getEndDay());
         gamesScreen.add(buttonClass.getTicTacToe());
         livestreamScreen.add(buttonClass.getScrollPane(), BorderLayout.CENTER);
+        gamesScreen.add(buttonClass.getRpsGame());
 
         mainPanel.add(startScreen, "StartScreen");
         mainPanel.add(tutorialScreen, "TutorialScreen");
@@ -220,8 +223,7 @@ public class Frame extends JFrame implements ActionListener {
         mainPanel.add(appScreen, "AppScreen");
         mainPanel.add(auraInfo, "auraInfo");
         mainPanel.add(gamesScreen, "GamesScreen");
-
-
+        mainPanel.add(rpsScreen,"RockPaperScissors");
 
         livestreamScreen.add(scrollPane);
 

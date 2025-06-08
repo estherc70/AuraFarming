@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ButtonClass {
     private Player player;
     private JButton livestreamApp, nextButton, mailApp, bookBtn,
-            editApp, powerOn, shopApp, gamesApp, endDay, accept, decline, next, ticTacToe;
+            editApp, powerOn, shopApp, gamesApp, endDay, accept, decline, next, ticTacToe, rpsGame, singleBtn, doubleBtn;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
     private JTextField usernameText, passwordText;
@@ -56,6 +56,9 @@ public class ButtonClass {
         gamesApp = new JButton();
         endDay = new JButton();
         ticTacToe = new JButton();
+        rpsGame = new JButton();
+        singleBtn = new JButton();
+        doubleBtn = new JButton();
 
         try {
             pressStartFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/PressStart2P-Regular.ttf"))
@@ -132,6 +135,18 @@ public class ButtonClass {
         ticTacToe.setContentAreaFilled(true);
         ticTacToe.setBorderPainted(true);
 
+        rpsGame.setOpaque(true);
+        rpsGame.setContentAreaFilled(true);
+        rpsGame.setBorderPainted(true);
+
+        singleBtn.setOpaque(true);
+        singleBtn.setContentAreaFilled(true);
+        singleBtn.setBorderPainted(true);
+
+        doubleBtn.setOpaque(true);
+        doubleBtn.setContentAreaFilled(true);
+        doubleBtn.setBorderPainted(true);
+
         //testing
         customizeButton(powerOn);
 //        powerOn.setOpaque(true);
@@ -144,7 +159,8 @@ public class ButtonClass {
 
         //set text field fonts
         //usernameText.setFont(new Font("Serif", Font.BOLD, 60));
-        usernameText.setFont(pressStartFont);
+//        usernameText.setFont(pressStartFont);
+        usernameText.setFont(pressStartFont.deriveFont(45f));
         passwordText.setFont(pressStartFont);
 //        passwordText.setFont(new Font("Serif", Font.BOLD, 60));
         livestreamApp.setFont(new Font("Serif", Font.ITALIC, 15));
@@ -161,7 +177,8 @@ public class ButtonClass {
         nextButton.setBounds(515,165,90,90);
         bookBtn.setBounds(625, 285, 145, 125);
         powerOn.setBounds(680,455,80,18);
-        ticTacToe.setBounds(350,350,65,65);
+        ticTacToe.setBounds(380,275,65,65);
+        rpsGame.setBounds(520,275,65,65);
 
         //livestreamApp.setVisible(false);
 
@@ -177,6 +194,9 @@ public class ButtonClass {
         btnPanel.add(shopApp);
         btnPanel.add(endDay);
         btnPanel.add(ticTacToe);
+        btnPanel.add(rpsGame);
+        btnPanel.add(singleBtn);
+        btnPanel.add(doubleBtn);
 
         addActionListeners();
     }
@@ -326,6 +346,10 @@ public class ButtonClass {
         gamesApp.addActionListener(e -> {
             cardLayoutPanel.showCard("GamesScreen");
         });
+
+        rpsGame.addActionListener(e -> {
+            cardLayoutPanel.showCard("RockPaperScissors");
+        });
     }
 
 //    public void setContinueButtonListener(ActionListener listener) {
@@ -406,12 +430,24 @@ public class ButtonClass {
         return ticTacToe;
     }
 
+    public JButton getRpsGame() {
+        return rpsGame;
+    }
+
+    public JButton getSingleBtn() {
+        return singleBtn;
+    }
+
+    public JButton getDoubleBtn() {
+        return doubleBtn;
+    }
+
     public void addPassword() {
         JLabel passwordLabel = new JLabel(String.valueOf(player.getPassword()));
         passwordLabel.setFont(pressStartFont);
         Color color = Color.decode("#1a37ac");
         passwordLabel.setForeground(color);
-        passwordLabel.setBounds(50, 325, 100, 50);
+        passwordLabel.setBounds(40, 325, 100, 50);
 
         JPanel appScreen = cardLayoutPanel.getAppScreen();
         appScreen.setLayout(null);

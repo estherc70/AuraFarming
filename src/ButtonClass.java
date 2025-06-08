@@ -55,6 +55,7 @@ public class ButtonClass {
         shopApp = new JButton();
         gamesApp = new JButton();
         endDay = new JButton();
+        ticTacToe = new JButton();
 
         try {
             pressStartFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/PressStart2P-Regular.ttf"))

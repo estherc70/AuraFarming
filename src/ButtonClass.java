@@ -76,7 +76,7 @@ public class ButtonClass {
             nextIcon = new ImageIcon(nextImage);
             acceptIcon = new ImageIcon(acceptImage);
             declineIcon = new ImageIcon(declineImage);
-            assert false;
+            //assert false;
         }
         catch (IOException ex){
             System.out.println(ex.getMessage());

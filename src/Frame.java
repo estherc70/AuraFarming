@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 
 public class Frame extends JFrame implements ActionListener {
-    private JPanel mainPanel, livestreamScreen, mail2, loginInScreen, auraInfo, ticTacToe, gamesScreen, appScreen;
+    private JPanel mainPanel, livestreamScreen, mail2, loginInScreen, auraInfo, ticTacToe, gamesScreen, appScreen, roundScreen;
     private JScrollPane scrollPane;
     //private JLabel username;
     private ButtonClass buttonClass;
@@ -26,9 +26,10 @@ public class Frame extends JFrame implements ActionListener {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
         player = new Player();
-        buttonClass = new ButtonClass(this,player);
+        buttonClass = new ButtonClass(this,player,mainPanel);
         sponsors = new Sponsors();
         scrollPane = buttonClass.getScrollPane();
+
 
         JPanel startScreen = PanelClass.createPanel("src/images/enteruser.png");
         JPanel tutorialScreen = PanelClass.createPanel("src/images/tutorial.jpeg");
@@ -42,6 +43,7 @@ public class Frame extends JFrame implements ActionListener {
         JPanel gamesScreen = PanelClass.createPanel("src/images/GamesScreen.png");
         JPanel ticTacToe = PanelClass.createPanel("src/images/TicTacToe.png");
         JPanel rpsScreen = PanelClass.createPanel("src/images/RockPaperScissorsGame/startScreen.png");
+        roundScreen = PanelClass.createPanel("src/images/RockPaperScissorsGame/roundScreen.png");
 
 
 //        try {
@@ -73,6 +75,16 @@ public class Frame extends JFrame implements ActionListener {
             }
         }
 
+//        ArrayList<BufferedImage> vsAnimation = new ArrayList<>();
+//        for (int i = 0; i < 29; i++) {
+//            String fileName = "src/images/RockPaperScissorsGame/vsAnimation/frame_" + i + ".jpg";
+//            try {
+//                vsAnimation.add(ImageIO.read(new File(fileName)));
+//            } catch (IOException e) {
+//                System.out.println(e.getMessage());
+//            }
+//        }
+
         ArrayList<BufferedImage> animationFrames = new ArrayList<>();
         ArrayList<BufferedImage> animationFrames2 = new ArrayList<>();
         ArrayList<BufferedImage> animationFrames3 = new ArrayList<>();
@@ -86,7 +98,11 @@ public class Frame extends JFrame implements ActionListener {
         initailizeIvanImages(animationFrames4,12,14,"Ivan1");
 
         JPanelAnimation startPanel = new JPanelAnimation(this, "StartScreen" ,startingImages, 300, 3);
-        mainPanel.add(startPanel);
+        mainPanel.add(startPanel, "AnimatedStartScreen");
+        showCard("AnimatedStartScreen");
+
+//        JPanelAnimation vsPanel = new JPanelAnimation(this, "StartScreen" ,vsAnimation, 300, 1);
+//        mainPanel.add(vsPanel);
 
         ImageAnimation animation = new ImageAnimation(animationFrames, 300, 100, 200);
         tutorialScreen.add(animation.getAnimationPanel());
@@ -198,6 +214,7 @@ public class Frame extends JFrame implements ActionListener {
         gamesScreen.setLayout(null);
         rpsScreen.setLayout(null);
         ticTacToe.setLayout(null);
+        roundScreen.setLayout(null);
 
         //add buttons
         startScreen.add(buttonClass.getUsernameText());
@@ -223,6 +240,8 @@ public class Frame extends JFrame implements ActionListener {
         ticTacToe.add(buttonClass.getTic7());
         ticTacToe.add(buttonClass.getTic8());
         ticTacToe.add(buttonClass.getTic9());
+        rpsScreen.add(buttonClass.getSingleBtn());
+        rpsScreen.add(buttonClass.getDoubleBtn());
 
         mainPanel.add(startScreen, "StartScreen");
         mainPanel.add(tutorialScreen, "TutorialScreen");
@@ -236,6 +255,7 @@ public class Frame extends JFrame implements ActionListener {
         mainPanel.add(gamesScreen, "GamesScreen");
         mainPanel.add(ticTacToe, "TicTacToe");
         mainPanel.add(rpsScreen,"RockPaperScissors");
+        mainPanel.add(roundScreen,"RoundScreen");
 
         livestreamScreen.add(scrollPane);
 
@@ -363,5 +383,9 @@ public class Frame extends JFrame implements ActionListener {
 
     public JPanel getAppScreen() {
         return appScreen;
+    }
+
+    public JPanel getRoundScreen() {
+        return roundScreen;
     }
 }

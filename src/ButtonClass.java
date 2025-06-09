@@ -17,7 +17,7 @@ public class ButtonClass {
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
     private JTextField usernameText, passwordText;
-    private JPanel btnPanel;
+    private JPanel btnPanel, mainPanel;
     private Frame cardLayoutPanel;
     private JPanelAnimation animation;
     private Livestream livestream;
@@ -27,8 +27,9 @@ public class ButtonClass {
     private TicTacToe ticTacToe;
 
 
-    public ButtonClass(Frame cardLayoutPanel,Player player)  {
+    public ButtonClass(Frame cardLayoutPanel,Player player, JPanel mainPanel)  {
         livestream = new Livestream();
+        this.mainPanel = mainPanel;
         btnPanel = new JPanel(new BorderLayout());
         this.cardLayoutPanel = cardLayoutPanel;
         this.player = player;
@@ -193,6 +194,8 @@ public class ButtonClass {
         tic7.setBounds(240,335,87,85);
         tic8.setBounds(332,335,87,85);
         tic9.setBounds(425,335,87,85);
+        singleBtn.setBounds(395,265,205,75);
+        doubleBtn.setBounds(395,360,205,75);
 
         //livestreamApp.setVisible(false);
 
@@ -368,6 +371,40 @@ public class ButtonClass {
         });
 
         ticTacToeApp.addActionListener(e -> {
+            cardLayoutPanel.showCard("TicTacToe");
+        });
+
+        singleBtn.addActionListener(e -> {
+            ArrayList<BufferedImage> vsAnimation = new ArrayList<>();
+            for (int i = 0; i < 29; i++) {
+                String fileName = "src/images/RockPaperScissorsGame/vsAnimation/frame_" + i + ".jpg";
+                try {
+                    vsAnimation.add(ImageIO.read(new File(fileName)));
+                } catch (IOException e2) {
+                    System.out.println(e2.getMessage());
+                }
+            }
+
+            JPanelAnimation animationPanel = new JPanelAnimation(this.cardLayoutPanel, "RoundScreen", vsAnimation, 100, 1);
+            this.mainPanel.add(animationPanel, "animation");
+            this.cardLayoutPanel.showCard("animation");
+
+            JLabel usernameLabel = new JLabel("Round 1");
+            usernameLabel.setFont(pressStartFont.deriveFont(45f));
+            Color color = Color.decode("#5d31b8");
+            usernameLabel.setForeground(color);
+            usernameLabel.setBounds(335, 310, 500, 50);
+            //usernameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+            JPanel roundScreen = cardLayoutPanel.getRoundScreen();
+            roundScreen.setLayout(null);
+            roundScreen.add(usernameLabel);
+            roundScreen.revalidate();
+            roundScreen.repaint();
+        });
+
+
+        doubleBtn.addActionListener(e -> {
             cardLayoutPanel.showCard("TicTacToe");
         });
     }

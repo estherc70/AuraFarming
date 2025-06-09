@@ -26,6 +26,7 @@ public class ButtonClass {
     private Font pressStartFont;
     private TicTacToe ticTacToe;
     private JLabel TTTWin, TTTLose, TTTDraw, TTTNull;
+    private boolean[] pressedKeys;
 
 
     public ButtonClass(Frame cardLayoutPanel,Player player, JPanel mainPanel)  {
@@ -420,6 +421,14 @@ public class ButtonClass {
         });
 
         singleBtn.addActionListener(e -> {
+            pressedKeys = new boolean[128];
+            singleBtn.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    int key = e.getKeyCode();
+                    pressedKeys[key] = true;
+                }
+            });
             vsAnimation();
         });
 
@@ -594,19 +603,48 @@ public class ButtonClass {
         this.mainPanel.add(animationPanel, "animation");
         this.cardLayoutPanel.showCard("animation");
 
-        JLabel usernameLabel = new JLabel("Round 1");
-        usernameLabel.setFont(pressStartFont.deriveFont(45f));
+        JLabel roundLabel = new JLabel("Round 1");
+        roundLabel.setFont(pressStartFont.deriveFont(45f));
         Color color = Color.decode("#5d31b8");
-        usernameLabel.setForeground(color);
-        usernameLabel.setBounds(335, 310, 500, 50);
+        roundLabel.setForeground(color);
+        roundLabel.setBounds(335, 310, 500, 50);
         //usernameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JLabel usernameLabel = new JLabel(usernameText.getText());
+        usernameLabel.setFont(pressStartFont.deriveFont(45f));
+        Color color2 = Color.decode("#a589e8");
+        usernameLabel.setForeground(color2);
+        usernameLabel.setBounds(610, 600, 200, 50);
 
         JPanel roundScreen = cardLayoutPanel.getRoundScreen();
         roundScreen.setLayout(null);
+        roundScreen.add(roundLabel);
         roundScreen.add(usernameLabel);
         roundScreen.revalidate();
         roundScreen.repaint();
 
         SoundUtils.playSound("src/Round 1 Fight! (Mortal Kombat Meme) - Sound Effect for editing.wav");
+
+        if (pressedKeys[65]) {
+            //cardLayoutPanel.showCard();
+            if (aiPlayer() == 1) {
+                cardLayoutPanel.showCard("RockTie");
+            } else if (aiPlayer() == 2) {
+                cardLayoutPanel.showCard("RockWin");
+            } else {
+                cardLayoutPanel.showCard("RockLose");
+            }
+        } else if (pressedKeys[83]) {
+
+        } else if (pressedKeys[68]) {
+
+        } else {
+            System.out.println("Invalid");
+        }
+    }
+
+    private int aiPlayer() {
+        int num = (int) (Math.random() * 3-1+1) + 1;
+        return num;
     }
 }

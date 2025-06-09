@@ -48,6 +48,9 @@ public class Frame extends JFrame implements ActionListener {
         JPanel ticTacToeDraw = PanelClass.createPanel("src/images/TicTacToeDraw.png");
         JPanel rpsScreen = PanelClass.createPanel("src/images/RockPaperScissorsGame/startScreen.png");
         roundScreen = PanelClass.createPanel("src/images/RockPaperScissorsGame/roundScreen.png");
+        JPanel rockTie = PanelClass.createPanel("src/images/RockPaperScissorsGame/RockTie.png");
+        JPanel rockWin = PanelClass.createPanel("src/images/RockPaperScissorsGame/RockWin.png");
+        JPanel rockLose = PanelClass.createPanel("src/images/RockPaperScissorsGame/RockLose.png");
 
 
 //        try {
@@ -223,6 +226,9 @@ public class Frame extends JFrame implements ActionListener {
         ticTacToeWin.setLayout(null);
         ticTacToeNull.setLayout(null);
         roundScreen.setLayout(null);
+        rockTie.setLayout(null);
+        rockLose.setLayout(null);
+        rockWin.setLayout(null);
 
         //add buttons
         startScreen.add(buttonClass.getUsernameText());
@@ -252,6 +258,7 @@ public class Frame extends JFrame implements ActionListener {
         rpsScreen.add(buttonClass.getSingleBtn());
         rpsScreen.add(buttonClass.getDoubleBtn());
 
+
         mainPanel.add(startScreen, "StartScreen");
         mainPanel.add(tutorialScreen, "TutorialScreen");
         mainPanel.add(backgroundScreen, "Background");
@@ -269,6 +276,10 @@ public class Frame extends JFrame implements ActionListener {
         mainPanel.add(ticTacToeWin, "TicTacToeWin");
         mainPanel.add(ticTacToeLose, "TicTacToeLose");
         mainPanel.add(roundScreen,"RoundScreen");
+        mainPanel.add(rockTie,"RockTie");
+        mainPanel.add(rockWin,"RockWin");
+        mainPanel.add(rockLose,"RockLose");
+
 
         livestreamScreen.add(scrollPane);
 

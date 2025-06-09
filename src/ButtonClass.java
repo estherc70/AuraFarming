@@ -30,7 +30,7 @@ public class ButtonClass {
 
 
     public ButtonClass(Frame cardLayoutPanel,Player player, JPanel mainPanel)  {
-        livestream = new Livestream();
+        livestream = new Livestream(player);
         this.mainPanel = mainPanel;
         btnPanel = new JPanel(new BorderLayout());
         this.cardLayoutPanel = cardLayoutPanel;
@@ -312,8 +312,10 @@ public class ButtonClass {
         });
 
         livestreamApp.addActionListener(e -> {
+            livestream.setLoop(true);
             new Thread(() -> {
                 while (!livestreamExited) {
+                    livestream.incrementByRandomNumber();
                     String textToAppend;
                     int goodOrBad = (int) (Math.random() * 2);
                     if (goodOrBad == 1) {
@@ -485,6 +487,7 @@ public class ButtonClass {
         });
 
         backBtnLS.addActionListener(e -> {
+            livestream.setLoop(false);
             cardLayoutPanel.showCard("AppScreen");
         });
 

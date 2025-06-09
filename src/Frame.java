@@ -51,7 +51,9 @@ public class Frame extends JFrame implements ActionListener {
         roundScreen = PanelClass.createPanel("src/images/RockPaperScissorsGame/roundScreen.png", buttonClass);
         shopScreen = PanelClass.createPanel("src/shopimages/shop.png", buttonClass);
         shop = PanelClass.createPanel("src/shopimages/shop2.png", buttonClass);
-
+        JPanel rockTie = PanelClass.createPanel("src/images/RockPaperScissorsGame/RockTie.png", buttonClass);
+        JPanel rockWin = PanelClass.createPanel("src/images/RockPaperScissorsGame/RockWin.png", buttonClass);
+        JPanel rockLose = PanelClass.createPanel("src/images/RockPaperScissorsGame/RockLose.png", buttonClass);
 
 //        try {
 //            Font pressStartFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/fonts/PressStart2P-Regular.ttf"))
@@ -228,7 +230,9 @@ public class Frame extends JFrame implements ActionListener {
         ticTacToeNull.setLayout(null);
         roundScreen.setLayout(null);
         appScreen.setLayout(null);
-        shop.setLayout(null);
+        rockTie.setLayout(null);
+        rockLose.setLayout(null);
+        rockWin.setLayout(null);
 
         //add buttons
         startScreen.add(buttonClass.getUsernameText());
@@ -278,6 +282,10 @@ public class Frame extends JFrame implements ActionListener {
         mainPanel.add(ticTacToeLose, "TicTacToeLose");
         mainPanel.add(roundScreen,"RoundScreen");
         mainPanel.add(shopScreen, "shopScreen");
+        mainPanel.add(rockTie,"RockTie");
+        mainPanel.add(rockWin,"RockWin");
+        mainPanel.add(rockLose,"RockLose");
+
         mainPanel.add(shop, "shop");
 
         livestreamScreen.add(scrollPane);

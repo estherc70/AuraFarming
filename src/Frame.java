@@ -40,6 +40,7 @@ public class Frame extends JFrame implements ActionListener {
         JPanel mailScreen = PanelClass.createPanel("src/MailImages/mailhomepage.png");
         auraInfo = PanelClass.createPanel("src/images/tutorial.jpeg");
         JPanel gamesScreen = PanelClass.createPanel("src/images/GamesScreen.png");
+        JPanel ticTacToe = PanelClass.createPanel("src/images/TicTacToe.png");
         JPanel rpsScreen = PanelClass.createPanel("src/images/RockPaperScissorsGame/startScreen.png");
 
 
@@ -196,6 +197,7 @@ public class Frame extends JFrame implements ActionListener {
         auraInfo.setLayout(null);
         gamesScreen.setLayout(null);
         rpsScreen.setLayout(null);
+        ticTacToe.setLayout(null);
 
         //add buttons
         startScreen.add(buttonClass.getUsernameText());
@@ -212,6 +214,15 @@ public class Frame extends JFrame implements ActionListener {
         gamesScreen.add(buttonClass.getTicTacToeApp());
         livestreamScreen.add(buttonClass.getScrollPane(), BorderLayout.CENTER);
         gamesScreen.add(buttonClass.getRpsGame());
+        ticTacToe.add(buttonClass.getTic1());
+        ticTacToe.add(buttonClass.getTic2());
+        ticTacToe.add(buttonClass.getTic3());
+        ticTacToe.add(buttonClass.getTic4());
+        ticTacToe.add(buttonClass.getTic5());
+        ticTacToe.add(buttonClass.getTic6());
+        ticTacToe.add(buttonClass.getTic7());
+        ticTacToe.add(buttonClass.getTic8());
+        ticTacToe.add(buttonClass.getTic9());
 
         mainPanel.add(startScreen, "StartScreen");
         mainPanel.add(tutorialScreen, "TutorialScreen");
@@ -223,6 +234,7 @@ public class Frame extends JFrame implements ActionListener {
         mainPanel.add(appScreen, "AppScreen");
         mainPanel.add(auraInfo, "auraInfo");
         mainPanel.add(gamesScreen, "GamesScreen");
+        mainPanel.add(ticTacToe, "TicTacToe");
         mainPanel.add(rpsScreen,"RockPaperScissors");
 
         livestreamScreen.add(scrollPane);

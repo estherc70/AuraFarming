@@ -70,15 +70,15 @@ public class TicTacToe extends JFrame {
         buttons[8].setContentAreaFilled(false);
         buttons[8].setBorderPainted(false);
 
-        buttons[0].setBounds(0,0,166,166);
-        buttons[1].setBounds(166,0,166,166);
-        buttons[2].setBounds(332,0,166,166);
-        buttons[3].setBounds(0,166,166,166);
-        buttons[4].setBounds(166,166,166,166);
-        buttons[5].setBounds(332,166,166,166);
-        buttons[6].setBounds(0,332,166,166);
-        buttons[7].setBounds(166,332,166,166);
-        buttons[8].setBounds(332,332,166,166);
+//        buttons[0].setBounds(0,0,166,166);
+//        buttons[1].setBounds(166,0,166,166);
+//        buttons[2].setBounds(332,0,166,166);
+//        buttons[3].setBounds(0,166,166,166);
+//        buttons[4].setBounds(166,166,166,166);
+//        buttons[5].setBounds(332,166,166,166);
+//        buttons[6].setBounds(0,332,166,166);
+//        buttons[7].setBounds(166,332,166,166);
+//        buttons[8].setBounds(332,332,166,166);
 
         mainPanel.add(buttons[0]);
         mainPanel.add(buttons[1]);
@@ -92,12 +92,12 @@ public class TicTacToe extends JFrame {
 
         addActionListeners();
 
-        setTitle("TicTacToe");
-        setSize(500, 525); // Set the size of the window
-        setResizable(false); // Disable resizing the window
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); // Center the window on the screen
-        setVisible(true);
+//        setTitle("TicTacToe");
+//        setSize(500, 525); // Set the size of the window
+//        setResizable(false); // Disable resizing the window
+//        setDefaultCloseOperation(EXIT_ON_CLOSE);
+//        setLocationRelativeTo(null); // Center the window on the screen
+//        setVisible(true);
 
     }
 

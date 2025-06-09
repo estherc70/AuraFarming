@@ -136,6 +136,24 @@ public class ButtonClass {
 
         //testing
         customizeButton(powerOn);
+
+        setButtonOpaque(tic1);
+
+        setButtonOpaque(tic2);
+
+        setButtonOpaque(tic3);
+
+        setButtonOpaque(tic4);
+
+        setButtonOpaque(tic5);
+
+        setButtonOpaque(tic6);
+
+        setButtonOpaque(tic7);
+
+        setButtonOpaque(tic8);
+
+        setButtonOpaque(tic9);
 //        powerOn.setOpaque(true);
 //        powerOn.setContentAreaFilled(true);
 //        powerOn.setBorderPainted(true);
@@ -166,6 +184,15 @@ public class ButtonClass {
         powerOn.setBounds(680,455,80,18);
         ticTacToeApp.setBounds(380,275,65,65);
         rpsGame.setBounds(520,275,65,65);
+        tic1.setBounds(240,160,87,85);
+        tic2.setBounds(332,160,87,85);
+        tic3.setBounds(425,160,87,85);
+        tic4.setBounds(240,250,87,85);
+        tic5.setBounds(332,250,87,85);
+        tic6.setBounds(425,250,87,85);
+        tic7.setBounds(240,335,87,85);
+        tic8.setBounds(332,335,87,85);
+        tic9.setBounds(425,335,87,85);
 
         //livestreamApp.setVisible(false);
 
@@ -184,6 +211,8 @@ public class ButtonClass {
         btnPanel.add(rpsGame);
         btnPanel.add(singleBtn);
         btnPanel.add(doubleBtn);
+        btnPanel.add(tic1);
+        btnPanel.add(tic2);
 
         addActionListeners();
     }
@@ -337,6 +366,10 @@ public class ButtonClass {
         rpsGame.addActionListener(e -> {
             cardLayoutPanel.showCard("RockPaperScissors");
         });
+
+        ticTacToeApp.addActionListener(e -> {
+            cardLayoutPanel.showCard("TicTacToe");
+        });
     }
 
 //    public void setContinueButtonListener(ActionListener listener) {
@@ -433,6 +466,42 @@ public class ButtonClass {
 
     public JButton getDoubleBtn() {
         return doubleBtn;
+    }
+
+    public JButton getTic1() {
+        return tic1;
+    }
+
+    public JButton getTic2() {
+        return tic2;
+    }
+
+    public JButton getTic3() {
+        return tic3;
+    }
+
+    public JButton getTic4() {
+        return tic4;
+    }
+
+    public JButton getTic5() {
+        return tic5;
+    }
+
+    public JButton getTic6() {
+        return tic6;
+    }
+
+    public JButton getTic7() {
+        return tic7;
+    }
+
+    public JButton getTic8() {
+        return tic8;
+    }
+
+    public JButton getTic9() {
+        return tic9;
     }
 
     public void addPassword() {

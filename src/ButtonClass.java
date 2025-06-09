@@ -420,37 +420,12 @@ public class ButtonClass {
         });
 
         singleBtn.addActionListener(e -> {
-            ArrayList<BufferedImage> vsAnimation = new ArrayList<>();
-            for (int i = 0; i < 29; i++) {
-                String fileName = "src/images/RockPaperScissorsGame/vsAnimation/frame_" + i + ".jpg";
-                try {
-                    vsAnimation.add(ImageIO.read(new File(fileName)));
-                } catch (IOException e2) {
-                    System.out.println(e2.getMessage());
-                }
-            }
-
-            JPanelAnimation animationPanel = new JPanelAnimation(this.cardLayoutPanel, "RoundScreen", vsAnimation, 100, 1);
-            this.mainPanel.add(animationPanel, "animation");
-            this.cardLayoutPanel.showCard("animation");
-
-            JLabel usernameLabel = new JLabel("Round 1");
-            usernameLabel.setFont(pressStartFont.deriveFont(45f));
-            Color color = Color.decode("#5d31b8");
-            usernameLabel.setForeground(color);
-            usernameLabel.setBounds(335, 310, 500, 50);
-            //usernameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-            JPanel roundScreen = cardLayoutPanel.getRoundScreen();
-            roundScreen.setLayout(null);
-            roundScreen.add(usernameLabel);
-            roundScreen.revalidate();
-            roundScreen.repaint();
+            vsAnimation();
         });
 
 
         doubleBtn.addActionListener(e -> {
-            cardLayoutPanel.showCard("TicTacToe");
+            vsAnimation();
         });
     }
 
@@ -602,5 +577,36 @@ public class ButtonClass {
         appScreen.add(passwordLabel);
         appScreen.revalidate();
         appScreen.repaint();
+    }
+
+    public void vsAnimation() {
+        ArrayList<BufferedImage> vsAnimation = new ArrayList<>();
+        for (int i = 0; i < 29; i++) {
+            String fileName = "src/images/RockPaperScissorsGame/vsAnimation/frame_" + i + ".jpg";
+            try {
+                vsAnimation.add(ImageIO.read(new File(fileName)));
+            } catch (IOException e2) {
+                System.out.println(e2.getMessage());
+            }
+        }
+
+        JPanelAnimation animationPanel = new JPanelAnimation(this.cardLayoutPanel, "RoundScreen", vsAnimation, 100, 1);
+        this.mainPanel.add(animationPanel, "animation");
+        this.cardLayoutPanel.showCard("animation");
+
+        JLabel usernameLabel = new JLabel("Round 1");
+        usernameLabel.setFont(pressStartFont.deriveFont(45f));
+        Color color = Color.decode("#5d31b8");
+        usernameLabel.setForeground(color);
+        usernameLabel.setBounds(335, 310, 500, 50);
+        //usernameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JPanel roundScreen = cardLayoutPanel.getRoundScreen();
+        roundScreen.setLayout(null);
+        roundScreen.add(usernameLabel);
+        roundScreen.revalidate();
+        roundScreen.repaint();
+
+        SoundUtils.playSound("src/Round 1 Fight! (Mortal Kombat Meme) - Sound Effect for editing.wav");
     }
 }

@@ -13,7 +13,7 @@ public class ButtonClass {
     private JButton livestreamApp, nextButton, mailApp, bookBtn,
             editApp, powerOn, shopApp, gamesApp, endDay, accept,
             decline, next, ticTacToeApp, rpsGame, singleBtn, doubleBtn;
-    private JButton tic1,tic2, tic3, tic4, tic5, tic6, tic7, tic8, tic9;
+    private JButton tic1,tic2, tic3, tic4, tic5, tic6, tic7, tic8, tic9, checkWinner;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
     private JTextField usernameText, passwordText;
@@ -25,6 +25,7 @@ public class ButtonClass {
     private boolean livestreamExited;
     private Font pressStartFont;
     private TicTacToe ticTacToe;
+    private JLabel TTTWin, TTTLose, TTTDraw, TTTNull;
 
 
     public ButtonClass(Frame cardLayoutPanel,Player player, JPanel mainPanel)  {
@@ -70,6 +71,11 @@ public class ButtonClass {
         tic7 = ticTacToe.getButton(6);
         tic8 = ticTacToe.getButton(7);
         tic9 = ticTacToe.getButton(8);
+        TTTWin = new JLabel(new ImageIcon("src/images/TicTacToeWin.png"));
+        TTTLose = new JLabel(new ImageIcon("src/images/TicTacToeLose.png"));
+        TTTDraw = new JLabel(new ImageIcon("src/images/TicTacToeDraw.png"));
+        TTTNull = new JLabel(new ImageIcon("src/images/TicTacToeNull.png"));
+        checkWinner = new JButton();
         rpsGame = new JButton();
         singleBtn = new JButton();
         doubleBtn = new JButton();
@@ -138,23 +144,25 @@ public class ButtonClass {
         //testing
         customizeButton(powerOn);
 
-        setButtonOpaque(tic1);
+        customizeButton(tic1);
 
-        setButtonOpaque(tic2);
+        customizeButton(tic2);
 
-        setButtonOpaque(tic3);
+        customizeButton(tic3);
 
-        setButtonOpaque(tic4);
+        customizeButton(tic4);
 
-        setButtonOpaque(tic5);
+        customizeButton(tic5);
 
-        setButtonOpaque(tic6);
+        customizeButton(tic6);
 
-        setButtonOpaque(tic7);
+        customizeButton(tic7);
 
-        setButtonOpaque(tic8);
+        customizeButton(tic8);
 
-        setButtonOpaque(tic9);
+        customizeButton(tic9);
+
+        customizeButton(checkWinner);
 //        powerOn.setOpaque(true);
 //        powerOn.setContentAreaFilled(true);
 //        powerOn.setBorderPainted(true);
@@ -194,6 +202,7 @@ public class ButtonClass {
         tic7.setBounds(240,335,87,85);
         tic8.setBounds(332,335,87,85);
         tic9.setBounds(425,335,87,85);
+        checkWinner.setBounds(585,273,150,40);
         singleBtn.setBounds(395,265,205,75);
         doubleBtn.setBounds(395,360,205,75);
 
@@ -216,6 +225,15 @@ public class ButtonClass {
         btnPanel.add(doubleBtn);
         btnPanel.add(tic1);
         btnPanel.add(tic2);
+        btnPanel.add(tic2);
+        btnPanel.add(tic3);
+        btnPanel.add(tic4);
+        btnPanel.add(tic5);
+        btnPanel.add(tic6);
+        btnPanel.add(tic7);
+        btnPanel.add(tic8);
+        btnPanel.add(tic9);
+        btnPanel.add(checkWinner);
 
         addActionListeners();
     }
@@ -372,6 +390,33 @@ public class ButtonClass {
 
         ticTacToeApp.addActionListener(e -> {
             cardLayoutPanel.showCard("TicTacToe");
+        });
+
+        checkWinner.addActionListener(e -> {
+            if (ticTacToe.getWinner().equals("You win")) {
+                TTTWin.setBounds(570,170,175,52);
+                cardLayoutPanel.getTicTacToe().add(TTTWin);
+                TTTNull.setVisible(false);
+                cardLayoutPanel.getTicTacToe().revalidate();
+                cardLayoutPanel.getTicTacToe().repaint();
+            } else if (ticTacToe.getWinner().equals("AI wins")) {
+                TTTLose.setBounds(573,170,170,50);
+                cardLayoutPanel.getTicTacToe().add(TTTLose);
+                TTTNull.setVisible(false);
+                cardLayoutPanel.getTicTacToe().revalidate();
+                cardLayoutPanel.getTicTacToe().repaint();
+            } else if (ticTacToe.getWinner().equals("Draw")) {
+                TTTDraw.setBounds(570,170,170,50);
+                cardLayoutPanel.getTicTacToe().add(TTTDraw);
+                TTTNull.setVisible(false);
+                cardLayoutPanel.getTicTacToe().revalidate();
+                cardLayoutPanel.getTicTacToe().repaint();
+            } else {
+                TTTNull.setBounds(565,170,195,48);
+                cardLayoutPanel.getTicTacToe().add(TTTNull);
+                cardLayoutPanel.getTicTacToe().revalidate();
+                cardLayoutPanel.getTicTacToe().repaint();
+            }
         });
 
         singleBtn.addActionListener(e -> {
@@ -539,6 +584,10 @@ public class ButtonClass {
 
     public JButton getTic9() {
         return tic9;
+    }
+
+    public JButton getCheckWinner() {
+        return checkWinner;
     }
 
     public void addPassword() {

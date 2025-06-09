@@ -153,7 +153,6 @@ public class ButtonClass {
         setButtonOpaque(backBtnRPS);
         setButtonOpaque(backBtnTTT);
 
-        //testing
         customizeButton(powerOn);
 
         customizeButton(tic1);
@@ -175,10 +174,6 @@ public class ButtonClass {
         customizeButton(tic9);
 
         customizeButton(checkWinner);
-
-//        powerOn.setOpaque(true);
-//        powerOn.setContentAreaFilled(true);
-//        powerOn.setBorderPainted(true);
 
         livestreamChat.setEditable(true);
         livestreamChat.setLineWrap(true);
@@ -415,29 +410,39 @@ public class ButtonClass {
         });
 
         checkWinner.addActionListener(e -> {
-            if (ticTacToe.getWinner().equals("You win")) {
-                TTTWin.setBounds(570,170,175,52);
-                cardLayoutPanel.getTicTacToe().add(TTTWin);
-                TTTNull.setVisible(false);
-                cardLayoutPanel.getTicTacToe().revalidate();
-                cardLayoutPanel.getTicTacToe().repaint();
-            } else if (ticTacToe.getWinner().equals("AI wins")) {
-                TTTLose.setBounds(573,170,170,50);
-                cardLayoutPanel.getTicTacToe().add(TTTLose);
-                TTTNull.setVisible(false);
-                cardLayoutPanel.getTicTacToe().revalidate();
-                cardLayoutPanel.getTicTacToe().repaint();
-            } else if (ticTacToe.getWinner().equals("Draw")) {
-                TTTDraw.setBounds(570,170,170,50);
-                cardLayoutPanel.getTicTacToe().add(TTTDraw);
-                TTTNull.setVisible(false);
-                cardLayoutPanel.getTicTacToe().revalidate();
-                cardLayoutPanel.getTicTacToe().repaint();
-            } else {
-                TTTNull.setBounds(565,170,195,48);
-                cardLayoutPanel.getTicTacToe().add(TTTNull);
-                cardLayoutPanel.getTicTacToe().revalidate();
-                cardLayoutPanel.getTicTacToe().repaint();
+            if (!ticTacToe.getGameEnded()) {
+                if (ticTacToe.getWinner().equals("You win")) {
+                    ticTacToe.setGameEnded(true);
+                    TTTWin.setBounds(570,170,175,52);
+                    cardLayoutPanel.getTicTacToe().add(TTTWin);
+                    TTTNull.setVisible(false);
+                    cardLayoutPanel.getTicTacToe().revalidate();
+                    cardLayoutPanel.getTicTacToe().repaint();
+                    player.addAura();
+                    System.out.println(player.getAura());
+                } else if (ticTacToe.getWinner().equals("AI wins")) {
+                    ticTacToe.setGameEnded(true);
+                    TTTLose.setBounds(573,170,170,50);
+                    cardLayoutPanel.getTicTacToe().add(TTTLose);
+                    TTTNull.setVisible(false);
+                    cardLayoutPanel.getTicTacToe().revalidate();
+                    cardLayoutPanel.getTicTacToe().repaint();
+                    player.deleteAura();
+                    System.out.println(player.getAura());
+                } else if (ticTacToe.getWinner().equals("Draw")) {
+                    ticTacToe.setGameEnded(true);
+                    TTTDraw.setBounds(570,170,170,50);
+                    cardLayoutPanel.getTicTacToe().add(TTTDraw);
+                    TTTNull.setVisible(false);
+                    cardLayoutPanel.getTicTacToe().revalidate();
+                    cardLayoutPanel.getTicTacToe().repaint();
+                } else {
+                    TTTNull.setBounds(565,170,195,48);
+                    TTTNull.setVisible(true);
+                    cardLayoutPanel.getTicTacToe().add(TTTNull);
+                    cardLayoutPanel.getTicTacToe().revalidate();
+                    cardLayoutPanel.getTicTacToe().repaint();
+                }
             }
         });
 
@@ -452,7 +457,6 @@ public class ButtonClass {
             });
             vsAnimation();
         });
-
 
         doubleBtn.addActionListener(e -> {
             vsAnimation();
@@ -493,6 +497,14 @@ public class ButtonClass {
         });
 
         backBtnTTT.addActionListener(e -> {
+            ticTacToe.resetGame();
+            cardLayoutPanel.getTicTacToe().remove(TTTWin);
+            cardLayoutPanel.getTicTacToe().remove(TTTLose);
+            cardLayoutPanel.getTicTacToe().remove(TTTDraw);
+            cardLayoutPanel.getTicTacToe().remove(TTTNull);
+
+            cardLayoutPanel.getTicTacToe().revalidate();
+            cardLayoutPanel.getTicTacToe().repaint();
             cardLayoutPanel.showCard("AppScreen");
         });
     }
@@ -730,6 +742,4 @@ public class ButtonClass {
         int num = (int) (Math.random() * 3-1+1) + 1;
         return num;
     }
-
-
 }

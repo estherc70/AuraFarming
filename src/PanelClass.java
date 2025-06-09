@@ -13,7 +13,6 @@ public class PanelClass extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        System.out.println("shop1");
         // Load the background image
         ImageIcon backgroundIcon = new ImageIcon(fileName);
         Image backgroundImage = backgroundIcon.getImage();

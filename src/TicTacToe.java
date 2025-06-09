@@ -7,8 +7,10 @@ public class TicTacToe extends JFrame {
     private String[] layout;
     private ImageIcon xIcon, yIcon;
     private String winner;
+    private boolean gameEnded;
 
     public TicTacToe() {
+        gameEnded = false;
         buttons = new JButton[9];
         position = new boolean[9];
         layout = new String[9];
@@ -27,41 +29,6 @@ public class TicTacToe extends JFrame {
         buttons[7] = new JButton();
         buttons[8] = new JButton();
 
-        buttons[0].setOpaque(false);
-        buttons[0].setContentAreaFilled(false);
-        buttons[0].setBorderPainted(false);
-
-        buttons[1].setOpaque(false);
-        buttons[1].setContentAreaFilled(false);
-        buttons[1].setBorderPainted(false);
-
-        buttons[2].setOpaque(false);
-        buttons[2].setContentAreaFilled(false);
-        buttons[2].setBorderPainted(false);
-
-        buttons[3].setOpaque(false);
-        buttons[3].setContentAreaFilled(false);
-        buttons[3].setBorderPainted(false);
-
-        buttons[4].setOpaque(false);
-        buttons[4].setContentAreaFilled(false);
-        buttons[4].setBorderPainted(false);
-
-        buttons[5].setOpaque(false);
-        buttons[5].setContentAreaFilled(false);
-        buttons[5].setBorderPainted(false);
-
-        buttons[6].setOpaque(false);
-        buttons[6].setContentAreaFilled(false);
-        buttons[6].setBorderPainted(false);
-
-        buttons[7].setOpaque(false);
-        buttons[7].setContentAreaFilled(false);
-        buttons[7].setBorderPainted(false);
-
-        buttons[8].setOpaque(false);
-        buttons[8].setContentAreaFilled(false);
-        buttons[8].setBorderPainted(false);
         addActionListeners();
     }
 
@@ -196,11 +163,33 @@ public class TicTacToe extends JFrame {
         checkWinner();
     }
 
+    public void resetGame() {
+        winner = "";
+        gameEnded = false;
+        for (int i = 0; i < buttons.length; i++) {
+            buttons[i].setIcon(null);
+            position[i] = false;
+            layout[i] = null;
+        }
+        for (JButton button : buttons) {
+            button.setEnabled(true);
+        }
+    }
+
+
     public JButton getButton(int index) {
         return buttons[index];
     }
 
     public String getWinner() {
         return winner;
+    }
+
+    public void setGameEnded (boolean input) {
+        gameEnded = input;
+    }
+
+    public boolean getGameEnded() {
+        return gameEnded;
     }
 }

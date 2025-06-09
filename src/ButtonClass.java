@@ -601,6 +601,14 @@ public class ButtonClass {
         return checkWinner;
     }
 
+    public Component getShop() {
+        return shop;
+    }
+
+    public Component getNext() {
+        return next;
+    }
+
 
 
     public void addPassword() {
@@ -676,4 +684,6 @@ public class ButtonClass {
         int num = (int) (Math.random() * 3-1+1) + 1;
         return num;
     }
+
+
 }

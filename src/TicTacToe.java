@@ -168,74 +168,73 @@ public class TicTacToe extends JFrame {
     public void checkWinner() {
         if ((layout[0] != null && layout[3] != null && layout[6] != null) &&
                 (layout[0].equals("X") && layout[3].equals("X") && layout[6].equals("X"))) { //X vertical
-            winner = "You win!";
+            winner = "You win";
             gameEnd = true;
         } else if ((layout[1] != null && layout[4] != null && layout[7] != null) &&
                 (layout[1].equals("X") && layout[4].equals("X") && layout[7].equals("X"))) {
-            winner = "You win!";
+            winner = "You win";
             gameEnd = true;
         } else if ((layout[2] != null && layout[5] != null && layout[8] != null) &&
                 (layout[2].equals("X") && layout[5].equals("X") && layout[8].equals("X"))) {
-            winner = "You win!";
+            winner = "You win";
             gameEnd = true;
         } else if ((layout[0] != null && layout[1] != null && layout[2] != null) &&
                 (layout[0].equals("X") && layout[1].equals("X") && layout[2].equals("X"))) { //X horizontal
-            winner = "You win!";
+            winner = "You win";
             gameEnd = true;
         } else if ((layout[3] != null && layout[4] != null && layout[5] != null) &&
                 (layout[3].equals("X") && layout[4].equals("X") && layout[5].equals("X"))) {
-            winner = "You win!";
+            winner = "You win";
             gameEnd = true;
         } else if ((layout[6] != null && layout[7] != null && layout[8] != null) &&
                 (layout[6].equals("X") && layout[7].equals("X") && layout[8].equals("X"))) {
-            winner = "You win!";
+            winner = "You win";
             gameEnd = true;
         } else if ((layout[0] != null && layout[4] != null && layout[8] != null) &&
                 (layout[0].equals("X") && layout[4].equals("X") && layout[8].equals("X"))) { //X diagonal
-            winner = "You win!";
+            winner = "You win";
             gameEnd = true;
         } else if ((layout[2] != null && layout[4] != null && layout[6] != null) &&
                 (layout[2].equals("X") && layout[4].equals("X") && layout[6].equals("X"))) {
-            winner = "You win!";
+            winner = "You win";
             gameEnd = true;
             // -----------------------------------------------------------------------------------
         } else if ((layout[0] != null && layout[3] != null && layout[6] != null) &&
                 (layout[0].equals("O") && layout[3].equals("O") && layout[6].equals("O"))) { //O vertical
-            winner = "The AI wins!";
+            winner = "AI wins";
             gameEnd = true;
         } else if ((layout[1] != null && layout[4] != null && layout[7] != null) &&
                 (layout[1].equals("O") && layout[4].equals("O") && layout[7].equals("O"))) {
-            winner = "You win!";
+            winner = "AI wins";
             gameEnd = true;
         } else if ((layout[2] != null && layout[5] != null && layout[8] != null) &&
                 (layout[2].equals("O") && layout[5].equals("O") && layout[8].equals("O"))) {
-            winner = "You win!";
+            winner = "AI wins";
             gameEnd = true;
         } else if ((layout[0] != null && layout[1] != null && layout[2] != null) &&
                 (layout[0].equals("O") && layout[1].equals("O") && layout[2].equals("O"))) { //O horizontal
-            winner = "You win!";
+            winner = "AI wins";
             gameEnd = true;
         } else if ((layout[3] != null && layout[4] != null && layout[5] != null) &&
                 (layout[3].equals("O") && layout[4].equals("O") && layout[5].equals("O"))) {
-            winner = "You win!";
+            winner = "AI wins";
             gameEnd = true;
         } else if ((layout[6] != null && layout[7] != null && layout[8] != null) &&
                 (layout[6].equals("O") && layout[7].equals("O") && layout[8].equals("O"))) {
-            winner = "You win!";
+            winner = "AI wins";
             gameEnd = true;
         } else if ((layout[0] != null && layout[4] != null && layout[8] != null) &&
                 (layout[0].equals("O") && layout[4].equals("O") && layout[8].equals("O"))) { //O diagonal
-            winner = "You win!";
+            winner = "AI wins";
             gameEnd = true;
         } else if ((layout[2] != null && layout[4] != null && layout[6] != null) &&
                 (layout[2].equals("O") && layout[4].equals("O") && layout[6].equals("O"))) {
-            winner = "You win!";
+            winner = "AI wins";
             gameEnd = true;
         } else if (checkAllFilled()) {
-            winner = "Draw!";
+            winner = "Draw";
             gameEnd = true;
         }
-        System.out.println(winner);
     }
 
     public void getButtonReady(int buttonNum) {
@@ -252,6 +251,10 @@ public class TicTacToe extends JFrame {
 
     public JButton getButton(int index) {
         return buttons[index];
+    }
+
+    public String getWinner() {
+        return winner;
     }
 
 //    public static void main(String[] args) {

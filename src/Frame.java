@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 
 public class Frame extends JFrame implements ActionListener {
-    private JPanel mainPanel, livestreamScreen, mail2, loginInScreen, auraInfo, ticTacToe, gamesScreen, appScreen, roundScreen;
+    private JPanel mainPanel, livestreamScreen, mail2, loginInScreen, auraInfo, ticTacToe, gamesScreen, appScreen, roundScreen, shopScreen;
     private JScrollPane scrollPane;
     //private JLabel username;
     private ButtonClass buttonClass;
@@ -48,6 +48,7 @@ public class Frame extends JFrame implements ActionListener {
         JPanel ticTacToeDraw = PanelClass.createPanel("src/images/TicTacToeDraw.png");
         JPanel rpsScreen = PanelClass.createPanel("src/images/RockPaperScissorsGame/startScreen.png");
         roundScreen = PanelClass.createPanel("src/images/RockPaperScissorsGame/roundScreen.png");
+        shopScreen = PanelClass.createPanel("src/shopimages/shop.png");
         JPanel rockTie = PanelClass.createPanel("src/images/RockPaperScissorsGame/RockTie.png");
         JPanel rockWin = PanelClass.createPanel("src/images/RockPaperScissorsGame/RockWin.png");
         JPanel rockLose = PanelClass.createPanel("src/images/RockPaperScissorsGame/RockLose.png");
@@ -81,6 +82,7 @@ public class Frame extends JFrame implements ActionListener {
                 System.out.println(e.getMessage());
             }
         }
+
 
 //        ArrayList<BufferedImage> vsAnimation = new ArrayList<>();
 //        for (int i = 0; i < 29; i++) {
@@ -226,6 +228,7 @@ public class Frame extends JFrame implements ActionListener {
         ticTacToeWin.setLayout(null);
         ticTacToeNull.setLayout(null);
         roundScreen.setLayout(null);
+        appScreen.setLayout(null);
         rockTie.setLayout(null);
         rockLose.setLayout(null);
         rockWin.setLayout(null);
@@ -257,6 +260,7 @@ public class Frame extends JFrame implements ActionListener {
         ticTacToe.add(buttonClass.getCheckWinner());
         rpsScreen.add(buttonClass.getSingleBtn());
         rpsScreen.add(buttonClass.getDoubleBtn());
+        shopScreen.add(buttonClass.getShopBtn());
 
 
         mainPanel.add(startScreen, "StartScreen");
@@ -276,6 +280,7 @@ public class Frame extends JFrame implements ActionListener {
         mainPanel.add(ticTacToeWin, "TicTacToeWin");
         mainPanel.add(ticTacToeLose, "TicTacToeLose");
         mainPanel.add(roundScreen,"RoundScreen");
+        mainPanel.add(shopScreen, "shopScreen");
         mainPanel.add(rockTie,"RockTie");
         mainPanel.add(rockWin,"RockWin");
         mainPanel.add(rockLose,"RockLose");

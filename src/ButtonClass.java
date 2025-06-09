@@ -12,7 +12,7 @@ public class ButtonClass {
     private Player player;
     private JButton livestreamApp, nextButton, mailApp, bookBtn,
             editApp, powerOn, shopApp, gamesApp, endDay, accept,
-            decline, next, ticTacToeApp, rpsGame, singleBtn, doubleBtn, shopBtn;
+            decline, next, ticTacToeApp, rpsGame, singleBtn, doubleBtn, backBtn, shopBtn;
     private JButton tic1,tic2, tic3, tic4, tic5, tic6, tic7, tic8, tic9, checkWinner;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
@@ -80,6 +80,7 @@ public class ButtonClass {
         rpsGame = new JButton();
         singleBtn = new JButton();
         doubleBtn = new JButton();
+        backBtn = new JButton();
 
         try {
             pressStartFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/PressStart2P-Regular.ttf"))
@@ -135,8 +136,6 @@ public class ButtonClass {
         setButtonOpaque(decline);
 
         setButtonOpaque(shopBtn);
-
-
 
         setButtonOpaque(ticTacToeApp);
 

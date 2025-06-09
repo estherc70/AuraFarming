@@ -12,7 +12,7 @@ public class ButtonClass {
     private Player player;
     private JButton livestreamApp, nextButton, mailApp, bookBtn,
             editApp, powerOn, shopApp, gamesApp, endDay, accept,
-            decline, next, ticTacToeApp, rpsGame, singleBtn, doubleBtn;
+            decline, next, ticTacToeApp, rpsGame, singleBtn, doubleBtn, shopBtn;
     private JButton tic1,tic2, tic3, tic4, tic5, tic6, tic7, tic8, tic9, checkWinner;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
@@ -61,6 +61,7 @@ public class ButtonClass {
         shopApp = new JButton();
         gamesApp = new JButton();
         endDay = new JButton();
+        shopBtn = new JButton();
         ticTacToeApp = new JButton();
         tic1 = ticTacToe.getButton(0);
         tic2 = ticTacToe.getButton(1);
@@ -95,7 +96,7 @@ public class ButtonClass {
         try {
             BufferedImage acceptImage = ImageIO.read(new File("src/MailImages/mails/accept.png"));
             BufferedImage declineImage = ImageIO.read(new File("src/MailImages/mails/decline.png"));
-            BufferedImage nextImage = ImageIO.read(new File("src/images/next.png"));
+            BufferedImage nextImage = ImageIO.read(new File("src/MailImages/next.png"));
             nextIcon = new ImageIcon(nextImage);
             acceptIcon = new ImageIcon(acceptImage);
             declineIcon = new ImageIcon(declineImage);
@@ -105,10 +106,12 @@ public class ButtonClass {
             System.out.println(ex.getMessage());
         }
 
+        setButtonOpaque(next);
+        next.setBounds(350, 400, 400, 100);
+
         accept.setIcon(acceptIcon);
         decline.setIcon(declineIcon);
         next.setIcon(nextIcon);
-        next.setBounds(350, 400, 400, 100);
 
         //set opaque
         //customizeButton(livestreamApp);
@@ -131,7 +134,9 @@ public class ButtonClass {
 
         setButtonOpaque(decline);
 
-        setButtonOpaque(next);
+        setButtonOpaque(shopBtn);
+
+
 
         setButtonOpaque(ticTacToeApp);
 
@@ -163,6 +168,7 @@ public class ButtonClass {
         customizeButton(tic9);
 
         customizeButton(checkWinner);
+
 //        powerOn.setOpaque(true);
 //        powerOn.setContentAreaFilled(true);
 //        powerOn.setBorderPainted(true);
@@ -205,6 +211,7 @@ public class ButtonClass {
         checkWinner.setBounds(585,273,150,40);
         singleBtn.setBounds(395,265,205,75);
         doubleBtn.setBounds(395,360,205,75);
+        shopBtn.setBounds(400, 400, 80, 30);
 
         //livestreamApp.setVisible(false);
 
@@ -234,6 +241,7 @@ public class ButtonClass {
         btnPanel.add(tic8);
         btnPanel.add(tic9);
         btnPanel.add(checkWinner);
+        btnPanel.add(shopBtn);
 
         addActionListeners();
     }
@@ -427,6 +435,10 @@ public class ButtonClass {
         doubleBtn.addActionListener(e -> {
             vsAnimation();
         });
+
+        shopApp.addActionListener( e -> {
+            cardLayoutPanel.showCard("shopScreen");
+        });
     }
 
 //    public void setContinueButtonListener(ActionListener listener) {
@@ -563,6 +575,10 @@ public class ButtonClass {
 
     public JButton getCheckWinner() {
         return checkWinner;
+    }
+
+    public JButton getShopBtn() {
+        return shopBtn;
     }
 
     public void addPassword() {

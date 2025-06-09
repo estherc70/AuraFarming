@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 
 public class Frame extends JFrame implements ActionListener {
-    private JPanel mainPanel, livestreamScreen, mail2, loginInScreen, auraInfo, ticTacToe, gamesScreen, appScreen, roundScreen, shopScreen;
+    private JPanel mainPanel, livestreamScreen, mail2, loginInScreen, auraInfo, ticTacToe, gamesScreen, appScreen, roundScreen, shopScreen, shop;
     private JScrollPane scrollPane;
     //private JLabel username;
     private ButtonClass buttonClass;
@@ -31,24 +31,26 @@ public class Frame extends JFrame implements ActionListener {
         scrollPane = buttonClass.getScrollPane();
 
 
-        JPanel startScreen = PanelClass.createPanel("src/images/enteruser.png");
-        JPanel tutorialScreen = PanelClass.createPanel("src/images/tutorial.jpeg");
-        JPanel backgroundScreen = PanelClass.createPanel("src/images/background.png");
-        loginInScreen = PanelClass.createPanel("src/images/loginInScreen.png");
-        appScreen = PanelClass.createPanel("src/images/appScreen.png");
-        JPanel editAppScreen = PanelClass.createPanel("src/images/EditAppScreen.png");
-        livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png");
-        JPanel mailScreen = PanelClass.createPanel("src/MailImages/mailhomepage.png");
-        auraInfo = PanelClass.createPanel("src/images/tutorial.jpeg");
-        JPanel gamesScreen = PanelClass.createPanel("src/images/GamesScreen.png");
-        ticTacToe = PanelClass.createPanel("src/images/TicTacToe.png");
-        JPanel ticTacToeWin = PanelClass.createPanel("src/images/TicTacToeWin.png");
-        JPanel ticTacToeLose = PanelClass.createPanel("src/iamges/TicTacToeLose.png");
-        JPanel ticTacToeNull = PanelClass.createPanel("src/images/TicTacToeNull.png");
-        JPanel ticTacToeDraw = PanelClass.createPanel("src/images/TicTacToeDraw.png");
-        JPanel rpsScreen = PanelClass.createPanel("src/images/RockPaperScissorsGame/startScreen.png");
-        roundScreen = PanelClass.createPanel("src/images/RockPaperScissorsGame/roundScreen.png");
-        shopScreen = PanelClass.createPanel("src/shopimages/shop.png");
+        JPanel startScreen = PanelClass.createPanel("src/images/enteruser.png", buttonClass);
+        JPanel tutorialScreen = PanelClass.createPanel("src/images/tutorial.jpeg", buttonClass);
+        JPanel backgroundScreen = PanelClass.createPanel("src/images/background.png", buttonClass);
+        loginInScreen = PanelClass.createPanel("src/images/loginInScreen.png", buttonClass);
+        appScreen = PanelClass.createPanel("src/images/appScreen.png", buttonClass);
+        JPanel editAppScreen = PanelClass.createPanel("src/images/EditAppScreen.png",buttonClass);
+        livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png", buttonClass);
+        JPanel mailScreen = PanelClass.createPanel("src/MailImages/mailhomepage.png", buttonClass);
+        auraInfo = PanelClass.createPanel("src/images/tutorial.jpeg", buttonClass);
+        JPanel gamesScreen = PanelClass.createPanel("src/images/GamesScreen.png", buttonClass);
+        ticTacToe = PanelClass.createPanel("src/images/TicTacToe.png", buttonClass);
+        JPanel ticTacToeScreen = PanelClass.createPanel("src/images/TicTacToe.png", buttonClass);
+        JPanel ticTacToeWin = PanelClass.createPanel("src/images/TicTacToeWin.png", buttonClass);
+        JPanel ticTacToeLose = PanelClass.createPanel("src/iamges/TicTacToeLose.png", buttonClass);
+        JPanel ticTacToeNull = PanelClass.createPanel("src/images/TicTacToeNull.png", buttonClass);
+        JPanel ticTacToeDraw = PanelClass.createPanel("src/images/TicTacToeDraw.png", buttonClass);
+        JPanel rpsScreen = PanelClass.createPanel("src/images/RockPaperScissorsGame/startScreen.png", buttonClass);
+        roundScreen = PanelClass.createPanel("src/images/RockPaperScissorsGame/roundScreen.png", buttonClass);
+        shopScreen = PanelClass.createPanel("src/shopimages/shop.png", buttonClass);
+        shop = PanelClass.createPanel("src/shopimages/shop2.png", buttonClass);
 
 
 //        try {
@@ -226,6 +228,7 @@ public class Frame extends JFrame implements ActionListener {
         ticTacToeNull.setLayout(null);
         roundScreen.setLayout(null);
         appScreen.setLayout(null);
+        shop.setLayout(null);
 
         //add buttons
         startScreen.add(buttonClass.getUsernameText());
@@ -254,7 +257,8 @@ public class Frame extends JFrame implements ActionListener {
         ticTacToe.add(buttonClass.getCheckWinner());
         rpsScreen.add(buttonClass.getSingleBtn());
         rpsScreen.add(buttonClass.getDoubleBtn());
-        shopScreen.add(buttonClass.getShopBtn());
+        shopScreen.add(buttonClass.getShop());
+        auraInfo.add(buttonClass.getNext());
 
         mainPanel.add(startScreen, "StartScreen");
         mainPanel.add(tutorialScreen, "TutorialScreen");
@@ -274,6 +278,7 @@ public class Frame extends JFrame implements ActionListener {
         mainPanel.add(ticTacToeLose, "TicTacToeLose");
         mainPanel.add(roundScreen,"RoundScreen");
         mainPanel.add(shopScreen, "shopScreen");
+        mainPanel.add(shop, "shop");
 
         livestreamScreen.add(scrollPane);
 
@@ -379,7 +384,7 @@ public class Frame extends JFrame implements ActionListener {
 
         // Only add if not already added
         if (!((CardLayout) mainPanel.getLayout()).toString().contains(panelName)) {
-            JPanel mailPanel = PanelClass.createPanel("src/MailImages/mails/" + num + ".png");
+            JPanel mailPanel = PanelClass.createPanel("src/MailImages/mails/" + num + ".png", buttonClass);
             mailPanel.setLayout(null);
             mainPanel.add(mailPanel, panelName);
             buttonClass.getAccept().setBounds(400, 590, 150, 40);

@@ -12,7 +12,7 @@ public class ButtonClass {
     private Player player;
     private JButton livestreamApp, nextButton, mailApp, bookBtn,
             editApp, powerOn, shopApp, gamesApp, endDay, accept,
-            decline, next, ticTacToeApp, rpsGame, singleBtn, doubleBtn, shopBtn;
+            decline, next, ticTacToeApp, rpsGame, singleBtn, doubleBtn, shop;
     private JButton tic1,tic2, tic3, tic4, tic5, tic6, tic7, tic8, tic9, checkWinner;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
@@ -61,7 +61,7 @@ public class ButtonClass {
         shopApp = new JButton();
         gamesApp = new JButton();
         endDay = new JButton();
-        shopBtn = new JButton();
+        shop = new JButton();
         ticTacToeApp = new JButton();
         tic1 = ticTacToe.getButton(0);
         tic2 = ticTacToe.getButton(1);
@@ -134,7 +134,7 @@ public class ButtonClass {
 
         setButtonOpaque(decline);
 
-        setButtonOpaque(shopBtn);
+        setButtonOpaque(shop);
 
 
 
@@ -211,7 +211,7 @@ public class ButtonClass {
         checkWinner.setBounds(585,273,150,40);
         singleBtn.setBounds(395,265,205,75);
         doubleBtn.setBounds(395,360,205,75);
-        shopBtn.setBounds(400, 400, 80, 30);
+        //shop.setBounds(400, 600, 200, 70);
 
         //livestreamApp.setVisible(false);
 
@@ -241,7 +241,7 @@ public class ButtonClass {
         btnPanel.add(tic8);
         btnPanel.add(tic9);
         btnPanel.add(checkWinner);
-        btnPanel.add(shopBtn);
+        btnPanel.add(shop);
 
         addActionListeners();
     }
@@ -364,7 +364,6 @@ public class ButtonClass {
             label.setFont(pressStartFont);
             label.setBounds(280, 150, 1000, 400);
             cardLayoutPanel.getAuraInfo().add(label);
-            cardLayoutPanel.getAuraInfo().add(next);
             cardLayoutPanel.getAuraInfo().revalidate();
             cardLayoutPanel.getAuraInfo().repaint();
             cardLayoutPanel.showCard("auraInfo");
@@ -377,7 +376,6 @@ public class ButtonClass {
             label.setFont(pressStartFont);
             label.setBounds(280, 150, 1000, 400);
             cardLayoutPanel.getAuraInfo().add(label);
-            cardLayoutPanel.getAuraInfo().add(next);
             cardLayoutPanel.getAuraInfo().revalidate();
             cardLayoutPanel.getAuraInfo().repaint();
             cardLayoutPanel.showCard("auraInfo");
@@ -438,6 +436,24 @@ public class ButtonClass {
 
         shopApp.addActionListener( e -> {
             cardLayoutPanel.showCard("shopScreen");
+        });
+
+        shop.addActionListener(e -> {
+            ArrayList<BufferedImage> shopImages = new ArrayList<>();
+            for (int i = 2; i < 9; i++) {
+                try {
+                    String file = "src/shopimages/" + i + ".png";
+                    BufferedImage shopImg = ImageIO.read(new File(file));
+                    shopImages.add(shopImg);
+                }
+                catch (IOException exception) {
+                    System.out.println(exception.getMessage());
+                }
+            }
+            JPanelAnimation shopAnimation = new JPanelAnimation(cardLayoutPanel, "shop", shopImages, 50, 1);
+            cardLayoutPanel.getMainPanel().add(shopAnimation, "shopAnimation");
+
+            cardLayoutPanel.showCard("shopAnimation");
         });
     }
 
@@ -577,8 +593,12 @@ public class ButtonClass {
         return checkWinner;
     }
 
-    public JButton getShopBtn() {
-        return shopBtn;
+    public JButton getShop() {
+        return shop;
+    }
+
+    public JButton getNext() {
+        return next;
     }
 
     public void addPassword() {

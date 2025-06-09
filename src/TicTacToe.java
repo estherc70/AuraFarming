@@ -9,6 +9,7 @@ public class TicTacToe extends JFrame {
     private ImageIcon xIcon, yIcon;
     private boolean gameEnd;
     private String winner;
+//    private ButtonClass buttonClass;
 
     public TicTacToe() {
         buttons = new JButton[9];
@@ -16,10 +17,11 @@ public class TicTacToe extends JFrame {
         layout = new String[9];
         gameEnd = false;
         winner = "";
+//        this.buttonClass = new ButtonClass();
 
-        JPanel mainPanel = PanelClass.createPanel("src/images/TicTacToe.png");
-        mainPanel.setLayout(null);
-        setContentPane(mainPanel);
+//        JPanel mainPanel = PanelClass.createPanel("src/images/TicTacToe.png", buttonClass);
+//        mainPanel.setLayout(null);
+//        setContentPane(mainPanel);
 
         xIcon = new ImageIcon("src/images/tictactoeX.PNG");
         yIcon = new ImageIcon("src/images/tictactoeO.PNG");
@@ -80,15 +82,15 @@ public class TicTacToe extends JFrame {
 //        buttons[7].setBounds(166,332,166,166);
 //        buttons[8].setBounds(332,332,166,166);
 
-        mainPanel.add(buttons[0]);
-        mainPanel.add(buttons[1]);
-        mainPanel.add(buttons[2]);
-        mainPanel.add(buttons[3]);
-        mainPanel.add(buttons[4]);
-        mainPanel.add(buttons[5]);
-        mainPanel.add(buttons[6]);
-        mainPanel.add(buttons[7]);
-        mainPanel.add(buttons[8]);
+//        mainPanel.add(buttons[0]);
+//        mainPanel.add(buttons[1]);
+//        mainPanel.add(buttons[2]);
+//        mainPanel.add(buttons[3]);
+//        mainPanel.add(buttons[4]);
+//        mainPanel.add(buttons[5]);
+//        mainPanel.add(buttons[6]);
+//        mainPanel.add(buttons[7]);
+//        mainPanel.add(buttons[8]);
 
         addActionListeners();
 

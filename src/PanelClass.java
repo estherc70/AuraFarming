@@ -18,7 +18,6 @@ public class PanelClass extends JPanel {
         ImageIcon backgroundIcon = new ImageIcon(fileName);
         Image backgroundImage = backgroundIcon.getImage();
         if (fileName.equals("src/shopimages/shop.png")) {
-            System.out.println("shop");
             buttonClass.getShop().setSize(200, 70);
             buttonClass.getShop().setLocation(400, 400);
         }

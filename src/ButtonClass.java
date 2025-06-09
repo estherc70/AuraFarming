@@ -12,7 +12,7 @@ public class ButtonClass {
     private Player player;
     private JButton livestreamApp, nextButton, mailApp, bookBtn,
             editApp, powerOn, shopApp, gamesApp, endDay, accept,
-            decline, next, ticTacToeApp, rpsGame, singleBtn, doubleBtn, backBtn, shop;
+            decline, next, ticTacToeApp, rpsGame, singleBtn, doubleBtn, shop, backBtnLS, backBtnRPS, backBtnTTT, backBtnEdit;
     private JButton tic1,tic2, tic3, tic4, tic5, tic6, tic7, tic8, tic9, checkWinner;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
@@ -81,7 +81,10 @@ public class ButtonClass {
         rpsGame = new JButton();
         singleBtn = new JButton();
         doubleBtn = new JButton();
-        backBtn = new JButton();
+        backBtnLS = new JButton();
+        backBtnEdit = new JButton();
+        backBtnRPS = new JButton();
+        backBtnTTT = new JButton();
 
         try {
             pressStartFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/PressStart2P-Regular.ttf"))
@@ -144,6 +147,11 @@ public class ButtonClass {
         setButtonOpaque(singleBtn);
 
         setButtonOpaque(doubleBtn);
+
+        setButtonOpaque(backBtnEdit);
+        setButtonOpaque(backBtnLS);
+        setButtonOpaque(backBtnRPS);
+        setButtonOpaque(backBtnTTT);
 
         //testing
         customizeButton(powerOn);
@@ -210,7 +218,10 @@ public class ButtonClass {
         checkWinner.setBounds(585,273,150,40);
         singleBtn.setBounds(395,265,205,75);
         doubleBtn.setBounds(395,360,205,75);
-
+        backBtnEdit.setBounds(200,85,17,17);
+        backBtnTTT.setBounds(200,85,17,17);
+        backBtnRPS.setBounds(200,85,17,17);
+        backBtnLS.setBounds(200,85,17,17);
 
         //livestreamApp.setVisible(false);
 
@@ -240,6 +251,11 @@ public class ButtonClass {
         btnPanel.add(tic8);
         btnPanel.add(tic9);
         btnPanel.add(checkWinner);
+        btnPanel.add(backBtnEdit);
+        btnPanel.add(backBtnLS);
+        btnPanel.add(backBtnEdit);
+        btnPanel.add(backBtnRPS);
+        btnPanel.add(backBtnTTT);
 
         addActionListeners();
     }
@@ -463,6 +479,22 @@ public class ButtonClass {
 
             cardLayoutPanel.showCard("shopAnimation");
         });
+
+        backBtnLS.addActionListener(e -> {
+            cardLayoutPanel.showCard("AppScreen");
+        });
+
+        backBtnEdit.addActionListener(e -> {
+            cardLayoutPanel.showCard("AppScreen");
+        });
+
+        backBtnRPS.addActionListener(e -> {
+            cardLayoutPanel.showCard("AppScreen");
+        });
+
+        backBtnTTT.addActionListener(e -> {
+            cardLayoutPanel.showCard("AppScreen");
+        });
     }
 
 //    public void setContinueButtonListener(ActionListener listener) {
@@ -609,7 +641,21 @@ public class ButtonClass {
         return next;
     }
 
+    public JButton getBackBtnLS() {
+        return backBtnLS;
+    }
 
+    public JButton getBackBtnRPS() {
+        return backBtnRPS;
+    }
+
+    public JButton getBackBtnTTT() {
+        return backBtnTTT;
+    }
+
+    public JButton getBackBtnEdit() {
+        return backBtnEdit;
+    }
 
     public void addPassword() {
         JLabel passwordLabel = new JLabel(String.valueOf(player.getPassword()));

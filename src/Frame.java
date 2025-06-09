@@ -42,11 +42,6 @@ public class Frame extends JFrame implements ActionListener {
         auraInfo = PanelClass.createPanel("src/images/tutorial.jpeg", buttonClass);
         JPanel gamesScreen = PanelClass.createPanel("src/images/GamesScreen.png", buttonClass);
         ticTacToe = PanelClass.createPanel("src/images/TicTacToe.png", buttonClass);
-        JPanel ticTacToeScreen = PanelClass.createPanel("src/images/TicTacToe.png", buttonClass);
-        JPanel ticTacToeWin = PanelClass.createPanel("src/images/TicTacToeWin.png", buttonClass);
-        JPanel ticTacToeLose = PanelClass.createPanel("src/iamges/TicTacToeLose.png", buttonClass);
-        JPanel ticTacToeNull = PanelClass.createPanel("src/images/TicTacToeNull.png", buttonClass);
-        JPanel ticTacToeDraw = PanelClass.createPanel("src/images/TicTacToeDraw.png", buttonClass);
         JPanel rpsScreen = PanelClass.createPanel("src/images/RockPaperScissorsGame/startScreen.png", buttonClass);
         roundScreen = PanelClass.createPanel("src/images/RockPaperScissorsGame/roundScreen.png", buttonClass);
         shopScreen = PanelClass.createPanel("src/shopimages/shop.png", buttonClass);
@@ -224,10 +219,6 @@ public class Frame extends JFrame implements ActionListener {
         gamesScreen.setLayout(null);
         rpsScreen.setLayout(null);
         ticTacToe.setLayout(null);
-        ticTacToeLose.setLayout(null);
-        ticTacToeDraw.setLayout(null);
-        ticTacToeWin.setLayout(null);
-        ticTacToeNull.setLayout(null);
         roundScreen.setLayout(null);
         appScreen.setLayout(null);
         rockTie.setLayout(null);
@@ -246,9 +237,12 @@ public class Frame extends JFrame implements ActionListener {
         appScreen.add(buttonClass.getGamesApp());
         appScreen.add(buttonClass.getShopApp());
         appScreen.add(buttonClass.getEndDay());
+        editAppScreen.add(buttonClass.getBackBtnEdit());
         gamesScreen.add(buttonClass.getTicTacToeApp());
+        livestreamScreen.add(buttonClass.getBackBtnLS());
         livestreamScreen.add(buttonClass.getScrollPane(), BorderLayout.CENTER);
         gamesScreen.add(buttonClass.getRpsGame());
+        ticTacToe.add(buttonClass.getBackBtnTTT());
         ticTacToe.add(buttonClass.getTic1());
         ticTacToe.add(buttonClass.getTic2());
         ticTacToe.add(buttonClass.getTic3());
@@ -259,6 +253,7 @@ public class Frame extends JFrame implements ActionListener {
         ticTacToe.add(buttonClass.getTic8());
         ticTacToe.add(buttonClass.getTic9());
         ticTacToe.add(buttonClass.getCheckWinner());
+        rpsScreen.add(buttonClass.getBackBtnRPS());
         rpsScreen.add(buttonClass.getSingleBtn());
         rpsScreen.add(buttonClass.getDoubleBtn());
         shopScreen.add(buttonClass.getShop());
@@ -276,10 +271,6 @@ public class Frame extends JFrame implements ActionListener {
         mainPanel.add(gamesScreen, "GamesScreen");
         mainPanel.add(ticTacToe, "TicTacToe");
         mainPanel.add(rpsScreen,"RockPaperScissors");
-        mainPanel.add(ticTacToeDraw, "TicTacToeDraw");
-        mainPanel.add(ticTacToeNull, "TicTacToeNull");
-        mainPanel.add(ticTacToeWin, "TicTacToeWin");
-        mainPanel.add(ticTacToeLose, "TicTacToeLose");
         mainPanel.add(roundScreen,"RoundScreen");
         mainPanel.add(shopScreen, "shopScreen");
         mainPanel.add(rockTie,"RockTie");

@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -454,14 +455,7 @@ public class ButtonClass {
 
         singleBtn.addActionListener(e -> {
             pressedKeys = new boolean[128];
-            singleBtn.addKeyListener(new KeyAdapter() {
-                @Override
-                public void keyTyped(KeyEvent e) {
-                    int key = e.getKeyCode();
-                    pressedKeys[key] = true;
-                }
-            });
-            vsAnimation();
+            vsAnimation(); // triggers the animation
         });
 
         doubleBtn.addActionListener(e -> {
@@ -716,7 +710,6 @@ public class ButtonClass {
         Color color = Color.decode("#5d31b8");
         roundLabel.setForeground(color);
         roundLabel.setBounds(335, 310, 500, 50);
-        //usernameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         JLabel usernameLabel = new JLabel(usernameText.getText());
         usernameLabel.setFont(pressStartFont.deriveFont(45f));
@@ -724,35 +717,64 @@ public class ButtonClass {
         usernameLabel.setForeground(color2);
         usernameLabel.setBounds(610, 600, 200, 50);
 
-        JPanel roundScreen = cardLayoutPanel.getRoundScreen();
-        roundScreen.setLayout(null);
-        roundScreen.add(roundLabel);
-        roundScreen.add(usernameLabel);
-        roundScreen.revalidate();
-        roundScreen.repaint();
-
         SoundUtils.playSound("src/Round 1 Fight! (Mortal Kombat Meme) - Sound Effect for editing.wav");
 
-        if (pressedKeys[65]) {
-            //cardLayoutPanel.showCard();
-            if (aiPlayer() == 1) {
-                cardLayoutPanel.showCard("RockTie");
-            } else if (aiPlayer() == 2) {
-                cardLayoutPanel.showCard("RockWin");
-            } else {
-                cardLayoutPanel.showCard("RockLose");
-            }
-        } else if (pressedKeys[83]) {
+        animationPanel.setOnComplete(() -> {
+            JPanel roundScreen = cardLayoutPanel.getRoundScreen();
 
-        } else if (pressedKeys[68]) {
+            roundScreen.setLayout(null);
+            roundScreen.add(roundLabel);
+            roundScreen.add(usernameLabel);
+            roundScreen.revalidate();
+            roundScreen.repaint();
 
-        } else {
-            System.out.println("Invalid");
+            roundScreen.requestFocusInWindow();
+        });
+    }
+
+    private void switchToResult(String move) {
+        int ai = aiPlayer();
+        String result;
+        if (ai == 1) result = move + "Tie";
+        else if (ai == 2) result = move + "Win";
+        else result = move + "Lose";
+
+        cardLayoutPanel.showCard(result);
+
+        // Wait 3 seconds, then switch back and request focus
+        new javax.swing.Timer(3000, e -> {
+            cardLayoutPanel.showCard("RoundScreen");
+            cardLayoutPanel.getRoundScreen().requestFocusInWindow();
+            ((javax.swing.Timer) e.getSource()).stop();
+        }).start();
+    }
+
+    void setupRoundScreenKeyListener(JPanel roundScreen) {
+        roundScreen.setFocusable(true);
+        roundScreen.requestFocusInWindow();
+
+        for (KeyListener kl : roundScreen.getKeyListeners()) {
+            roundScreen.removeKeyListener(kl);
         }
+
+        roundScreen.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                int key = e.getKeyCode();
+                if (key == KeyEvent.VK_A) {
+                    switchToResult("Rock");
+                } else if (key == KeyEvent.VK_S) {
+                    switchToResult("Paper");
+                } else if (key == KeyEvent.VK_D) {
+                    switchToResult("Scissors");
+                } else {
+                    System.out.println("Invalid key");
+                }
+            }
+        });
     }
 
     private int aiPlayer() {
-        int num = (int) (Math.random() * 3-1+1) + 1;
-        return num;
+        return (int) (Math.random() * 3) + 1;
     }
 }

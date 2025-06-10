@@ -13,8 +13,9 @@ public class JPanelAnimation extends JPanel implements ActionListener {
     private int currentFrame;
     private int loopCount;
     private int maxLoops;
+    private Runnable onComplete;
 
-    public JPanelAnimation(Frame cardLayoutPanel, String nextCard , ArrayList<BufferedImage> frames, int delay, int maxLoops) { //limited loops
+    public JPanelAnimation(Frame cardLayoutPanel, String nextCard , ArrayList<BufferedImage> frames, int delay, int maxLoops) {
         this.cardLayoutPanel = cardLayoutPanel;
         this.nextCard = nextCard;
         this.frames = frames;
@@ -23,6 +24,10 @@ public class JPanelAnimation extends JPanel implements ActionListener {
         this.maxLoops = maxLoops;
         timer = new Timer(delay, this);
         timer.start();
+    }
+
+    public void setOnComplete(Runnable onComplete) {
+        this.onComplete = onComplete;
     }
 
     @Override
@@ -43,6 +48,7 @@ public class JPanelAnimation extends JPanel implements ActionListener {
             if (loopCount >= maxLoops) {
                 timer.stop();
                 cardLayoutPanel.showCard(nextCard);
+                if (onComplete != null) onComplete.run();
             }
         }
         repaint();

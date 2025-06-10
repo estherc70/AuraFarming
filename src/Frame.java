@@ -51,26 +51,18 @@ public class Frame extends JFrame implements ActionListener {
         JPanel rockWin = PanelClass.createPanel("src/images/RockPaperScissorsGame/RockWin.png", buttonClass);
         JPanel rockLose = PanelClass.createPanel("src/images/RockPaperScissorsGame/RockLose.png", buttonClass);
         endDay = PanelClass.createPanel("src/images/endDayPage.png", buttonClass);
-
-//        try {
-//            Font pressStartFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/fonts/PressStart2P-Regular.ttf"))
-//                    .deriveFont(Font.PLAIN, 24f);
-//            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-//            ge.registerFont(pressStartFont);
-//        } catch (FontFormatException | IOException e1) {
-//            e1.printStackTrace();
-//        }
-
-//        username.setBounds(100,100,getWidth(),getHeight());
-//        loginInScreen.add(username);
+        JPanel paperTie = PanelClass.createPanel("src/images/RockPaperScissorsGame/Paper/PaperTie.png", buttonClass);
+        JPanel paperWin = PanelClass.createPanel("src/images/RockPaperScissorsGame/Paper/PaperWin.png", buttonClass);
+        JPanel paperLose = PanelClass.createPanel("src/images/RockPaperScissorsGame/Paper/PaperLose.png", buttonClass);
+        JPanel scissorsTie = PanelClass.createPanel("src/images/RockPaperScissorsGame/Scissors/ScissorsTie.png", buttonClass);
+        JPanel scissorsWin = PanelClass.createPanel("src/images/RockPaperScissorsGame/Scissors/ScissorsWin.png", buttonClass);
+        JPanel scissorsLose = PanelClass.createPanel("src/images/RockPaperScissorsGame/Scissors/ScissorsLose.png", buttonClass);
 
         ImageIcon tutorialImageIcon = new ImageIcon("src/DesktopPetImages/book.png");
         JLabel tutorialLabel = new JLabel(tutorialImageIcon);
         tutorialLabel.setBounds(0, 0, tutorialImageIcon.getIconWidth(), tutorialImageIcon.getIconHeight());
         tutorialScreen.add(tutorialLabel);
 
-
-        //loading screen animation
         ArrayList<BufferedImage> startingImages = new ArrayList<>();
         for (int i = 1; i <= 5; i++) {
             String fileName = "src/images/starting" + i + ".png";
@@ -80,17 +72,6 @@ public class Frame extends JFrame implements ActionListener {
                 System.out.println(e.getMessage());
             }
         }
-
-
-//        ArrayList<BufferedImage> vsAnimation = new ArrayList<>();
-//        for (int i = 0; i < 29; i++) {
-//            String fileName = "src/images/RockPaperScissorsGame/vsAnimation/frame_" + i + ".jpg";
-//            try {
-//                vsAnimation.add(ImageIO.read(new File(fileName)));
-//            } catch (IOException e) {
-//                System.out.println(e.getMessage());
-//            }
-//        }
 
         ArrayList<BufferedImage> animationFrames = new ArrayList<>();
         ArrayList<BufferedImage> animationFrames2 = new ArrayList<>();
@@ -108,15 +89,8 @@ public class Frame extends JFrame implements ActionListener {
         mainPanel.add(startPanel, "AnimatedStartScreen");
         showCard("AnimatedStartScreen");
 
-//        JPanelAnimation vsPanel = new JPanelAnimation(this, "StartScreen" ,vsAnimation, 300, 1);
-//        mainPanel.add(vsPanel);
-
         ImageAnimation animation = new ImageAnimation(animationFrames, 300, 100, 200);
         tutorialScreen.add(animation.getAnimationPanel());
-
-//        ArrayList<BufferedImage> animationFrames5 = new ArrayList<>();
-//        BufferedImage img2 = ImageIO.read(new File("src/DesktopPetImages/Ivan/ivan14.png"));
-//        animationFrames5.add(img2);
 
         ArrayList<BufferedImage> animationFrames5 = new ArrayList<>();
         initailizeIvanImages(animationFrames5,15,22,"Ivan2");
@@ -148,12 +122,6 @@ public class Frame extends JFrame implements ActionListener {
             }
         }
 
-        /*String[] paths = {
-                "src/DesktopPetImages/Speech/speech0.png",
-                "src/DesktopPetImages/Speech/speech1.png",
-                "src/DesktopPetImages/Speech/speech2.png",
-                "src/DesktopPetImages/Speech/speech3.png"
-        };*/
         switcher = new SpacebarImageSwitcher(speechImages);
         switcher.setBounds(360, 200, 200, 100);
         tutorialScreen.add(switcher);
@@ -205,10 +173,6 @@ public class Frame extends JFrame implements ActionListener {
             System.out.println("Book button clicked. Dialogue resumed.");
         });
 
-//        JPanelAnimation mailScreenAnimation = new JPanelAnimation(this, "MailScreen", mailImages, 100, 6);
-//        mainPanel.add(mailScreenAnimation, "MailScreenAnimation");
-
-        //manually control button positions
         startScreen.setLayout(null);
         tutorialScreen.setLayout(null);
         backgroundScreen.setLayout(null);
@@ -226,9 +190,14 @@ public class Frame extends JFrame implements ActionListener {
         rockTie.setLayout(null);
         rockLose.setLayout(null);
         rockWin.setLayout(null);
+        paperTie.setLayout(null);
+        paperLose.setLayout(null);
+        paperWin.setLayout(null);
+        scissorsTie.setLayout(null);
+        scissorsLose.setLayout(null);
+        scissorsWin.setLayout(null);
         endDay.setLayout(null);
 
-        //add buttons
         startScreen.add(buttonClass.getUsernameText());
         tutorialScreen.add(buttonClass.getNextButton());
         tutorialScreen.add(buttonClass.getBookBtn());
@@ -275,10 +244,17 @@ public class Frame extends JFrame implements ActionListener {
         mainPanel.add(ticTacToe, "TicTacToe");
         mainPanel.add(rpsScreen,"RockPaperScissors");
         mainPanel.add(roundScreen,"RoundScreen");
+        buttonClass.setupRoundScreenKeyListener(roundScreen);
         mainPanel.add(shopScreen, "shopScreen");
         mainPanel.add(rockTie,"RockTie");
         mainPanel.add(rockWin,"RockWin");
         mainPanel.add(rockLose,"RockLose");
+        mainPanel.add(paperTie,"PaperTie");
+        mainPanel.add(paperWin,"PaperWin");
+        mainPanel.add(paperLose,"PaperLose");
+        mainPanel.add(scissorsTie,"ScissorsTie");
+        mainPanel.add(scissorsWin,"ScissorsWin");
+        mainPanel.add(scissorsLose,"ScissorsLose");
         mainPanel.add(shop, "shop");
         mainPanel.add(endDay, "EndDayScreen");
 
@@ -302,16 +278,6 @@ public class Frame extends JFrame implements ActionListener {
             button.setBounds(33, y, 938, 93);
             y += 82;
         }
-
-//        System.out.println("Username: " + player.getUsername());
-//        String inputUsername = buttonClass.getUsernameText().getText();
-//        player.setUsername(inputUsername);
-//        JLabel username = new JLabel(player.getUsername());
-//        username.setFont(new Font("Arial", Font.BOLD, 24));
-//        username.setForeground(Color.WHITE);
-//        username.setBounds(100, 100, 300, 50);
-//        loginInScreen.setLayout(null);
-//        loginInScreen.add(username);
 
         Container pane = getContentPane();
         pane.add(mainPanel, BorderLayout.CENTER);
@@ -358,8 +324,6 @@ public class Frame extends JFrame implements ActionListener {
         return loginInScreen;
     }
 
-
-
     private void initailizeIvanImages (ArrayList<BufferedImage> frames, int start, int end, String src) {
         for (int i = start; i < end; i++) {
             try {
@@ -374,9 +338,6 @@ public class Frame extends JFrame implements ActionListener {
     public JPanel getLivestreamScreen() {
         return livestreamScreen;
     }
-
-
-
 
     @Override
     public void actionPerformed(ActionEvent e) {

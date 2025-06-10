@@ -10,10 +10,10 @@ public class Livestream {
     };
 
     public Livestream(Player player) {
-        loop = true;
-        this.player = player;
-        timer = new javax.swing.Timer(5000, e -> incrementByRandomNumber());
-        timer.start();
+//        loop = true;
+//        this.player = player;
+//        timer = new javax.swing.Timer(5000, e -> incrementByRandomNumber());
+//        timer.start();
     }
 
     public String getRandomGood() {

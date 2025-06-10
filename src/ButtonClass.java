@@ -312,10 +312,10 @@ public class ButtonClass {
         });
 
         livestreamApp.addActionListener(e -> {
-            livestream.setLoop(true);
+//            livestream.setLoop(true);
             new Thread(() -> {
                 while (!livestreamExited) {
-                    livestream.incrementByRandomNumber();
+//                    livestream.incrementByRandomNumber();
                     String textToAppend;
                     int goodOrBad = (int) (Math.random() * 2);
                     if (goodOrBad == 1) {
@@ -329,11 +329,15 @@ public class ButtonClass {
                         livestreamChat.setCaretPosition(livestreamChat.getDocument().getLength()); // scroll to bottom
                         cardLayoutPanel.getLivestreamScreen().revalidate();
                         cardLayoutPanel.getLivestreamScreen().repaint();
+                        int randomIncrement = (int) (Math.random() * 1001);
+                        player.addFollowers(randomIncrement);
+                        System.out.println("Current followers: " + player.getFollowers());
                     });
                     try {
                         Thread.sleep(600);
                     } catch (InterruptedException f) {
                         f.printStackTrace();
+                        break;
                     }
                 }
             }).start();
@@ -487,7 +491,9 @@ public class ButtonClass {
         });
 
         backBtnLS.addActionListener(e -> {
-            livestream.setLoop(false);
+//            livestream.setLoop(false);
+//            livestream = null;
+
             cardLayoutPanel.showCard("AppScreen");
         });
 
@@ -509,6 +515,10 @@ public class ButtonClass {
             cardLayoutPanel.getTicTacToe().revalidate();
             cardLayoutPanel.getTicTacToe().repaint();
             cardLayoutPanel.showCard("AppScreen");
+        });
+
+        endDay.addActionListener(e -> {
+            cardLayoutPanel.showCard("EndDayScreen");
         });
     }
 

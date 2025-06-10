@@ -10,7 +10,8 @@ import java.util.ArrayList;
 
 
 public class Frame extends JFrame implements ActionListener {
-    private JPanel mainPanel, livestreamScreen, mail2, loginInScreen, auraInfo, ticTacToe, gamesScreen, appScreen, roundScreen, shopScreen, shop;
+    private JPanel mainPanel, livestreamScreen, mail2, loginInScreen, auraInfo,
+            ticTacToe, gamesScreen, appScreen, roundScreen, shopScreen, shop, endDay;
     private JScrollPane scrollPane;
     //private JLabel username;
     private ButtonClass buttonClass;
@@ -49,6 +50,7 @@ public class Frame extends JFrame implements ActionListener {
         JPanel rockTie = PanelClass.createPanel("src/images/RockPaperScissorsGame/RockTie.png", buttonClass);
         JPanel rockWin = PanelClass.createPanel("src/images/RockPaperScissorsGame/RockWin.png", buttonClass);
         JPanel rockLose = PanelClass.createPanel("src/images/RockPaperScissorsGame/RockLose.png", buttonClass);
+        endDay = PanelClass.createPanel("src/images/endDayPage.png", buttonClass);
 
 //        try {
 //            Font pressStartFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/fonts/PressStart2P-Regular.ttf"))
@@ -224,6 +226,7 @@ public class Frame extends JFrame implements ActionListener {
         rockTie.setLayout(null);
         rockLose.setLayout(null);
         rockWin.setLayout(null);
+        endDay.setLayout(null);
 
         //add buttons
         startScreen.add(buttonClass.getUsernameText());
@@ -276,8 +279,8 @@ public class Frame extends JFrame implements ActionListener {
         mainPanel.add(rockTie,"RockTie");
         mainPanel.add(rockWin,"RockWin");
         mainPanel.add(rockLose,"RockLose");
-
         mainPanel.add(shop, "shop");
+        mainPanel.add(endDay, "EndDayScreen");
 
         livestreamScreen.add(scrollPane);
 

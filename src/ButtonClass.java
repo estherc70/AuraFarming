@@ -10,8 +10,11 @@ import java.util.ArrayList;
 public class ButtonClass {
     private Player player;
     private JButton livestreamApp, nextButton, mailApp, bookBtn,
-            editApp, powerOn, shopApp, gamesApp, endDay, accept,
-            decline, next, ticTacToeApp, rpsGame, singleBtn, doubleBtn, shop, backBtnLS, backBtnRPS, backBtnTTT, backBtnEdit;
+            editApp, powerOn, shopApp, gamesApp,
+            endDay, accept, decline, next,
+            ticTacToeApp, rpsGame, singleBtn, doubleBtn,
+            shop, backBtnLS, backBtnRPS, backBtnTTT,
+            backBtnEdit, returnBtn;
     private JButton tic1,tic2, tic3, tic4, tic5, tic6, tic7, tic8, tic9, checkWinner;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
@@ -87,8 +90,9 @@ public class ButtonClass {
         backBtnEdit = new JButton();
         backBtnRPS = new JButton();
         backBtnTTT = new JButton();
+        returnBtn = new JButton();
         round = 1;
-        wins = 0;
+        wins = 1;
         lose = 0;
 
         try {
@@ -160,6 +164,8 @@ public class ButtonClass {
 
         customizeButton(powerOn);
 
+        customizeButton(returnBtn);
+
         customizeButton(tic1);
 
         customizeButton(tic2);
@@ -222,6 +228,7 @@ public class ButtonClass {
         backBtnTTT.setBounds(200,85,17,17);
         backBtnRPS.setBounds(200,85,17,17);
         backBtnLS.setBounds(200,85,17,17);
+        returnBtn.setBounds(450,450,100,50);
 
         //livestreamApp.setVisible(false);
 
@@ -256,6 +263,7 @@ public class ButtonClass {
         btnPanel.add(backBtnEdit);
         btnPanel.add(backBtnRPS);
         btnPanel.add(backBtnTTT);
+        btnPanel.add(returnBtn);
 
         addActionListeners();
     }
@@ -787,22 +795,50 @@ public class ButtonClass {
                 this.mainPanel.revalidate();
                 this.mainPanel.repaint();
 
-                JPanel endScreen = new JPanel();
-                endScreen.setLayout(null);
+                cardLayoutPanel.showCard("RPSWinPage");
+                JPanel rpsWinPage = cardLayoutPanel.getRpsWinPage();
+                rpsWinPage.setLayout(null);
+                JButton returnBtn = new JButton("Return");
+                returnBtn.setBounds(650, 407, 125, 45);
+                returnBtn.setFont(pressStartFont.deriveFont(20f));
+                setButtonOpaque(returnBtn);
 
-                JLabel endLabel = new JLabel("You Win!");
-                endLabel.setFont(pressStartFont.deriveFont(45f));
-                endLabel.setForeground(Color.decode("#5d31b8"));
-                endLabel.setBounds(300, 300, 400, 50);
+                int num = player.addAura();
 
-                endScreen.add(endLabel);
+                JLabel auraGained = new JLabel(String.valueOf(num));
+                auraGained.setFont(pressStartFont.deriveFont(18f));
+                auraGained.setForeground(Color.decode("#ffcc00"));
+                auraGained.setBounds(510, 245, 100, 50);
 
-                this.mainPanel.add(endScreen, "EndScreen");
-                this.cardLayoutPanel.showCard("EndScreen");
+                int num2 = player.getFollowers();
 
-                endScreen.requestFocusInWindow();
+                JLabel totalFollowers = new JLabel(String.valueOf(num2));
+                totalFollowers.setFont(pressStartFont.deriveFont(18f));
+                totalFollowers.setForeground(Color.decode("#ffcc00"));
+                totalFollowers.setBounds(560, 275, 100, 50);
+
+                int num3 = player.getAura();
+
+                JLabel totalAura = new JLabel(String.valueOf(num3));
+                totalAura.setFont(pressStartFont.deriveFont(18f));
+                totalAura.setForeground(Color.decode("#ffcc00"));
+                totalAura.setBounds(500, 297, 100, 50);
+
+                round = 1;
+                wins = 0;
+                lose = 0;
+
+                returnBtn.addActionListener(e -> {
+                    cardLayoutPanel.showCard("AppScreen");
+                });
+
+                rpsWinPage.add(returnBtn);
+                rpsWinPage.add(auraGained);
+                rpsWinPage.add(totalFollowers);
+                rpsWinPage.add(totalAura);
+                rpsWinPage.revalidate();
+                rpsWinPage.repaint();
             });
-
             return;
         }
         cardLayoutPanel.showCard(result);
@@ -881,5 +917,9 @@ public class ButtonClass {
 
     private int aiPlayer() {
         return (int) (Math.random() * 3) + 1;
+    }
+
+    public JButton getReturnBtn() {
+        return returnBtn;
     }
 }

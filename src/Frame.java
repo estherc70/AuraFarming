@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Frame extends JFrame implements ActionListener {
     private JPanel mainPanel, livestreamScreen, mail2, loginInScreen, auraInfo,
-            ticTacToe, gamesScreen, appScreen, roundScreen, shopScreen, shop, endDay;
+            ticTacToe, gamesScreen, appScreen, roundScreen, shopScreen, shop, endDay, rpsWinPage;
     private JScrollPane scrollPane;
     //private JLabel username;
     private ButtonClass buttonClass;
@@ -57,6 +57,7 @@ public class Frame extends JFrame implements ActionListener {
         JPanel scissorsTie = PanelClass.createPanel("src/images/RockPaperScissorsGame/Scissors/ScissorsTie.png", buttonClass);
         JPanel scissorsWin = PanelClass.createPanel("src/images/RockPaperScissorsGame/Scissors/ScissorsWin.png", buttonClass);
         JPanel scissorsLose = PanelClass.createPanel("src/images/RockPaperScissorsGame/Scissors/ScissorsLose.png", buttonClass);
+        rpsWinPage = PanelClass.createPanel("src/images/RockPaperScissorsGame/WinPage.png", buttonClass);
 
         ImageIcon tutorialImageIcon = new ImageIcon("src/DesktopPetImages/book.png");
         JLabel tutorialLabel = new JLabel(tutorialImageIcon);
@@ -197,6 +198,7 @@ public class Frame extends JFrame implements ActionListener {
         scissorsLose.setLayout(null);
         scissorsWin.setLayout(null);
         endDay.setLayout(null);
+        rpsWinPage.setLayout(null);
 
         startScreen.add(buttonClass.getUsernameText());
         tutorialScreen.add(buttonClass.getNextButton());
@@ -230,6 +232,7 @@ public class Frame extends JFrame implements ActionListener {
         rpsScreen.add(buttonClass.getDoubleBtn());
         shopScreen.add(buttonClass.getShop());
         auraInfo.add(buttonClass.getNext());
+        rpsWinPage.add(buttonClass.getReturnBtn());
 
         mainPanel.add(startScreen, "StartScreen");
         mainPanel.add(tutorialScreen, "TutorialScreen");
@@ -257,6 +260,7 @@ public class Frame extends JFrame implements ActionListener {
         mainPanel.add(scissorsLose,"ScissorsLose");
         mainPanel.add(shop, "shop");
         mainPanel.add(endDay, "EndDayScreen");
+        mainPanel.add(rpsWinPage,"RPSWinPage");
 
         livestreamScreen.add(scrollPane);
 
@@ -377,5 +381,9 @@ public class Frame extends JFrame implements ActionListener {
 
     public JPanel getRoundScreen() {
         return roundScreen;
+    }
+
+    public JPanel getRpsWinPage() {
+        return rpsWinPage;
     }
 }

@@ -24,11 +24,12 @@ public class ButtonClass {
     private boolean livestreamExited;
     private Font pressStartFont;
     private TicTacToe ticTacToe;
-    private JLabel TTTWin, TTTLose, TTTDraw, TTTNull;
+    private JLabel TTTWin, TTTLose, TTTDraw, TTTNull, label;
     private boolean[] pressedKeys;
     private int round;
     private int wins;
     private int lose;
+    private Timer timer;
 
 
     public ButtonClass(Frame cardLayoutPanel,Player player, JPanel mainPanel)  {
@@ -40,6 +41,7 @@ public class ButtonClass {
         sponsors = new Sponsors();
         livestreamExited = false;
         ticTacToe = new TicTacToe();
+        //timer = new Timer();
 
         //create buttons
         usernameText = new JTextField(15);
@@ -102,12 +104,9 @@ public class ButtonClass {
 
         ImageIcon acceptIcon = new ImageIcon();
         ImageIcon declineIcon = new ImageIcon();
-        ImageIcon nextIcon = new ImageIcon();
         try {
             BufferedImage acceptImage = ImageIO.read(new File("src/MailImages/mails/accept.png"));
             BufferedImage declineImage = ImageIO.read(new File("src/MailImages/mails/decline.png"));
-            BufferedImage nextImage = ImageIO.read(new File("src/MailImages/next.png"));
-            nextIcon = new ImageIcon(nextImage);
             acceptIcon = new ImageIcon(acceptImage);
             declineIcon = new ImageIcon(declineImage);
             //assert false;
@@ -116,12 +115,8 @@ public class ButtonClass {
             System.out.println(ex.getMessage());
         }
 
-        setButtonOpaque(next);
-        next.setBounds(350, 400, 400, 100);
-
         accept.setIcon(acceptIcon);
         decline.setIcon(declineIcon);
-        next.setIcon(nextIcon);
 
         //set opaque
         //customizeButton(livestreamApp);
@@ -144,6 +139,7 @@ public class ButtonClass {
 
         setButtonOpaque(decline);
 
+        //setButtonOpaque(next);
 
         setButtonOpaque(ticTacToeApp);
 
@@ -179,6 +175,8 @@ public class ButtonClass {
         customizeButton(tic9);
 
         customizeButton(checkWinner);
+
+        //customizeButton(next);
 
         livestreamChat.setEditable(true);
         livestreamChat.setLineWrap(true);
@@ -222,6 +220,7 @@ public class ButtonClass {
         backBtnTTT.setBounds(200,85,17,17);
         backBtnRPS.setBounds(200,85,17,17);
         backBtnLS.setBounds(200,85,17,17);
+        next.setBounds(50, 58, 280, 60);
 
         //livestreamApp.setVisible(false);
 
@@ -256,6 +255,7 @@ public class ButtonClass {
         btnPanel.add(backBtnEdit);
         btnPanel.add(backBtnRPS);
         btnPanel.add(backBtnTTT);
+        //btnPanel.add(next);
 
         addActionListeners();
     }
@@ -380,27 +380,33 @@ public class ButtonClass {
         accept.addActionListener(e -> {
             int added = player.addAura();
             player.addAds(1);
-            JLabel label = new JLabel("You gained " + added + " aura!");
+            label = new JLabel("You gained " + added + " aura!");
             label.setFont(pressStartFont);
             label.setBounds(280, 150, 1000, 400);
-            cardLayoutPanel.getAuraInfo().add(label);
-            cardLayoutPanel.getAuraInfo().add(next);
+            //cardLayoutPanel.getAuraInfo().add(label);
+            cardLayoutPanel.showCard("auraInfo");
+            new javax.swing.Timer(2000, ex -> {
+                cardLayoutPanel.showCard("AppScreen");
+                ((javax.swing.Timer) e.getSource()).stop();
+            }).start();
             cardLayoutPanel.getAuraInfo().revalidate();
             cardLayoutPanel.getAuraInfo().repaint();
-            cardLayoutPanel.showCard("auraInfo");
             //cardLayoutPanel.showCard("AppScreen");
         });
 
         decline.addActionListener(e -> {
             int deleted = player.deleteAura();
-            JLabel label = new JLabel("You lost " + deleted + " aura!");
+            label = new JLabel("You lost " + deleted + " aura!");
             label.setFont(pressStartFont);
             label.setBounds(280, 150, 1000, 400);
-            cardLayoutPanel.getAuraInfo().add(label);
-            cardLayoutPanel.getAuraInfo().add(next);
+            //cardLayoutPanel.getAuraInfo().add(label);
+            cardLayoutPanel.showCard("auraInfo");
+            new javax.swing.Timer(2000, ex -> {
+                cardLayoutPanel.showCard("AppScreen");
+                ((javax.swing.Timer) e.getSource()).stop();
+            }).start();
             cardLayoutPanel.getAuraInfo().revalidate();
             cardLayoutPanel.getAuraInfo().repaint();
-            cardLayoutPanel.showCard("auraInfo");
             //cardLayoutPanel.showCard("AppScreen");
         });
 
@@ -654,11 +660,11 @@ public class ButtonClass {
         return checkWinner;
     }
 
-    public Component getShop() {
+    public JButton getShop() {
         return shop;
     }
 
-    public Component getNext() {
+    public JButton getNext() {
         return next;
     }
 
@@ -676,6 +682,10 @@ public class ButtonClass {
 
     public JButton getBackBtnEdit() {
         return backBtnEdit;
+    }
+
+    public JLabel getLabel() {
+        return label;
     }
 
     public void addPassword() {

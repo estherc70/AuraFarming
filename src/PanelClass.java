@@ -1,13 +1,19 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class PanelClass extends JPanel {
     private String fileName;
     private ButtonClass buttonClass;
+    private Frame cardLayoutPanel;
 
-    public PanelClass(String fileName, ButtonClass buttonClass) {
+    public PanelClass(String fileName, ButtonClass buttonClass, Frame cardLayoutPanel) {
         this.fileName = fileName;
         this.buttonClass = buttonClass;
+        this.cardLayoutPanel = cardLayoutPanel;
     }
 
     @Override
@@ -20,12 +26,26 @@ public class PanelClass extends JPanel {
             buttonClass.getShop().setSize(300, 70);
             buttonClass.getShop().setLocation(497, 255);
         }
+        else if (fileName.equals("src/images/auraInfo.png")) {
+//            ImageIcon nextIcon = null;
+//            try {
+//                BufferedImage nextImage = ImageIO.read(new File("src/MailImages/next.png"));
+//                nextIcon = new ImageIcon(nextImage);
+//            }
+//            catch (IOException e) {
+//                System.out.println(e.getMessage());
+//            }
+//            buttonClass.getNext().setIcon(nextIcon);
+            cardLayoutPanel.getAuraInfo().add(buttonClass.getLabel());
+            //cardLayoutPanel.getAuraInfo().repaint();
+            //cardLayoutPanel.getAuraInfo().revalidate();
+        }
 
         // Scale the image to fit the size of the panel
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
     }
 
-    public static JPanel createPanel(String fileName, ButtonClass buttonClass) {
-        return new PanelClass(fileName, buttonClass);
+    public static JPanel createPanel(String fileName, ButtonClass buttonClass, Frame cardLayoutPanel) {
+        return new PanelClass(fileName, buttonClass, cardLayoutPanel);
     }
 }

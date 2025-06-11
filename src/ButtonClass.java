@@ -1,9 +1,7 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -28,6 +26,9 @@ public class ButtonClass {
     private TicTacToe ticTacToe;
     private JLabel TTTWin, TTTLose, TTTDraw, TTTNull;
     private boolean[] pressedKeys;
+    private int round;
+    private int wins;
+    private int lose;
 
 
     public ButtonClass(Frame cardLayoutPanel,Player player, JPanel mainPanel)  {
@@ -86,6 +87,9 @@ public class ButtonClass {
         backBtnEdit = new JButton();
         backBtnRPS = new JButton();
         backBtnTTT = new JButton();
+        round = 1;
+        wins = 0;
+        lose = 0;
 
         try {
             pressStartFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/PressStart2P-Regular.ttf"))
@@ -455,10 +459,12 @@ public class ButtonClass {
 
         singleBtn.addActionListener(e -> {
             pressedKeys = new boolean[128];
-            vsAnimation(); // triggers the animation
+            //hasPlayedIntroAnimation = true;
+            vsAnimation();
         });
 
         doubleBtn.addActionListener(e -> {
+            pressedKeys = new boolean[128];
             vsAnimation();
         });
 
@@ -515,10 +521,6 @@ public class ButtonClass {
             cardLayoutPanel.showCard("EndDayScreen");
         });
     }
-
-//    public void setContinueButtonListener(ActionListener listener) {
-//        bookBtn.addActionListener(listener);
-//    }
 
     private void customizeButton(JButton button) {
         button.setOpaque(false);
@@ -690,6 +692,7 @@ public class ButtonClass {
         appScreen.repaint();
     }
 
+
     public void vsAnimation() {
         ArrayList<BufferedImage> vsAnimation = new ArrayList<>();
         for (int i = 0; i < 29; i++) {
@@ -705,48 +708,149 @@ public class ButtonClass {
         this.mainPanel.add(animationPanel, "animation");
         this.cardLayoutPanel.showCard("animation");
 
-        JLabel roundLabel = new JLabel("Round 1");
-        roundLabel.setFont(pressStartFont.deriveFont(45f));
-        Color color = Color.decode("#5d31b8");
-        roundLabel.setForeground(color);
-        roundLabel.setBounds(335, 310, 500, 50);
-
-        JLabel usernameLabel = new JLabel(usernameText.getText());
-        usernameLabel.setFont(pressStartFont.deriveFont(45f));
-        Color color2 = Color.decode("#a589e8");
-        usernameLabel.setForeground(color2);
-        usernameLabel.setBounds(610, 600, 200, 50);
-
         SoundUtils.playSound("src/Round 1 Fight! (Mortal Kombat Meme) - Sound Effect for editing.wav");
 
         animationPanel.setOnComplete(() -> {
-            JPanel roundScreen = cardLayoutPanel.getRoundScreen();
+            this.mainPanel.remove(animationPanel);
+            this.mainPanel.revalidate();
+            this.mainPanel.repaint();
 
+            JPanel roundScreen = cardLayoutPanel.getRoundScreen();
             roundScreen.setLayout(null);
+
+            JLabel roundLabel = new JLabel("Round " + round);
+            roundLabel.setFont(pressStartFont.deriveFont(45f));
+            roundLabel.setForeground(Color.decode("#5d31b8"));
+            roundLabel.setBounds(335, 310, 500, 50);
+
+            JLabel winLabelPlayer1 = new JLabel("Wins: " + wins);
+            winLabelPlayer1.setFont(pressStartFont.deriveFont(25f));
+            winLabelPlayer1.setForeground(Color.decode("#5d31b8"));
+            winLabelPlayer1.setBounds(430, 430, 200, 60);
+
+            JLabel winLabelPlayer2 = new JLabel("Wins: " + lose);
+            winLabelPlayer2.setFont(pressStartFont.deriveFont(25f));
+            winLabelPlayer2.setForeground(Color.decode("#5d31b8"));
+            winLabelPlayer2.setBounds(15, 25, 200, 60);
+
+            JLabel usernameLabel = new JLabel(usernameText.getText());
+            usernameLabel.setFont(pressStartFont.deriveFont(45f));
+            usernameLabel.setForeground(Color.decode("#a589e8"));
+            usernameLabel.setBounds(610, 600, 200, 50);
+
+            roundScreen.removeAll();
             roundScreen.add(roundLabel);
             roundScreen.add(usernameLabel);
+            roundScreen.add(winLabelPlayer1);
+            roundScreen.add(winLabelPlayer2);
             roundScreen.revalidate();
             roundScreen.repaint();
 
             roundScreen.requestFocusInWindow();
+
+            setupRoundScreenKeyListener(roundScreen);
         });
     }
 
     private void switchToResult(String move) {
         int ai = aiPlayer();
         String result;
-        if (ai == 1) result = move + "Tie";
-        else if (ai == 2) result = move + "Win";
-        else result = move + "Lose";
 
+        if (ai == 1) {
+            result = move + "Tie";
+        } else if (ai == 2) {
+            wins++;
+            result = move + "Win";
+        } else {
+            lose++;
+            result = move + "Lose";
+        }
+
+        if (wins == 2) {
+            ArrayList<BufferedImage> vsAnimation2 = new ArrayList<>();
+            for (int i = 0; i < 24; i++) {
+                String fileName = "src/images/RockPaperScissorsGame/winAnimation/frame" + i + ".jpg";
+                try {
+                    vsAnimation2.add(ImageIO.read(new File(fileName)));
+                } catch (IOException e2) {
+                    System.out.println(e2.getMessage());
+                }
+            }
+
+            JPanelAnimation animationPanel2 = new JPanelAnimation(this.cardLayoutPanel, "EndScreen", vsAnimation2, 100, 2);
+
+            this.mainPanel.add(animationPanel2, "animation2");
+            this.cardLayoutPanel.showCard("animation2");
+
+            animationPanel2.setOnComplete(() -> {
+                this.mainPanel.remove(animationPanel2);
+                this.mainPanel.revalidate();
+                this.mainPanel.repaint();
+
+                JPanel endScreen = new JPanel();
+                endScreen.setLayout(null);
+
+                JLabel endLabel = new JLabel("You Win!");
+                endLabel.setFont(pressStartFont.deriveFont(45f));
+                endLabel.setForeground(Color.decode("#5d31b8"));
+                endLabel.setBounds(300, 300, 400, 50);
+
+                endScreen.add(endLabel);
+
+                this.mainPanel.add(endScreen, "EndScreen");
+                this.cardLayoutPanel.showCard("EndScreen");
+
+                endScreen.requestFocusInWindow();
+            });
+
+            return;
+        }
         cardLayoutPanel.showCard(result);
 
-        // Wait 3 seconds, then switch back and request focus
         new javax.swing.Timer(3000, e -> {
+            round++;
+            updateRoundScreen();
             cardLayoutPanel.showCard("RoundScreen");
-            cardLayoutPanel.getRoundScreen().requestFocusInWindow();
             ((javax.swing.Timer) e.getSource()).stop();
         }).start();
+    }
+
+    private void updateRoundScreen() {
+        JPanel roundScreen = cardLayoutPanel.getRoundScreen();
+        roundScreen.setLayout(null);
+        roundScreen.removeAll();
+
+        JLabel roundLabel = new JLabel("Round " + round);
+        roundLabel.setFont(pressStartFont.deriveFont(45f));
+        roundLabel.setForeground(Color.decode("#5d31b8"));
+        roundLabel.setBounds(335, 310, 500, 50);
+
+        JLabel winLabelPlayer1 = new JLabel("Wins: " + wins);
+        winLabelPlayer1.setFont(pressStartFont.deriveFont(25f));
+        winLabelPlayer1.setForeground(Color.decode("#5d31b8"));
+        winLabelPlayer1.setBounds(430, 430, 200, 60);
+
+        JLabel winLabelPlayer2 = new JLabel("Wins: " + lose);
+        winLabelPlayer2.setFont(pressStartFont.deriveFont(25f));
+        winLabelPlayer2.setForeground(Color.decode("#5d31b8"));
+        winLabelPlayer2.setBounds(15, 25, 200, 60);
+
+        JLabel usernameLabel = new JLabel(usernameText.getText());
+        usernameLabel.setFont(pressStartFont.deriveFont(45f));
+        usernameLabel.setForeground(Color.decode("#a589e8"));
+        usernameLabel.setBounds(610, 600, 200, 50);
+
+        roundScreen.add(roundLabel);
+        roundScreen.add(usernameLabel);
+        roundScreen.add(winLabelPlayer1);
+        roundScreen.add(winLabelPlayer2);
+
+        roundScreen.revalidate();
+        roundScreen.repaint();
+
+        setupRoundScreenKeyListener(roundScreen);
+
+        SwingUtilities.invokeLater(roundScreen::requestFocusInWindow);
     }
 
     void setupRoundScreenKeyListener(JPanel roundScreen) {
@@ -760,6 +864,7 @@ public class ButtonClass {
         roundScreen.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
+                System.out.println("Key pressed: " + e.getKeyChar());
                 int key = e.getKeyCode();
                 if (key == KeyEvent.VK_A) {
                     switchToResult("Rock");

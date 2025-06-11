@@ -27,15 +27,7 @@ public class PanelClass extends JPanel {
             buttonClass.getShop().setLocation(497, 255);
         }
         else if (fileName.equals("src/images/auraInfo.png")) {
-//            ImageIcon nextIcon = null;
-//            try {
-//                BufferedImage nextImage = ImageIO.read(new File("src/MailImages/next.png"));
-//                nextIcon = new ImageIcon(nextImage);
-//            }
-//            catch (IOException e) {
-//                System.out.println(e.getMessage());
-//            }
-//            buttonClass.getNext().setIcon(nextIcon);
+            cardLayoutPanel.getAuraInfo().removeAll();
             cardLayoutPanel.getAuraInfo().add(buttonClass.getLabel());
             //cardLayoutPanel.getAuraInfo().repaint();
             //cardLayoutPanel.getAuraInfo().revalidate();

@@ -24,6 +24,8 @@ public class JPanelAnimation extends JPanel implements ActionListener {
         this.maxLoops = maxLoops;
         timer = new Timer(delay, this);
         timer.start();
+        setFocusable(false);
+        setRequestFocusEnabled(false);
     }
 
     public void setOnComplete(Runnable onComplete) {

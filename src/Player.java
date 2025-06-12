@@ -4,7 +4,12 @@ public class Player {
     private int password;
     private int aura;
     private int ads;
+    private int day, followersGained, auraGained;
+
     public Player() {
+        day = 0;
+        followersGained = 0;
+        auraGained = 0;
         username = "";
         followers = 0;
         aura = 0;
@@ -15,12 +20,14 @@ public class Player {
     public int addAura() {
         int auraToAdd = (int) (Math.random() * 1001);
         aura += auraToAdd;
+        auraGained += auraToAdd;
         return auraToAdd;
     }
 
     public int deleteAura() {
         int auraToDelete = (int) (Math.random() * 101);
         aura -= auraToDelete;
+        auraGained -= auraToDelete;
         return auraToDelete;
     }
 
@@ -35,6 +42,7 @@ public class Player {
     public int getAds() {
         return ads;
     }
+
     public String getUsername() {
         return username;
     }
@@ -49,6 +57,7 @@ public class Player {
 
     public void addFollowers(int newFollowers) {
         followers = followers + newFollowers;
+        followersGained += followersGained;
     }
 
     public int getPassword() {
@@ -57,5 +66,19 @@ public class Player {
 
     public void setPassword(int password) {
         this.password = password;
+    }
+
+    public void endDay() {
+        day++;
+        followersGained = 0;
+        auraGained = 0;
+    }
+
+    public int getFollowersGained() {
+        return followersGained;
+    }
+
+    public int getAuraGained() {
+        return auraGained;
     }
 }

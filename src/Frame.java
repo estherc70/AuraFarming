@@ -234,6 +234,7 @@ public class Frame extends JFrame implements ActionListener {
         mailScreen.add(buttonClass.getNext());
         auraInfo.add(buttonClass.getNext());
         rpsWinPage.add(buttonClass.getReturnBtn());
+        endDay.add(buttonClass.getBackBtnEndDay());
 
         mainPanel.add(startScreen, "StartScreen");
         mainPanel.add(tutorialScreen, "TutorialScreen");
@@ -386,5 +387,9 @@ public class Frame extends JFrame implements ActionListener {
 
     public JPanel getRpsWinPage() {
         return rpsWinPage;
+    }
+
+    public JPanel getEndDay() {
+        return endDay;
     }
 }

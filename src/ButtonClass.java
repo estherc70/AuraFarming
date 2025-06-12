@@ -14,7 +14,7 @@ public class ButtonClass {
             endDay, accept, decline, next,
             ticTacToeApp, rpsGame, singleBtn, doubleBtn,
             shop, backBtnLS, backBtnRPS, backBtnTTT,
-            backBtnEdit, returnBtn;
+            backBtnEdit, returnBtn, backBtnEndDay;
     private JButton tic1,tic2, tic3, tic4, tic5, tic6, tic7, tic8, tic9, checkWinner;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
@@ -27,7 +27,8 @@ public class ButtonClass {
     private boolean livestreamExited;
     private Font pressStartFont;
     private TicTacToe ticTacToe;
-    private JLabel TTTWin, TTTLose, TTTDraw, TTTNull, label;
+    private JLabel TTTWin, TTTLose, TTTDraw, TTTNull, label, TTTotalWins, TTTtotalLosses, TTTAura;
+    private JLabel followersGained, auraGained, totalFollowers, totalAura;
     private boolean[] pressedKeys;
     private int round;
     private int wins;
@@ -43,7 +44,7 @@ public class ButtonClass {
         this.player = player;
         sponsors = new Sponsors();
         livestreamExited = false;
-        ticTacToe = new TicTacToe();
+        ticTacToe = new TicTacToe(player);
         //timer = new Timer();
 
         //create buttons
@@ -70,6 +71,7 @@ public class ButtonClass {
         gamesApp = new JButton();
         endDay = new JButton();
         shop = new JButton();
+        backBtnEndDay = new JButton();
         ticTacToeApp = new JButton();
         tic1 = ticTacToe.getButton(0);
         tic2 = ticTacToe.getButton(1);
@@ -142,6 +144,8 @@ public class ButtonClass {
         setButtonOpaque(accept);
 
         setButtonOpaque(decline);
+
+        setButtonOpaque(backBtnEndDay);
 
         //setButtonOpaque(next);
 
@@ -228,6 +232,7 @@ public class ButtonClass {
         backBtnLS.setBounds(200,85,17,17);
         next.setBounds(50, 58, 280, 60);
         returnBtn.setBounds(450,450,100,50);
+        backBtnEndDay.setBounds(610,130,30,30);
 
         //livestreamApp.setVisible(false);
 
@@ -264,6 +269,7 @@ public class ButtonClass {
         btnPanel.add(backBtnTTT);
         //btnPanel.add(next);
         btnPanel.add(returnBtn);
+        btnPanel.add(backBtnEndDay);
 
         addActionListeners();
     }
@@ -342,15 +348,14 @@ public class ButtonClass {
                         livestreamChat.setCaretPosition(livestreamChat.getDocument().getLength()); // scroll to bottom
                         cardLayoutPanel.getLivestreamScreen().revalidate();
                         cardLayoutPanel.getLivestreamScreen().repaint();
-                        int randomIncrement = (int) (Math.random() * 1001);
-                        player.addFollowers(randomIncrement);
-                        System.out.println("Current followers: " + player.getFollowers());
+//                        int randomIncrement = (int) (Math.random() * 1001);
+//                        player.addFollowers(randomIncrement);
+//                        System.out.println("Current followers: " + player.getFollowers());
                     });
                     try {
                         Thread.sleep(600);
                     } catch (InterruptedException f) {
                         f.printStackTrace();
-                        break;
                     }
                 }
             }).start();
@@ -431,6 +436,24 @@ public class ButtonClass {
         });
 
         ticTacToeApp.addActionListener(e -> {
+            TTTotalWins = new JLabel(String.valueOf(ticTacToe.getWins()));
+            TTTotalWins.setFont(pressStartFont.deriveFont(15f));
+            TTTotalWins.setForeground(Color.decode("#31529b"));
+            TTTotalWins.setBounds(635, 343, 200, 60);
+
+            TTTtotalLosses = new JLabel(String.valueOf(ticTacToe.getLosses()));
+            TTTtotalLosses.setFont(pressStartFont.deriveFont(15f));
+            TTTtotalLosses.setForeground(Color.decode("#31529b"));
+            TTTtotalLosses.setBounds(655, 365, 200, 60);
+
+            TTTAura = new JLabel(String.valueOf(ticTacToe.getAuraGained()));
+            TTTAura.setFont(pressStartFont.deriveFont(15f));
+            TTTAura.setForeground(Color.decode("#31529b"));
+            TTTAura.setBounds(705, 388, 200, 60);
+
+            cardLayoutPanel.getTicTacToe().add(TTTotalWins);
+            cardLayoutPanel.getTicTacToe().add(TTTtotalLosses);
+            cardLayoutPanel.getTicTacToe().add(TTTAura);
             cardLayoutPanel.showCard("TicTacToe");
         });
 
@@ -443,8 +466,6 @@ public class ButtonClass {
                     TTTNull.setVisible(false);
                     cardLayoutPanel.getTicTacToe().revalidate();
                     cardLayoutPanel.getTicTacToe().repaint();
-                    player.addAura();
-                    System.out.println(player.getAura());
                 } else if (ticTacToe.getWinner().equals("AI wins")) {
                     ticTacToe.setGameEnded(true);
                     TTTLose.setBounds(573,170,170,50);
@@ -452,8 +473,6 @@ public class ButtonClass {
                     TTTNull.setVisible(false);
                     cardLayoutPanel.getTicTacToe().revalidate();
                     cardLayoutPanel.getTicTacToe().repaint();
-                    player.deleteAura();
-                    System.out.println(player.getAura());
                 } else if (ticTacToe.getWinner().equals("Draw")) {
                     ticTacToe.setGameEnded(true);
                     TTTDraw.setBounds(570,170,170,50);
@@ -469,6 +488,43 @@ public class ButtonClass {
                     cardLayoutPanel.getTicTacToe().repaint();
                 }
             }
+            cardLayoutPanel.getTicTacToe().remove(TTTotalWins);
+            cardLayoutPanel.getTicTacToe().remove(TTTtotalLosses);
+            cardLayoutPanel.getTicTacToe().remove(TTTAura);
+
+            TTTotalWins = new JLabel(String.valueOf(ticTacToe.getWins()));
+            TTTotalWins.setFont(pressStartFont.deriveFont(15f));
+            TTTotalWins.setForeground(Color.decode("#31529b"));
+            TTTotalWins.setBounds(635, 343, 200, 60);
+
+            TTTtotalLosses = new JLabel(String.valueOf(ticTacToe.getLosses()));
+            TTTtotalLosses.setFont(pressStartFont.deriveFont(15f));
+            TTTtotalLosses.setForeground(Color.decode("#31529b"));
+            TTTtotalLosses.setBounds(655, 365, 200, 60);
+
+            TTTAura = new JLabel(String.valueOf(ticTacToe.getAuraGained()));
+            TTTAura.setFont(pressStartFont.deriveFont(15f));
+            TTTAura.setForeground(Color.decode("#31529b"));
+            TTTAura.setBounds(705, 388, 200, 60);
+
+            cardLayoutPanel.getTicTacToe().add(TTTotalWins);
+            cardLayoutPanel.getTicTacToe().add(TTTtotalLosses);
+            cardLayoutPanel.getTicTacToe().add(TTTAura);
+        });
+
+        backBtnTTT.addActionListener(e -> {
+            ticTacToe.resetGame();
+            cardLayoutPanel.getTicTacToe().remove(TTTWin);
+            cardLayoutPanel.getTicTacToe().remove(TTTLose);
+            cardLayoutPanel.getTicTacToe().remove(TTTDraw);
+            cardLayoutPanel.getTicTacToe().remove(TTTNull);
+            cardLayoutPanel.getTicTacToe().remove(TTTotalWins);
+            cardLayoutPanel.getTicTacToe().remove(TTTtotalLosses);
+            cardLayoutPanel.getTicTacToe().remove(TTTAura);
+
+            cardLayoutPanel.getTicTacToe().revalidate();
+            cardLayoutPanel.getTicTacToe().repaint();
+            cardLayoutPanel.showCard("AppScreen");
         });
 
         singleBtn.addActionListener(e -> {
@@ -519,19 +575,41 @@ public class ButtonClass {
             cardLayoutPanel.showCard("AppScreen");
         });
 
-        backBtnTTT.addActionListener(e -> {
-            ticTacToe.resetGame();
-            cardLayoutPanel.getTicTacToe().remove(TTTWin);
-            cardLayoutPanel.getTicTacToe().remove(TTTLose);
-            cardLayoutPanel.getTicTacToe().remove(TTTDraw);
-            cardLayoutPanel.getTicTacToe().remove(TTTNull);
-
-            cardLayoutPanel.getTicTacToe().revalidate();
-            cardLayoutPanel.getTicTacToe().repaint();
+        backBtnEndDay.addActionListener(e -> {
             cardLayoutPanel.showCard("AppScreen");
         });
 
         endDay.addActionListener(e -> {
+            cardLayoutPanel.getEndDay().removeAll();
+
+            followersGained = new JLabel(String.valueOf(player.getFollowersGained()));
+            followersGained.setFont(pressStartFont.deriveFont(15f));
+            followersGained.setForeground(Color.decode("#31529b"));
+            followersGained.setBounds(555, 213, 200, 60);
+
+            auraGained = new JLabel(String.valueOf(player.getAuraGained()));
+            auraGained.setFont(pressStartFont.deriveFont(15f));
+            auraGained.setForeground(Color.decode("#31529b"));
+            auraGained.setBounds(500, 238, 200, 60);
+
+            totalFollowers = new JLabel(String.valueOf(player.getFollowers()));
+            totalFollowers.setFont(pressStartFont.deriveFont(15f));
+            totalFollowers.setForeground(Color.decode("#31529b"));
+            totalFollowers.setBounds(545, 265, 200, 60);
+
+            totalAura = new JLabel(String.valueOf(player.getAura()));
+            totalAura.setFont(pressStartFont.deriveFont(15f));
+            totalAura.setForeground(Color.decode("#31529b"));
+            totalAura.setBounds(485, 293, 200, 60);
+
+            cardLayoutPanel.getEndDay().add(followersGained);
+            cardLayoutPanel.getEndDay().add(auraGained);
+            cardLayoutPanel.getEndDay().add(totalFollowers);
+            cardLayoutPanel.getEndDay().add(totalAura);
+            cardLayoutPanel.getEndDay().add(backBtnEndDay);
+
+            player.endDay();
+
             cardLayoutPanel.showCard("EndDayScreen");
         });
     }
@@ -923,6 +1001,10 @@ public class ButtonClass {
                 }
             }
         });
+    }
+
+    public JButton getBackBtnEndDay() {
+        return backBtnEndDay;
     }
 
     private int aiPlayer() {

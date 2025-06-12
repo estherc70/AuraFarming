@@ -58,6 +58,10 @@ public class Frame extends JFrame implements ActionListener {
         JPanel scissorsWin = PanelClass.createPanel("src/images/RockPaperScissorsGame/Scissors/ScissorsWin.png", buttonClass, this);
         JPanel scissorsLose = PanelClass.createPanel("src/images/RockPaperScissorsGame/Scissors/ScissorsLose.png", buttonClass, this);
         rpsWinPage = PanelClass.createPanel("src/images/RockPaperScissorsGame/WinPage.png", buttonClass, this);
+        JPanel areyousure = PanelClass.createPanel("src/shopimages/areyousure.png", buttonClass, this);
+        JPanel success = PanelClass.createPanel("src/shopimages/success.png", buttonClass, this);
+        JPanel notenough = PanelClass.createPanel("src/shopimages/notenough.png", buttonClass, this);
+
 
         ImageIcon tutorialImageIcon = new ImageIcon("src/DesktopPetImages/book.png");
         JLabel tutorialLabel = new JLabel(tutorialImageIcon);
@@ -199,6 +203,9 @@ public class Frame extends JFrame implements ActionListener {
         scissorsWin.setLayout(null);
         endDay.setLayout(null);
         rpsWinPage.setLayout(null);
+        areyousure.setLayout(null);
+        success.setLayout(null);
+        notenough.setLayout(null);
 
         startScreen.add(buttonClass.getUsernameText());
         tutorialScreen.add(buttonClass.getNextButton());
@@ -234,6 +241,13 @@ public class Frame extends JFrame implements ActionListener {
         mailScreen.add(buttonClass.getNext());
         auraInfo.add(buttonClass.getNext());
         rpsWinPage.add(buttonClass.getReturnBtn());
+        shop.add(buttonClass.getHundredAura());
+        shop.add(buttonClass.getThousandAura());
+        shop.add(buttonClass.getTwoThousandAura());
+        shop.add(buttonClass.getAura());
+        areyousure.add(buttonClass.getYes());
+        areyousure.add(buttonClass.getNo());
+
 
         mainPanel.add(startScreen, "StartScreen");
         mainPanel.add(tutorialScreen, "TutorialScreen");
@@ -262,6 +276,9 @@ public class Frame extends JFrame implements ActionListener {
         mainPanel.add(shop, "shop");
         mainPanel.add(endDay, "EndDayScreen");
         mainPanel.add(rpsWinPage,"RPSWinPage");
+        mainPanel.add(areyousure, "areyousure");
+        mainPanel.add(success, "success");
+        mainPanel.add(notenough, "notenough");
 
         livestreamScreen.add(scrollPane);
 
@@ -386,5 +403,9 @@ public class Frame extends JFrame implements ActionListener {
 
     public JPanel getRpsWinPage() {
         return rpsWinPage;
+    }
+
+    public JPanel getShop() {
+        return shop;
     }
 }

@@ -73,7 +73,7 @@ public class Player {
 
     public void addFollowers(int newFollowers) {
         followers = followers + newFollowers;
-        followersGained += followersGained;
+        followersGained = followersGained + newFollowers;
     }
 
     public int getCurrent() {

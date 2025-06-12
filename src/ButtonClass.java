@@ -351,11 +351,21 @@ public class ButtonClass {
             cardLayoutPanel.showCard("LoginInScreen");
         });
 
+        timer = new Timer(3000, e -> {
+        int randomIncrement = (int) (Math.random() * 1001);
+        player.addFollowers(randomIncrement);
+        System.out.println("Current value of Followers: " + player.getFollowers());
+        });
+
+        backBtnLS.addActionListener(e -> {
+            timer.stop();
+            cardLayoutPanel.showCard("AppScreen");
+        });
+
         livestreamApp.addActionListener(e -> {
-//            livestream.setLoop(true);
+            timer.start();
             new Thread(() -> {
                 while (!livestreamExited) {
-//                    livestream.incrementByRandomNumber();
                     String textToAppend;
                     int goodOrBad = (int) (Math.random() * 2);
                     if (goodOrBad == 1) {
@@ -369,9 +379,6 @@ public class ButtonClass {
                         livestreamChat.setCaretPosition(livestreamChat.getDocument().getLength()); // scroll to bottom
                         cardLayoutPanel.getLivestreamScreen().revalidate();
                         cardLayoutPanel.getLivestreamScreen().repaint();
-//                        int randomIncrement = (int) (Math.random() * 1001);
-//                        player.addFollowers(randomIncrement);
-//                        System.out.println("Current followers: " + player.getFollowers());
                     });
                     try {
                         Thread.sleep(600);
@@ -579,13 +586,6 @@ public class ButtonClass {
             cardLayoutPanel.getMainPanel().add(shopAnimation, "shopAnimation");
 
             cardLayoutPanel.showCard("shopAnimation");
-        });
-
-        backBtnLS.addActionListener(e -> {
-//            livestream.setLoop(false);
-//            livestream = null;
-
-            cardLayoutPanel.showCard("AppScreen");
         });
 
         backBtnEdit.addActionListener(e -> {

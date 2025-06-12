@@ -1,8 +1,4 @@
 import java.util.Timer;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionListener;
-
 
 public class Livestream {
     private Player player;
@@ -28,36 +24,4 @@ public class Livestream {
         int random = (int) (Math.random() * badChat.length - 1);
         return badChat[random];
     }
-
-//    private void setupTimer() {
-//        timer = new Timer(5000, e -> incrementByRandomNumber());
-//    }
-//
-//    private void incrementByRandomNumber() {
-//        int randomIncrement = (int) (Math.random() * 1001);
-//        player.addFollowers(randomIncrement);
-//        System.out.println("Current value of myVar: " + player.getFollowers());
-//    }
-//
-//    public void setLoop(boolean input) {
-//        loop = input;
-//    }
-//
-//    private void switchPanel() {
-//        // Stop the timer if it's active on Panel1 and switch to Panel2
-//        if (isTimerActive) {
-//            timer.stop();  // Stop the timer when switching
-//            isTimerActive = false;
-//        }
-//
-//        // Switch to the next panel
-//        cardLayout.next(cardPanel);
-//
-//        // Start the timer if we are switching back to Panel1
-//        if (((JLabel) ((JPanel) cardPanel.getComponent(0)).getComponent(0)).getText().contains("Timer")) {
-//            timer.start();  // Start the timer if it's Panel1
-//            isTimerActive = true;
-//        }
-//    }
-
 }

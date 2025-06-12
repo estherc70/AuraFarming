@@ -1,4 +1,5 @@
 import javax.imageio.ImageIO;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -15,7 +16,7 @@ public class ButtonClass {
             ticTacToeApp, rpsGame, singleBtn, doubleBtn,
             shop, backBtnLS, backBtnRPS, backBtnTTT,
             backBtnEdit, returnBtn, backBtnEndDay, hundredAura, thousandAura, twoThousandAura, yes, no;
-    private JButton tic1,tic2, tic3, tic4, tic5, tic6, tic7, tic8, tic9, checkWinner, shopback;
+    private JButton tic1,tic2, tic3, tic4, tic5, tic6, tic7, tic8, tic9, checkWinner, shopback, miniGameBtn;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
     private Thread livestreamThread;
@@ -36,6 +37,7 @@ public class ButtonClass {
     private int wins;
     private int lose;
     private Timer timer;
+    private Clip currentClip;
 
 
     public ButtonClass(Frame cardLayoutPanel,Player player, JPanel mainPanel)  {
@@ -112,10 +114,11 @@ public class ButtonClass {
         twoThousandAura = new JButton();
         yes = new JButton();
         no = new JButton();
+        miniGameBtn = new JButton();
 
         round = 1;
         wins = 0;
-        lose = 1;
+        lose = 0;
 
         try {
             pressStartFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/PressStart2P-Regular.ttf"))
@@ -223,6 +226,9 @@ public class ButtonClass {
 
         customizeButton(checkWinner);
 
+        //setButtonOpaque(miniGameBtn);
+        customizeButton(miniGameBtn);
+
         //customizeButton(next);
 
         livestreamChat.setEditable(true);
@@ -272,6 +278,7 @@ public class ButtonClass {
         next.setBounds(50, 58, 280, 60);
         returnBtn.setBounds(450,450,100,50);
         backBtnEndDay.setBounds(610,130,30,30);
+        miniGameBtn.setBounds(200,450,100,50);
 //       hundredAura.setBounds(60, 450, 40, 200);
 //        thousandAura.setBounds(150, 450, 40, 200);
 //        twoThousandAura.setBounds(250, 450, 40, 200);
@@ -311,6 +318,7 @@ public class ButtonClass {
         btnPanel.add(backBtnTTT);
         //btnPanel.add(next);
         btnPanel.add(returnBtn);
+        btnPanel.add(miniGameBtn);
         //btnPanel.add(backBtnEndDay);
 
         addActionListeners();
@@ -448,6 +456,14 @@ public class ButtonClass {
         });
 
         editApp.addActionListener(e -> {
+            currentClip = SoundUtils.playSound("src/Rick Astley - Never Gonna Give You Up (Official Music Video).wav");
+            JPanel editScreen = cardLayoutPanel.getEditAppScreen();
+            editScreen.setLayout(null);
+            JLabel availableLabel = new JLabel(String.valueOf(player.getAds()));
+            availableLabel.setFont(pressStartFont.deriveFont(25f));
+            availableLabel.setForeground(Color.decode("#5d31b8"));
+            availableLabel.setBounds(675, 177, 500, 50);
+            editScreen.add(availableLabel);
             cardLayoutPanel.showCard("EditAppScreen");
         });
 
@@ -647,6 +663,15 @@ public class ButtonClass {
         });
 
         backBtnEdit.addActionListener(e -> {
+            if (currentClip != null && currentClip.isRunning()) {
+                currentClip.stop();
+                currentClip.close();
+            }
+            JPanel editScreen = cardLayoutPanel.getEditAppScreen();
+            editScreen.setLayout(null);
+            editScreen.removeAll();
+            editScreen.revalidate();
+            editScreen.repaint();
             cardLayoutPanel.showCard("AppScreen");
         });
 
@@ -764,6 +789,10 @@ public class ButtonClass {
 
         shopback.addActionListener(e -> {
             cardLayoutPanel.showCard("AppScreen");
+        });
+
+        miniGameBtn.addActionListener(e -> {
+
         });
     }
 
@@ -1257,5 +1286,9 @@ public class ButtonClass {
 
     public JButton getReturnBtn() {
         return returnBtn;
+    }
+
+    public JButton getMiniGameBtn() {
+        return miniGameBtn;
     }
 }

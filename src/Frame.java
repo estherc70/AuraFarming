@@ -11,7 +11,8 @@ import java.util.ArrayList;
 
 public class Frame extends JFrame implements ActionListener {
     private JPanel mainPanel, livestreamScreen, mail2, loginInScreen, auraInfo,
-            ticTacToe, gamesScreen, appScreen, roundScreen, shopScreen, shop, endDay, rpsWinPage, rpsLoseScreen;
+            ticTacToe, gamesScreen, appScreen, roundScreen, shopScreen, shop, endDay,
+            rpsWinPage, rpsLoseScreen, editAppScreen;
     private JScrollPane scrollPane;
     //private JLabel username;
     private ButtonClass buttonClass;
@@ -36,7 +37,7 @@ public class Frame extends JFrame implements ActionListener {
         JPanel backgroundScreen = PanelClass.createPanel("src/images/background.png", buttonClass, this);
         loginInScreen = PanelClass.createPanel("src/images/loginInScreen.png", buttonClass, this);
         appScreen = PanelClass.createPanel("src/images/appScreen.png", buttonClass, this);
-        JPanel editAppScreen = PanelClass.createPanel("src/images/EditAppScreen.png",buttonClass, this);
+        editAppScreen = PanelClass.createPanel("src/images/EditAppScreen.png",buttonClass, this);
         livestreamScreen = PanelClass.createPanel("src/images/livestreambg.png", buttonClass, this);
         JPanel mailScreen = PanelClass.createPanel("src/MailImages/mailhomepage.png", buttonClass, this);
         auraInfo = PanelClass.createPanel("src/images/auraInfo.png", buttonClass, this);
@@ -259,6 +260,7 @@ public class Frame extends JFrame implements ActionListener {
         appScreen.add(buttonClass.getShopApp());
         appScreen.add(buttonClass.getEndDay());
         editAppScreen.add(buttonClass.getBackBtnEdit());
+        editAppScreen.add(buttonClass.getMiniGameBtn());
         gamesScreen.add(buttonClass.getTicTacToeApp());
         livestreamScreen.add(buttonClass.getBackBtnLS());
         livestreamScreen.add(buttonClass.getScrollPane(), BorderLayout.CENTER);
@@ -456,5 +458,9 @@ public class Frame extends JFrame implements ActionListener {
 
     public JPanel getRpsLoseScreen() {
         return rpsLoseScreen;
+    }
+
+    public JPanel getEditAppScreen() {
+        return editAppScreen;
     }
 }

@@ -40,6 +40,7 @@ public class PanelClass extends JPanel {
             buttonClass.getHundredAura().setBounds(68, 500, 240, 50);
             buttonClass.getThousandAura().setBounds(365, 500, 240, 50);
             buttonClass.getTwoThousandAura().setBounds(675, 500, 240, 50);
+            buttonClass.getShopback().setBounds(670, 587, 265, 47);
 
             aura.setFont(buttonClass.getPressStartFont());
             aura.setOpaque(false);
@@ -50,6 +51,7 @@ public class PanelClass extends JPanel {
 
             // Add components
             cardLayoutPanel.getShop().add(aura);
+            cardLayoutPanel.getShop().add(buttonClass.getShopback());
             cardLayoutPanel.getShop().add(buttonClass.getHundredAura());
             cardLayoutPanel.getShop().add(buttonClass.getThousandAura());
             cardLayoutPanel.getShop().add(buttonClass.getTwoThousandAura());
@@ -76,5 +78,11 @@ public class PanelClass extends JPanel {
 
     public static JPanel createPanel(String fileName, ButtonClass buttonClass, Frame cardLayoutPanel) {
         return new PanelClass(fileName, buttonClass, cardLayoutPanel);
+    }
+
+    private void customizeButton(JButton button) {
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setBorderPainted(false);
     }
 }

@@ -15,7 +15,7 @@ public class ButtonClass {
             ticTacToeApp, rpsGame, singleBtn, doubleBtn,
             shop, backBtnLS, backBtnRPS, backBtnTTT,
             backBtnEdit, returnBtn, backBtnEndDay, hundredAura, thousandAura, twoThousandAura, yes, no;
-    private JButton tic1,tic2, tic3, tic4, tic5, tic6, tic7, tic8, tic9, checkWinner;
+    private JButton tic1,tic2, tic3, tic4, tic5, tic6, tic7, tic8, tic9, checkWinner, shopback;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
     private JTextField usernameText, passwordText;
@@ -79,6 +79,7 @@ public class ButtonClass {
         gamesApp = new JButton();
         endDay = new JButton();
         shop = new JButton();
+        shopback = new JButton();
         backBtnEndDay = new JButton();
         ticTacToeApp = new JButton();
         tic1 = ticTacToe.getButton(0);
@@ -141,50 +142,57 @@ public class ButtonClass {
         //set opaque
         //customizeButton(livestreamApp);
 
-        setButtonOpaque(nextButton);
+        customizeButton(nextButton);
 
         //customizeButton(mailApp);
+        customizeButton(mailApp);
 
-        setButtonOpaque(editApp);
+        customizeButton(livestreamApp);
 
-        setButtonOpaque(gamesApp);
+        customizeButton(editApp);
 
-        setButtonOpaque(shopApp);
+        customizeButton(gamesApp);
 
-        setButtonOpaque(endDay);
+        customizeButton(shopApp);
 
-        setButtonOpaque(bookBtn);
+        customizeButton(shop);
 
-        setButtonOpaque(accept);
+        customizeButton(endDay);
 
-        setButtonOpaque(decline);
+        customizeButton(bookBtn);
 
-        setButtonOpaque(backBtnEndDay);
+        customizeButton(accept);
+
+        customizeButton(decline);
+
+        customizeButton(backBtnEndDay);
 
         //setButtonOpaque(next);
 
-        setButtonOpaque(ticTacToeApp);
+        customizeButton(ticTacToeApp);
 
-        setButtonOpaque(rpsGame);
+        customizeButton(rpsGame);
 
-        setButtonOpaque(singleBtn);
+        customizeButton(singleBtn);
 
-        setButtonOpaque(doubleBtn);
+        customizeButton(doubleBtn);
 
-        setButtonOpaque(hundredAura);
+        customizeButton(hundredAura);
 
-        setButtonOpaque(thousandAura);
+        customizeButton(thousandAura);
 
-        setButtonOpaque(twoThousandAura);
+        customizeButton(twoThousandAura);
 
-        setButtonOpaque(yes);
+        customizeButton(yes);
 
-        setButtonOpaque(no);
+        customizeButton(no);
 
-        setButtonOpaque(backBtnEdit);
-        setButtonOpaque(backBtnLS);
-        setButtonOpaque(backBtnRPS);
-        setButtonOpaque(backBtnTTT);
+        customizeButton(shopback);
+
+        customizeButton(backBtnEdit);
+        customizeButton(backBtnLS);
+        customizeButton(backBtnRPS);
+        customizeButton(backBtnTTT);
 
         customizeButton(powerOn);
 
@@ -700,6 +708,10 @@ public class ButtonClass {
         no.addActionListener(e -> {
             cardLayoutPanel.showCard("AppScreen");
         });
+
+        shopback.addActionListener(e -> {
+            cardLayoutPanel.showCard("AppScreen");
+        });
     }
 
     private void customizeButton(JButton button) {
@@ -891,6 +903,10 @@ public class ButtonClass {
 
     public Font getPressStartFont() {
         return pressStartFont;
+    }
+
+    public JButton getShopback() {
+        return shopback;
     }
 
     public void addPassword() {

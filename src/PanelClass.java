@@ -32,6 +32,24 @@ public class PanelClass extends JPanel {
             //cardLayoutPanel.getAuraInfo().repaint();
             //cardLayoutPanel.getAuraInfo().revalidate();
         }
+        else if (fileName.equals("src/shopimages/shop2.png")) {
+            //cardLayoutPanel.getShop().removeAll();
+            buttonClass.getHundredAura().setLocation(68, 500);
+            buttonClass.getThousandAura().setLocation(365, 500);
+            buttonClass.getTwoThousandAura().setLocation(675, 500);
+            buttonClass.getHundredAura().setSize(240, 50);
+            buttonClass.getThousandAura().setSize(240, 50);
+            buttonClass.getTwoThousandAura().setSize(240, 50);
+            //cardLayoutPanel.getShop().add(buttonClass.getAura());
+
+        }
+        else if (fileName.equals("src/shopimages/areyousure.png")) {
+            buttonClass.getYes().setLocation(155, 380);
+            buttonClass.getNo().setLocation(530, 380);
+            buttonClass.getYes().setSize(250, 50);
+            buttonClass.getNo().setSize(250, 50);
+
+        }
 
         // Scale the image to fit the size of the panel
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);

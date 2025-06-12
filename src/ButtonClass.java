@@ -14,7 +14,7 @@ public class ButtonClass {
             endDay, accept, decline, next,
             ticTacToeApp, rpsGame, singleBtn, doubleBtn,
             shop, backBtnLS, backBtnRPS, backBtnTTT,
-            backBtnEdit, returnBtn, backBtnEndDay;
+            backBtnEdit, returnBtn, backBtnEndDay, hundredAura, thousandAura, twoThousandAura, yes, no;
     private JButton tic1,tic2, tic3, tic4, tic5, tic6, tic7, tic8, tic9, checkWinner;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
@@ -28,7 +28,7 @@ public class ButtonClass {
     private Font pressStartFont;
     private TicTacToe ticTacToe;
     private JLabel TTTWin, TTTLose, TTTDraw, TTTNull, label, TTTotalWins, TTTtotalLosses, TTTAura;
-    private JLabel followersGained, auraGained, totalFollowers, totalAura;
+    private JLabel followersGained, auraGained, totalFollowers, totalAura, aura;
     private boolean[] pressedKeys;
     private int round;
     private int wins;
@@ -45,7 +45,9 @@ public class ButtonClass {
         sponsors = new Sponsors();
         livestreamExited = false;
         ticTacToe = new TicTacToe(player);
-        //timer = new Timer();
+        aura = new JLabel(player.getAura() + "");
+        aura.setFont(pressStartFont);
+        aura.setBounds(400, 400, 1000, 400);
 
         //create buttons
         usernameText = new JTextField(15);
@@ -95,6 +97,12 @@ public class ButtonClass {
         backBtnRPS = new JButton();
         backBtnTTT = new JButton();
         returnBtn = new JButton();
+        hundredAura = new JButton();
+        thousandAura = new JButton();
+        twoThousandAura = new JButton();
+        yes = new JButton();
+        no = new JButton();
+
         round = 1;
         wins = 1;
         lose = 0;
@@ -156,6 +164,16 @@ public class ButtonClass {
         setButtonOpaque(singleBtn);
 
         setButtonOpaque(doubleBtn);
+
+        setButtonOpaque(hundredAura);
+
+        setButtonOpaque(thousandAura);
+
+        setButtonOpaque(twoThousandAura);
+
+        setButtonOpaque(yes);
+
+        setButtonOpaque(no);
 
         setButtonOpaque(backBtnEdit);
         setButtonOpaque(backBtnLS);
@@ -233,6 +251,9 @@ public class ButtonClass {
         next.setBounds(50, 58, 280, 60);
         returnBtn.setBounds(450,450,100,50);
         backBtnEndDay.setBounds(610,130,30,30);
+//       hundredAura.setBounds(60, 450, 40, 200);
+//        thousandAura.setBounds(150, 450, 40, 200);
+//        twoThousandAura.setBounds(250, 450, 40, 200);
 
         //livestreamApp.setVisible(false);
 
@@ -612,6 +633,65 @@ public class ButtonClass {
 
             cardLayoutPanel.showCard("EndDayScreen");
         });
+
+        hundredAura.addActionListener(e -> {
+            if (player.getAura() < 100) {
+                cardLayoutPanel.showCard("notenough");
+                new javax.swing.Timer(1000, ex -> {
+                    cardLayoutPanel.showCard("shop");
+                    ((javax.swing.Timer) e.getSource()).stop();
+                }).start();
+            }
+            else {
+                player.setCurrent(1000);
+                player.setCurrentAura(100);
+                cardLayoutPanel.showCard("areyousure");
+            }
+        });
+
+        thousandAura.addActionListener(e -> {
+            if (player.getAura() < 1000) {
+                cardLayoutPanel.showCard("notenough");
+                new javax.swing.Timer(1000, ex -> {
+                    cardLayoutPanel.showCard("shop");
+                    ((javax.swing.Timer) e.getSource()).stop();
+                }).start();
+            }
+            else {
+                player.setCurrent(10000);
+                player.setCurrentAura(1000);
+                cardLayoutPanel.showCard("areyousure");
+            }
+        });
+
+        twoThousandAura.addActionListener(e -> {
+            if (player.getAura() < 2000) {
+                cardLayoutPanel.showCard("notenough");
+                new javax.swing.Timer(1000, ex -> {
+                    cardLayoutPanel.showCard("shop");
+                    ((javax.swing.Timer) e.getSource()).stop();
+                }).start();
+            }
+            else {
+                player.setCurrent(20000);
+                player.setCurrentAura(2000);
+                cardLayoutPanel.showCard("areyousure");
+            }
+        });
+
+        yes.addActionListener(e -> {
+            player.addFollowers(player.getCurrent());
+            player.deleteAura(player.getCurrentAura());
+            cardLayoutPanel.showCard("success");
+            new javax.swing.Timer(2000, ex -> {
+                cardLayoutPanel.showCard("AppScreen");
+                ((javax.swing.Timer) e.getSource()).stop();
+            }).start();
+        });
+
+        no.addActionListener(e -> {
+            cardLayoutPanel.showCard("AppScreen");
+        });
     }
 
     private void customizeButton(JButton button) {
@@ -770,8 +850,31 @@ public class ButtonClass {
         return backBtnEdit;
     }
 
+    public JButton getHundredAura() {
+        return hundredAura;
+    }
+
+    public JButton getThousandAura() {
+        return thousandAura;
+    }
+
+    public JButton getTwoThousandAura() {
+        return twoThousandAura;
+    }
+
+    public JButton getYes() {
+        return yes;
+    }
+
+    public JButton getNo() {
+        return no;
+    }
     public JLabel getLabel() {
         return label;
+    }
+
+    public JLabel getAura() {
+        return aura;
     }
 
     public void addPassword() {

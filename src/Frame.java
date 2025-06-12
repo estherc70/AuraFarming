@@ -7,12 +7,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 
 
 public class Frame extends JFrame implements ActionListener {
     private JPanel mainPanel, livestreamScreen, mail2, loginInScreen, auraInfo,
-            ticTacToe, gamesScreen, appScreen, roundScreen, shopScreen, shop, endDay, rpsWinPage;
+            ticTacToe, gamesScreen, appScreen, roundScreen, shopScreen, shop, endDay, rpsWinPage, rpsLoseScreen;
     private JScrollPane scrollPane;
     //private JLabel username;
     private ButtonClass buttonClass;
@@ -31,7 +30,6 @@ public class Frame extends JFrame implements ActionListener {
         buttonClass = new ButtonClass(this,player,mainPanel);
         sponsors = new Sponsors();
         scrollPane = buttonClass.getScrollPane();
-
 
         JPanel startScreen = PanelClass.createPanel("src/images/enteruser.png", buttonClass, this);
         JPanel tutorialScreen = PanelClass.createPanel("src/images/tutorial.jpeg", buttonClass, this);
@@ -62,12 +60,18 @@ public class Frame extends JFrame implements ActionListener {
         JPanel areyousure = PanelClass.createPanel("src/shopimages/areyousure.png", buttonClass, this);
         JPanel success = PanelClass.createPanel("src/shopimages/success.png", buttonClass, this);
         JPanel notenough = PanelClass.createPanel("src/shopimages/notenough.png", buttonClass, this);
-
+        JPanel rpsLosePage = PanelClass.createPanel("src/images/RockPaperScissorsGame/LoseScreen.png", buttonClass, this);
+        rpsLoseScreen = PanelClass.createPanel("src/images/RockPaperScissorsGame/LosePage.png", buttonClass, this);
 
         ImageIcon tutorialImageIcon = new ImageIcon("src/DesktopPetImages/book.png");
         JLabel tutorialLabel = new JLabel(tutorialImageIcon);
         tutorialLabel.setBounds(0, 0, tutorialImageIcon.getIconWidth(), tutorialImageIcon.getIconHeight());
         tutorialScreen.add(tutorialLabel);
+
+        ImageIcon tutorialSkipImageIcon = new ImageIcon("src/images/skip.png");
+        JLabel tutorialSkipLabel = new JLabel(tutorialSkipImageIcon);
+        tutorialSkipLabel.setBounds(0, 0, tutorialSkipImageIcon.getIconWidth(), tutorialSkipImageIcon.getIconHeight());
+        tutorialScreen.add(tutorialSkipLabel);
 
         ArrayList<BufferedImage> startingImages = new ArrayList<>();
         for (int i = 1; i <= 5; i++) {
@@ -162,16 +166,47 @@ public class Frame extends JFrame implements ActionListener {
         switcher2.setBounds(450, 175, 200, 100);
         backgroundScreen.add(switcher2);
 
+//        ArrayList<BufferedImage> arrowAnimation = new ArrayList<>();
+//        BufferedImage img3 = ImageIO.read(new File("src/DesktopPetImages/arrow0.png"));
+//        arrowAnimation.add(img3);
+//        BufferedImage img4 = ImageIO.read(new File("src/DesktopPetImages/arrow1.png"));
+//        arrowAnimation.add(img4);
+
+        ArrayList<BufferedImage> arrowAnimation = new ArrayList<>();
+        try {
+            BufferedImage img3 = ImageIO.read(new File("src/DesktopPetImages/arrow0.png"));
+            BufferedImage img4 = ImageIO.read(new File("src/DesktopPetImages/arrow1.png"));
+            arrowAnimation.add(img3);
+            arrowAnimation.add(img4);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        final boolean[] arrowAdded = {false};
+
         switcher2.setDialogueChangeListener(pressCount -> {
             System.out.println("[DEBUG] DialogueChangeListener: pressCount2 = " + pressCount);
-            if (pressCount == 3) {
+
+            if (pressCount == 3 && !arrowAdded[0]) {
+                arrowAdded[0] = true;
+
+                ImageAnimation arrowAnim = new ImageAnimation(arrowAnimation, 500, 495, 250);
+                arrowAnim.getAnimationPanel().setOpaque(false);
+                backgroundScreen.setLayout(null);
+                backgroundScreen.add(arrowAnim.getAnimationPanel());
+                backgroundScreen.revalidate();
+                backgroundScreen.repaint();
+
+                // Your existing stuff
                 animation2.updateLocation(450, 265);
                 animation2.updateFrames(animationFrames6);
                 switcher2.setBounds(700, 275, 200, 100);
                 switcher2.setSwitcherActive(false);
-                System.out.println("[DEBUG] Disabled switcher at pressCount == 5");
+
+                System.out.println("[DEBUG] Arrow animation added & switcher disabled");
             }
         });
+
 
 
         buttonClass.getBookBtn().addActionListener(e -> {
@@ -207,6 +242,8 @@ public class Frame extends JFrame implements ActionListener {
         areyousure.setLayout(null);
         success.setLayout(null);
         notenough.setLayout(null);
+        rpsLosePage.setLayout(null);
+        rpsLoseScreen.setLayout(null);
 
         startScreen.add(buttonClass.getUsernameText());
         tutorialScreen.add(buttonClass.getNextButton());
@@ -242,13 +279,10 @@ public class Frame extends JFrame implements ActionListener {
         mailScreen.add(buttonClass.getNext());
         auraInfo.add(buttonClass.getNext());
         rpsWinPage.add(buttonClass.getReturnBtn());
-//        shop.add(buttonClass.getHundredAura());
-//        shop.add(buttonClass.getThousandAura());
-//        shop.add(buttonClass.getTwoThousandAura());
-//        shop.add(buttonClass.getAura());
+        //rpsLosePage.add(buttonClass.getReturnBtn());
+        rpsLoseScreen.add(buttonClass.getReturnBtn());
         areyousure.add(buttonClass.getYes());
         areyousure.add(buttonClass.getNo());
-
 
         mainPanel.add(startScreen, "StartScreen");
         mainPanel.add(tutorialScreen, "TutorialScreen");
@@ -277,6 +311,8 @@ public class Frame extends JFrame implements ActionListener {
         mainPanel.add(shop, "shop");
         mainPanel.add(endDay, "EndDayScreen");
         mainPanel.add(rpsWinPage,"RPSWinPage");
+        mainPanel.add(rpsLosePage,"RPSLoseScreen");
+        mainPanel.add(rpsLoseScreen,"RPSLosePage");
         mainPanel.add(areyousure, "areyousure");
         mainPanel.add(success, "success");
         mainPanel.add(notenough, "notenough");
@@ -412,5 +448,9 @@ public class Frame extends JFrame implements ActionListener {
 
     public JPanel getEndDay() {
         return endDay;
+    }
+
+    public JPanel getRpsLoseScreen() {
+        return rpsLoseScreen;
     }
 }

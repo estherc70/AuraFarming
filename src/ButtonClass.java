@@ -111,8 +111,8 @@ public class ButtonClass {
         no = new JButton();
 
         round = 1;
-        wins = 1;
-        lose = 0;
+        wins = 0;
+        lose = 1;
 
         try {
             pressStartFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/PressStart2P-Regular.ttf"))
@@ -142,7 +142,9 @@ public class ButtonClass {
         //set opaque
         //customizeButton(livestreamApp);
 
-        customizeButton(nextButton);
+        //customizeButton(nextButton);
+
+        setButtonOpaque(nextButton);
 
         //customizeButton(mailApp);
         customizeButton(mailApp);
@@ -241,7 +243,9 @@ public class ButtonClass {
         editApp.setBounds(323, 345, 65, 65);
         shopApp.setBounds(460,345,65,65);
         endDay.setBounds(600,345,65,65);
-        nextButton.setBounds(515,165,90,90);
+
+        nextButton.setBounds(725,480,210,85);
+
         bookBtn.setBounds(625, 285, 145, 125);
         powerOn.setBounds(680,455,80,18);
         ticTacToeApp.setBounds(380,275,65,65);
@@ -1052,6 +1056,9 @@ public class ButtonClass {
                 lose = 0;
 
                 returnBtn.addActionListener(e -> {
+                    rpsWinPage.removeAll();
+                    rpsWinPage.revalidate();
+                    rpsWinPage.repaint();
                     cardLayoutPanel.showCard("AppScreen");
                 });
 
@@ -1063,6 +1070,59 @@ public class ButtonClass {
                 rpsWinPage.repaint();
             });
             return;
+        } else if (lose == 2) {
+            cardLayoutPanel.showCard("RPSLoseScreen");
+
+            javax.swing.SwingUtilities.invokeLater(() -> {
+                new javax.swing.Timer(5000, e -> {
+                    JPanel rpsLosePage = cardLayoutPanel.getRpsLoseScreen();
+                    rpsLosePage.setLayout(null);
+
+                    JButton returnBtn = new JButton("Return");
+                    returnBtn.setBounds(650, 407, 125, 45);
+                    returnBtn.setFont(pressStartFont.deriveFont(20f));
+                    setButtonOpaque(returnBtn);
+
+                    int num = player.addAura();
+                    JLabel auraGained = new JLabel(String.valueOf(num));
+                    auraGained.setFont(pressStartFont.deriveFont(18f));
+                    auraGained.setForeground(Color.decode("#ffcc00"));
+                    auraGained.setBounds(510, 245, 100, 50);
+
+                    int num2 = player.getFollowers();
+                    JLabel totalFollowers = new JLabel(String.valueOf(num2));
+                    totalFollowers.setFont(pressStartFont.deriveFont(18f));
+                    totalFollowers.setForeground(Color.decode("#ffcc00"));
+                    totalFollowers.setBounds(560, 275, 100, 50);
+
+                    int num3 = player.getAura();
+                    JLabel totalAura = new JLabel(String.valueOf(num3));
+                    totalAura.setFont(pressStartFont.deriveFont(18f));
+                    totalAura.setForeground(Color.decode("#ffcc00"));
+                    totalAura.setBounds(500, 297, 100, 50);
+
+                    round = 1;
+                    wins = 0;
+                    lose = 0;
+
+                    returnBtn.addActionListener(evt -> {
+                        rpsLosePage.removeAll();
+                        rpsLosePage.revalidate();
+                        rpsLosePage.repaint();
+                        cardLayoutPanel.showCard("AppScreen");
+                    });
+
+                    rpsLosePage.add(returnBtn);
+                    rpsLosePage.add(auraGained);
+                    rpsLosePage.add(totalFollowers);
+                    rpsLosePage.add(totalAura);
+                    rpsLosePage.revalidate();
+                    rpsLosePage.repaint();
+
+                    cardLayoutPanel.showCard("RPSLosePage");
+                    ((javax.swing.Timer) e.getSource()).stop();
+                }).start();
+            });
         }
         cardLayoutPanel.showCard(result);
 

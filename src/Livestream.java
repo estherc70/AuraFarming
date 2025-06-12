@@ -16,12 +16,12 @@ public class Livestream {
     }
 
     public String getRandomGood() {
-        int random = (int) (Math.random() * goodChat.length - 1);
+        int random = (int) (Math.random() * goodChat.length);
         return goodChat[random];
     }
 
     public String getRandomBad() {
-        int random = (int) (Math.random() * badChat.length - 1);
+        int random = (int) (Math.random() * badChat.length);
         return badChat[random];
     }
 }

@@ -8,7 +8,7 @@ public class Player {
     private int current, currentAura;
 
     public Player() {
-        day = 0;
+        day = 1;
         followersGained = 0;
         auraGained = 0;
         username = "";
@@ -95,6 +95,7 @@ public class Player {
         day++;
         followersGained = 0;
         auraGained = 0;
+        System.out.println("Day: " + day);
     }
 
     public int getFollowersGained() {
@@ -103,5 +104,8 @@ public class Player {
 
     public int getAuraGained() {
         return auraGained;
+    }
+    public int getDay() {
+        return day;
     }
 }

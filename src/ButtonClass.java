@@ -1,4 +1,5 @@
 import javax.imageio.ImageIO;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -15,25 +16,28 @@ public class ButtonClass {
             ticTacToeApp, rpsGame, singleBtn, doubleBtn,
             shop, backBtnLS, backBtnRPS, backBtnTTT,
             backBtnEdit, returnBtn, backBtnEndDay, hundredAura, thousandAura, twoThousandAura, yes, no;
-    private JButton tic1,tic2, tic3, tic4, tic5, tic6, tic7, tic8, tic9, checkWinner, shopback;
+    private JButton tic1,tic2, tic3, tic4, tic5, tic6, tic7, tic8, tic9, checkWinner, shopback, miniGameBtn;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
+    private Thread livestreamThread;
+    private volatile boolean livestreamExited = false;
     private JTextField usernameText, passwordText;
     private JPanel btnPanel, mainPanel;
     private Frame cardLayoutPanel;
     private JPanelAnimation animation;
     private Livestream livestream;
     private Sponsors sponsors;
-    private boolean livestreamExited;
     private Font pressStartFont;
     private TicTacToe ticTacToe;
     private JLabel TTTWin, TTTLose, TTTDraw, TTTNull, label, TTTotalWins, TTTtotalLosses, TTTAura;
-    private JLabel followersGained, auraGained, totalFollowers, totalAura, aura;
+    private JLabel followersGained, auraGained, totalFollowers, totalAura, aura, followersLS, auraLS,
+            game0, game1, game2, game3;
     private boolean[] pressedKeys;
     private int round;
     private int wins;
     private int lose;
     private Timer timer;
+    private Clip currentClip;
 
 
     public ButtonClass(Frame cardLayoutPanel,Player player, JPanel mainPanel)  {
@@ -43,19 +47,20 @@ public class ButtonClass {
         this.cardLayoutPanel = cardLayoutPanel;
         this.player = player;
         sponsors = new Sponsors();
-        livestreamExited = false;
         ticTacToe = new TicTacToe(player);
-//        aura = new JLabel("" + player.getAura());
-//        aura.setFont(pressStartFont);
-//        aura.setOpaque(true);
-
 
         ticTacToe = new TicTacToe(player);
         aura = new JLabel(player.getAura() + "");
         aura.setFont(pressStartFont);
         aura.setBounds(400, 400, 1000, 400);
 
-        //create buttons
+        followersLS = new JLabel(String.valueOf(player.getFollowers()));
+        auraLS = new JLabel(String.valueOf(player.getAura()));
+        game0 = new JLabel(new ImageIcon("src/images/LSGame0.png"));
+        game1 = new JLabel(new ImageIcon("src/images/LSGame1.png"));
+        game2 = new JLabel(new ImageIcon("src/images/LSGame2.png"));
+        game3 = new JLabel(new ImageIcon("src/images/LSGame3.png"));
+
         usernameText = new JTextField(15);
         passwordText = new JTextField(4);
         livestreamChat = new JTextArea(280,500);
@@ -109,9 +114,10 @@ public class ButtonClass {
         twoThousandAura = new JButton();
         yes = new JButton();
         no = new JButton();
+        miniGameBtn = new JButton();
 
         round = 1;
-        wins = 1;
+        wins = 0;
         lose = 0;
 
         try {
@@ -142,7 +148,9 @@ public class ButtonClass {
         //set opaque
         //customizeButton(livestreamApp);
 
-        customizeButton(nextButton);
+        //customizeButton(nextButton);
+
+        setButtonOpaque(nextButton);
 
         //customizeButton(mailApp);
         customizeButton(mailApp);
@@ -218,6 +226,9 @@ public class ButtonClass {
 
         customizeButton(checkWinner);
 
+        //setButtonOpaque(miniGameBtn);
+        customizeButton(miniGameBtn);
+
         //customizeButton(next);
 
         livestreamChat.setEditable(true);
@@ -241,7 +252,9 @@ public class ButtonClass {
         editApp.setBounds(323, 345, 65, 65);
         shopApp.setBounds(460,345,65,65);
         endDay.setBounds(600,345,65,65);
-        nextButton.setBounds(515,165,90,90);
+
+        nextButton.setBounds(725,480,210,85);
+
         bookBtn.setBounds(625, 285, 145, 125);
         powerOn.setBounds(680,455,80,18);
         ticTacToeApp.setBounds(380,275,65,65);
@@ -265,6 +278,7 @@ public class ButtonClass {
         next.setBounds(50, 58, 280, 60);
         returnBtn.setBounds(450,450,100,50);
         backBtnEndDay.setBounds(610,130,30,30);
+        miniGameBtn.setBounds(200,450,100,50);
 //       hundredAura.setBounds(60, 450, 40, 200);
 //        thousandAura.setBounds(150, 450, 40, 200);
 //        twoThousandAura.setBounds(250, 450, 40, 200);
@@ -304,6 +318,7 @@ public class ButtonClass {
         btnPanel.add(backBtnTTT);
         //btnPanel.add(next);
         btnPanel.add(returnBtn);
+        btnPanel.add(miniGameBtn);
         //btnPanel.add(backBtnEndDay);
 
         addActionListeners();
@@ -366,21 +381,54 @@ public class ButtonClass {
         });
 
         timer = new Timer(3000, e -> {
-        int randomIncrement = (int) (Math.random() * 1001);
-        player.addFollowers(randomIncrement);
-        System.out.println("Current value of Followers: " + player.getFollowers());
+            int randomIncrement = (int) (Math.random() * 1001);
+            player.addFollowers(randomIncrement);
+            followersLS.setText(String.valueOf(player.getFollowers()));
         });
 
         backBtnLS.addActionListener(e -> {
             timer.stop();
+            cardLayoutPanel.getLivestreamScreen().remove(auraLS);
             cardLayoutPanel.showCard("AppScreen");
         });
 
         livestreamApp.addActionListener(e -> {
+            int randomGame = (int) (Math.random() * 5);
+            if (randomGame == 0) {
+                game0.setBounds(202,100,380,240);
+                cardLayoutPanel.getLivestreamScreen().add(game0);
+            } else if (randomGame == 1) {
+                game1.setBounds(202,100,380,240);
+                cardLayoutPanel.getLivestreamScreen().add(game1);
+            } else if (randomGame == 2) {
+                game2.setBounds(202,100,380,240);
+                cardLayoutPanel.getLivestreamScreen().add(game2);
+            } else {
+                game3.setBounds(202,100,380,240);
+                cardLayoutPanel.getLivestreamScreen().add(game3);
+            }
+
+            cardLayoutPanel.getLivestreamScreen().add(followersLS);
+            followersLS.setFont(pressStartFont.deriveFont(15f));
+            followersLS.setForeground(Color.decode("#31529b"));
+            followersLS.setBounds(440, 365, 200, 60);
+
+            auraLS = new JLabel(String.valueOf(player.getAura()));
+            auraLS.setFont(pressStartFont.deriveFont(15f));
+            auraLS.setForeground(Color.decode("#31529b"));
+            auraLS.setBounds(387, 383, 200, 60);
+            cardLayoutPanel.getLivestreamScreen().add(auraLS);
+
             timer.start();
-            new Thread(() -> {
+
+            livestreamExited = true;
+            if (livestreamThread != null && livestreamThread.isAlive()) {
+                livestreamThread.interrupt();
+            }
+            livestreamExited = false;
+
+            livestreamThread = new Thread(() -> {
                 while (!livestreamExited) {
-//                    livestream.incrementByRandomNumber();
                     String textToAppend;
                     int goodOrBad = (int) (Math.random() * 2);
                     if (goodOrBad == 1) {
@@ -391,21 +439,31 @@ public class ButtonClass {
                     String finalTextToAppend = textToAppend;
                     SwingUtilities.invokeLater(() -> {
                         livestreamChat.append(finalTextToAppend);
-                        livestreamChat.setCaretPosition(livestreamChat.getDocument().getLength()); // scroll to bottom
+                        livestreamChat.setCaretPosition(livestreamChat.getDocument().getLength());
                         cardLayoutPanel.getLivestreamScreen().revalidate();
                         cardLayoutPanel.getLivestreamScreen().repaint();
                     });
+
                     try {
                         Thread.sleep(600);
                     } catch (InterruptedException f) {
-                        f.printStackTrace();
+                        break;
                     }
                 }
-            }).start();
+            });
+            livestreamThread.start();
             cardLayoutPanel.showCard("LivestreamScreen");
         });
 
         editApp.addActionListener(e -> {
+            currentClip = SoundUtils.playSound("src/Rick Astley - Never Gonna Give You Up (Official Music Video).wav");
+            JPanel editScreen = cardLayoutPanel.getEditAppScreen();
+            editScreen.setLayout(null);
+            JLabel availableLabel = new JLabel(String.valueOf(player.getAds()));
+            availableLabel.setFont(pressStartFont.deriveFont(25f));
+            availableLabel.setForeground(Color.decode("#5d31b8"));
+            availableLabel.setBounds(675, 177, 500, 50);
+            editScreen.add(availableLabel);
             cardLayoutPanel.showCard("EditAppScreen");
         });
 
@@ -605,6 +663,15 @@ public class ButtonClass {
         });
 
         backBtnEdit.addActionListener(e -> {
+            if (currentClip != null && currentClip.isRunning()) {
+                currentClip.stop();
+                currentClip.close();
+            }
+            JPanel editScreen = cardLayoutPanel.getEditAppScreen();
+            editScreen.setLayout(null);
+            editScreen.removeAll();
+            editScreen.revalidate();
+            editScreen.repaint();
             cardLayoutPanel.showCard("AppScreen");
         });
 
@@ -648,6 +715,17 @@ public class ButtonClass {
             player.endDay();
 
             cardLayoutPanel.showCard("EndDayScreen");
+
+            if (player.getDay() >= 30) {
+                System.out.println("hi");
+                if (player.getFollowers() >= 100000) {
+                    System.out.println("bye");
+                    cardLayoutPanel.showCard("VictoryScreen");
+                } else {
+                    System.out.println("loser");
+                    cardLayoutPanel.showCard("LosingScreen");
+                }
+            }
         });
 
         hundredAura.addActionListener(e -> {
@@ -711,6 +789,10 @@ public class ButtonClass {
 
         shopback.addActionListener(e -> {
             cardLayoutPanel.showCard("AppScreen");
+        });
+
+        miniGameBtn.addActionListener(e -> {
+
         });
     }
 
@@ -1052,6 +1134,9 @@ public class ButtonClass {
                 lose = 0;
 
                 returnBtn.addActionListener(e -> {
+                    rpsWinPage.removeAll();
+                    rpsWinPage.revalidate();
+                    rpsWinPage.repaint();
                     cardLayoutPanel.showCard("AppScreen");
                 });
 
@@ -1063,6 +1148,59 @@ public class ButtonClass {
                 rpsWinPage.repaint();
             });
             return;
+        } else if (lose == 2) {
+            cardLayoutPanel.showCard("RPSLoseScreen");
+
+            javax.swing.SwingUtilities.invokeLater(() -> {
+                new javax.swing.Timer(5000, e -> {
+                    JPanel rpsLosePage = cardLayoutPanel.getRpsLoseScreen();
+                    rpsLosePage.setLayout(null);
+
+                    JButton returnBtn = new JButton("Return");
+                    returnBtn.setBounds(650, 407, 125, 45);
+                    returnBtn.setFont(pressStartFont.deriveFont(20f));
+                    setButtonOpaque(returnBtn);
+
+                    int num = player.addAura();
+                    JLabel auraGained = new JLabel(String.valueOf(num));
+                    auraGained.setFont(pressStartFont.deriveFont(18f));
+                    auraGained.setForeground(Color.decode("#ffcc00"));
+                    auraGained.setBounds(510, 245, 100, 50);
+
+                    int num2 = player.getFollowers();
+                    JLabel totalFollowers = new JLabel(String.valueOf(num2));
+                    totalFollowers.setFont(pressStartFont.deriveFont(18f));
+                    totalFollowers.setForeground(Color.decode("#ffcc00"));
+                    totalFollowers.setBounds(560, 275, 100, 50);
+
+                    int num3 = player.getAura();
+                    JLabel totalAura = new JLabel(String.valueOf(num3));
+                    totalAura.setFont(pressStartFont.deriveFont(18f));
+                    totalAura.setForeground(Color.decode("#ffcc00"));
+                    totalAura.setBounds(500, 297, 100, 50);
+
+                    round = 1;
+                    wins = 0;
+                    lose = 0;
+
+                    returnBtn.addActionListener(evt -> {
+                        rpsLosePage.removeAll();
+                        rpsLosePage.revalidate();
+                        rpsLosePage.repaint();
+                        cardLayoutPanel.showCard("AppScreen");
+                    });
+
+                    rpsLosePage.add(returnBtn);
+                    rpsLosePage.add(auraGained);
+                    rpsLosePage.add(totalFollowers);
+                    rpsLosePage.add(totalAura);
+                    rpsLosePage.revalidate();
+                    rpsLosePage.repaint();
+
+                    cardLayoutPanel.showCard("RPSLosePage");
+                    ((javax.swing.Timer) e.getSource()).stop();
+                }).start();
+            });
         }
         cardLayoutPanel.showCard(result);
 
@@ -1148,5 +1286,9 @@ public class ButtonClass {
 
     public JButton getReturnBtn() {
         return returnBtn;
+    }
+
+    public JButton getMiniGameBtn() {
+        return miniGameBtn;
     }
 }

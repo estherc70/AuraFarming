@@ -241,10 +241,10 @@ public class Frame extends JFrame implements ActionListener {
         mailScreen.add(buttonClass.getNext());
         auraInfo.add(buttonClass.getNext());
         rpsWinPage.add(buttonClass.getReturnBtn());
-        shop.add(buttonClass.getHundredAura());
-        shop.add(buttonClass.getThousandAura());
-        shop.add(buttonClass.getTwoThousandAura());
-        shop.add(buttonClass.getAura());
+//        shop.add(buttonClass.getHundredAura());
+//        shop.add(buttonClass.getThousandAura());
+//        shop.add(buttonClass.getTwoThousandAura());
+//        shop.add(buttonClass.getAura());
         areyousure.add(buttonClass.getYes());
         areyousure.add(buttonClass.getNo());
 

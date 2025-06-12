@@ -44,9 +44,11 @@ public class ButtonClass {
         sponsors = new Sponsors();
         livestreamExited = false;
         ticTacToe = new TicTacToe();
-        aura = new JLabel(player.getAura() + "");
-        aura.setFont(pressStartFont);
-        aura.setBounds(400, 400, 1000, 400);
+//        aura = new JLabel("" + player.getAura());
+//        aura.setFont(pressStartFont);
+//        aura.setOpaque(true);
+
+
 
         //create buttons
         usernameText = new JTextField(15);
@@ -520,6 +522,7 @@ public class ButtonClass {
                 }
             }
             JPanelAnimation shopAnimation = new JPanelAnimation(cardLayoutPanel, "shop", shopImages, 50, 1);
+            System.out.println(player.getAura());
             cardLayoutPanel.getMainPanel().add(shopAnimation, "shopAnimation");
 
             cardLayoutPanel.showCard("shopAnimation");
@@ -563,6 +566,7 @@ public class ButtonClass {
                     cardLayoutPanel.showCard("shop");
                     ((javax.swing.Timer) e.getSource()).stop();
                 }).start();
+
             }
             else {
                 player.setCurrent(1000);
@@ -797,6 +801,14 @@ public class ButtonClass {
 
     public JLabel getAura() {
         return aura;
+    }
+
+    public int getPlayerAura() {
+        return player.getAura();
+    }
+
+    public Font getPressStartFont() {
+        return pressStartFont;
     }
 
     public void addPassword() {

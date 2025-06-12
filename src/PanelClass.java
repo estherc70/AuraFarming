@@ -33,16 +33,35 @@ public class PanelClass extends JPanel {
             //cardLayoutPanel.getAuraInfo().revalidate();
         }
         else if (fileName.equals("src/shopimages/shop2.png")) {
-            //cardLayoutPanel.getShop().removeAll();
-            buttonClass.getHundredAura().setLocation(68, 500);
-            buttonClass.getThousandAura().setLocation(365, 500);
-            buttonClass.getTwoThousandAura().setLocation(675, 500);
-            buttonClass.getHundredAura().setSize(240, 50);
-            buttonClass.getThousandAura().setSize(240, 50);
-            buttonClass.getTwoThousandAura().setSize(240, 50);
-            //cardLayoutPanel.getShop().add(buttonClass.getAura());
+            cardLayoutPanel.getShop().removeAll();
 
+            JLabel aura = new JLabel("" + buttonClass.getPlayerAura());
+
+            buttonClass.getHundredAura().setBounds(68, 500, 240, 50);
+            buttonClass.getThousandAura().setBounds(365, 500, 240, 50);
+            buttonClass.getTwoThousandAura().setBounds(675, 500, 240, 50);
+
+            aura.setFont(buttonClass.getPressStartFont());
+            aura.setOpaque(false);
+            aura.setForeground(Color.BLACK);
+            aura.setBounds(250, 75, 150, 100);
+
+            cardLayoutPanel.getShop().setLayout(null);
+
+            // Add components
+            cardLayoutPanel.getShop().add(aura);
+            cardLayoutPanel.getShop().add(buttonClass.getHundredAura());
+            cardLayoutPanel.getShop().add(buttonClass.getThousandAura());
+            cardLayoutPanel.getShop().add(buttonClass.getTwoThousandAura());
+
+            // Force revalidation and repaint
+            cardLayoutPanel.getShop().revalidate();
+            cardLayoutPanel.getShop().repaint();
         }
+
+
+
+
         else if (fileName.equals("src/shopimages/areyousure.png")) {
             buttonClass.getYes().setLocation(155, 380);
             buttonClass.getNo().setLocation(530, 380);

@@ -24,7 +24,6 @@ public class Frame extends JFrame implements ActionListener {
     private Player player;
 
     public Frame() throws IOException {
-        System.out.println("[DEBUG] Created switcher: " + switcher);
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
         player = new Player();
@@ -140,7 +139,6 @@ public class Frame extends JFrame implements ActionListener {
         tutorialScreen.add(switcher);
 
         switcher.setDialogueChangeListener(pressCount -> {
-            System.out.println("[DEBUG] DialogueChangeListener: pressCount = " + pressCount);
 
             if (pressCount == 1) {
                 animation.updateFrames(animationFrames2);
@@ -148,7 +146,6 @@ public class Frame extends JFrame implements ActionListener {
 
             if (pressCount == 4) {
                 switcher.setSwitcherActive(false);
-                System.out.println("[DEBUG] Disabled switcher at pressCount == 5");
             }
 
             if (pressCount >= 5) {
@@ -157,7 +154,6 @@ public class Frame extends JFrame implements ActionListener {
                 }
                 if (pressCount > 5) {
                     animation.updateFrames(animationFrames4);
-                    System.out.println("[DEBUG] Disabled switcher at pressCount > 5");
                     if (pressCount > 7) {
                         showCard("Background");
                     }
@@ -188,7 +184,6 @@ public class Frame extends JFrame implements ActionListener {
         final boolean[] arrowAdded = {false};
 
         switcher2.setDialogueChangeListener(pressCount -> {
-            System.out.println("[DEBUG] DialogueChangeListener: pressCount2 = " + pressCount);
 
             if (pressCount == 3 && !arrowAdded[0]) {
                 arrowAdded[0] = true;
@@ -205,8 +200,6 @@ public class Frame extends JFrame implements ActionListener {
                 animation2.updateFrames(animationFrames6);
                 switcher2.setBounds(700, 275, 200, 100);
                 switcher2.setSwitcherActive(false);
-
-                System.out.println("[DEBUG] Arrow animation added & switcher disabled");
             }
         });
 

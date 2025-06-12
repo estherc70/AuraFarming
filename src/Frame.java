@@ -247,7 +247,7 @@ public class Frame extends JFrame implements ActionListener {
 //        shop.add(buttonClass.getAura());
         areyousure.add(buttonClass.getYes());
         areyousure.add(buttonClass.getNo());
-
+        endDay.add(buttonClass.getBackBtnEndDay());
 
         mainPanel.add(startScreen, "StartScreen");
         mainPanel.add(tutorialScreen, "TutorialScreen");
@@ -403,6 +403,10 @@ public class Frame extends JFrame implements ActionListener {
 
     public JPanel getRpsWinPage() {
         return rpsWinPage;
+    }
+
+    public JPanel getEndDay() {
+        return endDay;
     }
 
     public JPanel getShop() {

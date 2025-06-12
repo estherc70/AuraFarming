@@ -4,27 +4,34 @@ public class Player {
     private int password;
     private int aura;
     private int ads;
+    private int day, followersGained, auraGained;
     private int current;
     private int currentAura;
+
     public Player() {
+        day = 0;
+        followersGained = 0;
+        auraGained = 0;
         username = "";
         followers = 0;
         aura = 0;
         ads = 0;
+        password = 0000;
         current = 0;
         currentAura = 0;
-        password = 0000;
     }
 
     public int addAura() {
         int auraToAdd = (int) (Math.random() * 1001);
         aura += auraToAdd;
+        auraGained += auraToAdd;
         return auraToAdd;
     }
 
     public int deleteAura() {
         int auraToDelete = (int) (Math.random() * 101);
         aura -= auraToDelete;
+        auraGained -= auraToDelete;
         return auraToDelete;
     }
 
@@ -48,17 +55,10 @@ public class Player {
         ads += add;
     }
 
-    public int getCurrent() {
-        return current;
-    }
-
-    public int getCurrentAura() {
-        return currentAura;
-    }
-
     public int getAds() {
         return ads;
     }
+
     public String getUsername() {
         return username;
     }
@@ -73,6 +73,15 @@ public class Player {
 
     public void addFollowers(int newFollowers) {
         followers = followers + newFollowers;
+        followersGained = followersGained + newFollowers;
+    }
+
+    public int getCurrent() {
+        return current;
+    }
+
+    public int getCurrentAura() {
+        return currentAura;
     }
 
     public int getPassword() {
@@ -81,5 +90,19 @@ public class Player {
 
     public void setPassword(int password) {
         this.password = password;
+    }
+
+    public void endDay() {
+        day++;
+        followersGained = 0;
+        auraGained = 0;
+    }
+
+    public int getFollowersGained() {
+        return followersGained;
+    }
+
+    public int getAuraGained() {
+        return auraGained;
     }
 }

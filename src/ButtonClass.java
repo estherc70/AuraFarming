@@ -296,7 +296,7 @@ public class ButtonClass {
         btnPanel.add(backBtnTTT);
         //btnPanel.add(next);
         btnPanel.add(returnBtn);
-        btnPanel.add(backBtnEndDay);
+        //btnPanel.add(backBtnEndDay);
 
         addActionListeners();
     }

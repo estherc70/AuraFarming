@@ -62,7 +62,8 @@ public class Frame extends JFrame implements ActionListener {
         JPanel areyousure = PanelClass.createPanel("src/shopimages/areyousure.png", buttonClass, this);
         JPanel success = PanelClass.createPanel("src/shopimages/success.png", buttonClass, this);
         JPanel notenough = PanelClass.createPanel("src/shopimages/notenough.png", buttonClass, this);
-
+        JPanel victoryScreen = PanelClass.createPanel("src/images/VictoryScreen.png", buttonClass, this);
+        JPanel losingScreen = PanelClass.createPanel("src/images/LosingScreen.png", buttonClass, this);
 
         ImageIcon tutorialImageIcon = new ImageIcon("src/DesktopPetImages/book.png");
         JLabel tutorialLabel = new JLabel(tutorialImageIcon);
@@ -280,6 +281,8 @@ public class Frame extends JFrame implements ActionListener {
         mainPanel.add(areyousure, "areyousure");
         mainPanel.add(success, "success");
         mainPanel.add(notenough, "notenough");
+        mainPanel.add(victoryScreen, "VictoryScreen");
+        mainPanel.add(losingScreen, "LosingScreen");
 
         livestreamScreen.add(scrollPane);
 

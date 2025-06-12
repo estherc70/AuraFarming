@@ -686,6 +686,17 @@ public class ButtonClass {
             player.endDay();
 
             cardLayoutPanel.showCard("EndDayScreen");
+
+            if (player.getDay() >= 30) {
+                System.out.println("hi");
+                if (player.getFollowers() >= 100000) {
+                    System.out.println("bye");
+                    cardLayoutPanel.showCard("VictoryScreen");
+                } else {
+                    System.out.println("loser");
+                    cardLayoutPanel.showCard("LosingScreen");
+                }
+            }
         });
 
         hundredAura.addActionListener(e -> {

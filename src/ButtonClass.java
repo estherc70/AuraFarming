@@ -443,7 +443,7 @@ public class ButtonClass {
             cardLayoutPanel.showCard("auraInfo");
             new javax.swing.Timer(2000, ex -> {
                 cardLayoutPanel.showCard("AppScreen");
-                ((javax.swing.Timer) e.getSource()).stop();
+                ((javax.swing.Timer) ex.getSource()).stop();
             }).start();
             cardLayoutPanel.getAuraInfo().revalidate();
             cardLayoutPanel.getAuraInfo().repaint();
@@ -459,7 +459,7 @@ public class ButtonClass {
             cardLayoutPanel.showCard("auraInfo");
             new javax.swing.Timer(2000, ex -> {
                 cardLayoutPanel.showCard("AppScreen");
-                ((javax.swing.Timer) e.getSource()).stop();
+                ((javax.swing.Timer) ex.getSource()).stop();
             }).start();
             cardLayoutPanel.getAuraInfo().revalidate();
             cardLayoutPanel.getAuraInfo().repaint();

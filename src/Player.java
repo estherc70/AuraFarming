@@ -5,8 +5,7 @@ public class Player {
     private int aura;
     private int ads;
     private int day, followersGained, auraGained;
-    private int current;
-    private int currentAura;
+    private int current, currentAura;
 
     public Player() {
         day = 0;
@@ -16,9 +15,9 @@ public class Player {
         followers = 0;
         aura = 0;
         ads = 0;
-        password = 0000;
         current = 0;
         currentAura = 0;
+        password = 0000;
     }
 
     public int addAura() {
@@ -39,12 +38,20 @@ public class Player {
         aura -= amount;
     }
 
-    public void setCurrent(int set) {
-        current = set;
+    public int getCurrent() {
+        return current;
+    }
+
+    public int getCurrentAura() {
+        return currentAura;
     }
 
     public void setCurrentAura(int amount) {
         currentAura = amount;
+    }
+
+    public void setCurrent(int amount) {
+        current = amount;
     }
 
     public int getAura() {
@@ -73,15 +80,7 @@ public class Player {
 
     public void addFollowers(int newFollowers) {
         followers = followers + newFollowers;
-        followersGained = followersGained + newFollowers;
-    }
-
-    public int getCurrent() {
-        return current;
-    }
-
-    public int getCurrentAura() {
-        return currentAura;
+        followersGained += followersGained;
     }
 
     public int getPassword() {

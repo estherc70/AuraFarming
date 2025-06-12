@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 
 public class Frame extends JFrame implements ActionListener {
@@ -247,7 +248,7 @@ public class Frame extends JFrame implements ActionListener {
 //        shop.add(buttonClass.getAura());
         areyousure.add(buttonClass.getYes());
         areyousure.add(buttonClass.getNo());
-        endDay.add(buttonClass.getBackBtnEndDay());
+
 
         mainPanel.add(startScreen, "StartScreen");
         mainPanel.add(tutorialScreen, "TutorialScreen");
@@ -405,11 +406,11 @@ public class Frame extends JFrame implements ActionListener {
         return rpsWinPage;
     }
 
-    public JPanel getEndDay() {
-        return endDay;
-    }
-
     public JPanel getShop() {
         return shop;
+    }
+
+    public JPanel getEndDay() {
+        return endDay;
     }
 }

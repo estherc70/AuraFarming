@@ -148,9 +148,9 @@ public class ButtonClass {
         //set opaque
         //customizeButton(livestreamApp);
 
-        //customizeButton(nextButton);
+        customizeButton(nextButton);
 
-        setButtonOpaque(nextButton);
+        //setButtonOpaque(nextButton);
 
         //customizeButton(mailApp);
         customizeButton(mailApp);
@@ -456,6 +456,10 @@ public class ButtonClass {
         });
 
         editApp.addActionListener(e -> {
+            if (currentClip != null && currentClip.isRunning()) {
+                currentClip.stop();
+                currentClip.close();
+            }
             currentClip = SoundUtils.playSound("src/Rick Astley - Never Gonna Give You Up (Official Music Video).wav");
             JPanel editScreen = cardLayoutPanel.getEditAppScreen();
             editScreen.setLayout(null);
@@ -731,12 +735,10 @@ public class ButtonClass {
         hundredAura.addActionListener(e -> {
             if (player.getAura() < 100) {
                 cardLayoutPanel.showCard("notenough");
-                new javax.swing.Timer(1000, ex -> {
-                    cardLayoutPanel.showCard("shop");
-                    ((javax.swing.Timer) e.getSource()).stop();
-                }).start();
-            }
-            else {
+                Timer timer = new Timer(1000, ex -> cardLayoutPanel.showCard("shop"));
+                timer.setRepeats(false);
+                timer.start();
+            } else {
                 player.setCurrent(1000);
                 player.setCurrentAura(100);
                 cardLayoutPanel.showCard("areyousure");
@@ -746,12 +748,10 @@ public class ButtonClass {
         thousandAura.addActionListener(e -> {
             if (player.getAura() < 1000) {
                 cardLayoutPanel.showCard("notenough");
-                new javax.swing.Timer(1000, ex -> {
-                    cardLayoutPanel.showCard("shop");
-                    ((javax.swing.Timer) e.getSource()).stop();
-                }).start();
-            }
-            else {
+                Timer timer = new Timer(1000, ex -> cardLayoutPanel.showCard("shop"));
+                timer.setRepeats(false);
+                timer.start();
+            } else {
                 player.setCurrent(10000);
                 player.setCurrentAura(1000);
                 cardLayoutPanel.showCard("areyousure");
@@ -761,12 +761,10 @@ public class ButtonClass {
         twoThousandAura.addActionListener(e -> {
             if (player.getAura() < 2000) {
                 cardLayoutPanel.showCard("notenough");
-                new javax.swing.Timer(1000, ex -> {
-                    cardLayoutPanel.showCard("shop");
-                    ((javax.swing.Timer) e.getSource()).stop();
-                }).start();
-            }
-            else {
+                Timer timer = new Timer(1000, ex -> cardLayoutPanel.showCard("shop"));
+                timer.setRepeats(false);
+                timer.start();
+            } else {
                 player.setCurrent(20000);
                 player.setCurrentAura(2000);
                 cardLayoutPanel.showCard("areyousure");
@@ -777,10 +775,9 @@ public class ButtonClass {
             player.addFollowers(player.getCurrent());
             player.deleteAura(player.getCurrentAura());
             cardLayoutPanel.showCard("success");
-            new javax.swing.Timer(2000, ex -> {
-                cardLayoutPanel.showCard("AppScreen");
-                ((javax.swing.Timer) e.getSource()).stop();
-            }).start();
+            Timer timer = new Timer(2000, ex -> cardLayoutPanel.showCard("AppScreen"));
+            timer.setRepeats(false);
+            timer.start();
         });
 
         no.addActionListener(e -> {

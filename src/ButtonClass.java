@@ -16,14 +16,16 @@ public class ButtonClass {
             endDay, accept, decline, next,
             ticTacToeApp, rpsGame, singleBtn, doubleBtn,
             shop, backBtnLS, backBtnRPS, backBtnTTT,
-            backBtnEdit, returnBtn, backBtnEndDay, hundredAura, thousandAura, twoThousandAura, yes, no, mailback;
+            backBtnEdit, returnBtn, backBtnEndDay, hundredAura,
+            thousandAura, twoThousandAura, yes, no, mailback,
+            startGameBtn;
     private JButton tic1,tic2, tic3, tic4, tic5, tic6, tic7, tic8, tic9, checkWinner, shopback, miniGameBtn;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
     private Thread livestreamThread;
     private volatile boolean livestreamExited = false;
     private JTextField usernameText, passwordText;
-    private JPanel btnPanel, mainPanel;
+    private JPanel btnPanel, mainPanel, redLine, blueLine;
     private Frame cardLayoutPanel;
     private JPanelAnimation animation;
     private java.util.List<JLabel> comments = new ArrayList<>();
@@ -33,14 +35,16 @@ public class ButtonClass {
     private TicTacToe ticTacToe;
     private JLabel TTTWin, TTTLose, TTTDraw, TTTNull, label, TTTotalWins, TTTtotalLosses, TTTAura;
     private JLabel followersGained, auraGained, totalFollowers, totalAura, aura, followersLS, auraLS,
-            game0, game1, game2, game3;
+            game0, game1, game2, game3, winLabel;
     private boolean[] pressedKeys;
     private int round;
     private int wins;
     private int lose;
     private Timer timer;
     private Clip currentClip;
-
+    private Timer blueLineTimer;
+    private int blueLineX, roundMiniGame, winsMiniGame;
+    private int blueLineDirection = 1;
 
     public ButtonClass(Frame cardLayoutPanel,Player player, JPanel mainPanel)  {
         livestream = new Livestream(player);
@@ -123,6 +127,8 @@ public class ButtonClass {
         round = 1;
         wins = 0;
         lose = 0;
+        roundMiniGame = 0;
+        winsMiniGame = 0;
 
         try {
             pressStartFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/PressStart2P-Regular.ttf"))
@@ -233,6 +239,8 @@ public class ButtonClass {
         //setButtonOpaque(miniGameBtn);
         customizeButton(miniGameBtn);
 
+        //setButtonOpaque(startGameBtn);
+
         customizeButton(mailback);
 
         //customizeButton(next);
@@ -286,6 +294,7 @@ public class ButtonClass {
         backBtnEndDay.setBounds(610,130,30,30);
         miniGameBtn.setBounds(200,450,100,50);
         mailback.setBounds(40, 60, 270, 70);
+        //startGameBtn.setBounds(200, 200, 200, 100);
 //       hundredAura.setBounds(60, 450, 40, 200);
 //        thousandAura.setBounds(150, 450, 40, 200);
 //        twoThousandAura.setBounds(250, 450, 40, 200);
@@ -326,6 +335,7 @@ public class ButtonClass {
         //btnPanel.add(next);
         btnPanel.add(returnBtn);
         btnPanel.add(miniGameBtn);
+        //btnPanel.add(startGameBtn);
         //btnPanel.add(backBtnEndDay);
 
         addActionListeners();
@@ -461,13 +471,8 @@ public class ButtonClass {
                 currentClip.close();
             }
             currentClip = SoundUtils.playSound("src/Rick Astley - Never Gonna Give You Up (Official Music Video).wav");
-            JPanel editScreen = cardLayoutPanel.getEditAppScreen();
-            editScreen.setLayout(null);
-            JLabel availableLabel = new JLabel(String.valueOf(player.getAds()));
-            availableLabel.setFont(pressStartFont.deriveFont(25f));
-            availableLabel.setForeground(Color.decode("#5d31b8"));
-            availableLabel.setBounds(675, 177, 500, 50);
-            editScreen.add(availableLabel);
+
+            buildEditAppScreen();
             cardLayoutPanel.showCard("EditAppScreen");
         });
 
@@ -664,19 +669,6 @@ public class ButtonClass {
             cardLayoutPanel.getMainPanel().add(shopAnimation, "shopAnimation");
 
             cardLayoutPanel.showCard("shopAnimation");
-        });
-
-        backBtnEdit.addActionListener(e -> {
-            if (currentClip != null && currentClip.isRunning()) {
-                currentClip.stop();
-                currentClip.close();
-            }
-            JPanel editScreen = cardLayoutPanel.getEditAppScreen();
-            editScreen.setLayout(null);
-            editScreen.removeAll();
-            editScreen.revalidate();
-            editScreen.repaint();
-            cardLayoutPanel.showCard("AppScreen");
         });
 
         backBtnRPS.addActionListener(e -> {
@@ -996,6 +988,10 @@ public class ButtonClass {
         return mailback;
     }
 
+    public JButton getStartGameBtn() {
+        return startGameBtn;
+    }
+
     public void addPassword() {
         JLabel passwordLabel = new JLabel(String.valueOf(player.getPassword()));
         passwordLabel.setFont(pressStartFont);
@@ -1111,7 +1107,8 @@ public class ButtonClass {
                 JButton returnBtn = new JButton("Return");
                 returnBtn.setBounds(650, 407, 125, 45);
                 returnBtn.setFont(pressStartFont.deriveFont(20f));
-                setButtonOpaque(returnBtn);
+                //setButtonOpaque(returnBtn);
+                customizeButton(returnBtn);
 
                 int num = player.addAura();
 
@@ -1350,5 +1347,124 @@ public class ButtonClass {
 
     public JButton getMiniGameBtn() {
         return miniGameBtn;
+    }
+
+    private void buildEditAppScreen() {
+        JPanel editScreen = cardLayoutPanel.getEditAppScreen();
+        editScreen.removeAll();
+        editScreen.setLayout(null);
+
+        // Re-add back button
+        JButton backBtnEdit = new JButton();
+        backBtnEdit.setBounds(200,85,17,17);
+        customizeButton(backBtnEdit);
+        backBtnEdit.addActionListener(e -> {
+            if (currentClip != null && currentClip.isRunning()) {
+                currentClip.stop();
+                currentClip.close();
+            }
+            cardLayoutPanel.showCard("AppScreen");
+        });
+        customizeButton(backBtnEdit);
+        editScreen.add(backBtnEdit);
+
+        winLabel = new JLabel(winsMiniGame + " / 5");
+        winLabel.setFont(pressStartFont.deriveFont(18f));
+        winLabel.setForeground(Color.GREEN);
+        winLabel.setBounds(230, 420, 200, 30);
+        editScreen.add(winLabel);
+
+        JButton uploadBtn = new JButton("Upload");
+        uploadBtn.setBounds(390, 380, 165, 50);
+        uploadBtn.addActionListener(ev -> {
+            if (winsMiniGame >= 5) {
+                JOptionPane.showMessageDialog(editScreen, "Upload complete! You gained " + player.addAura() + " aura");
+                winsMiniGame = 0;
+                winLabel.setText(winsMiniGame + " / 5");
+            }
+        });
+        customizeButton(uploadBtn);
+        editScreen.add(uploadBtn);
+
+        JButton startBtn = new JButton();
+        startBtn.setBounds(200,365,150,45);
+        startBtn.addActionListener(e -> {
+            if (redLine != null) {
+                editScreen.remove(redLine);
+            }
+
+            redLine = new JPanel();
+            redLine.setBackground(Color.decode("#ffcc00"));
+            int num = (int)(Math.random() * (500 - 270 + 1)) + 270;
+            redLine.setBounds(num, 270, 10, 30);
+            editScreen.add(redLine);
+
+            if (blueLine != null) {
+                editScreen.remove(blueLine);
+            }
+            if (blueLineTimer != null && blueLineTimer.isRunning()) {
+                blueLineTimer.stop();
+            }
+
+            blueLine = new JPanel();
+            blueLine.setBackground(Color.decode("#ff3131"));
+            blueLine.setBounds(270, 255, 10, 60);
+            editScreen.add(blueLine);
+
+            blueLineX = 270;
+            blueLineDirection = 1;
+
+            blueLineTimer = new Timer(20, ev -> {
+                blueLineX += blueLineDirection * 2;
+                if (blueLineX >= 500) {
+                    blueLineX = 500;
+                    blueLineDirection = -1;
+                } else if (blueLineX <= 270) {
+                    blueLineX = 270;
+                    blueLineDirection = 1;
+                }
+                blueLine.setBounds(blueLineX, 255, 10, 60);
+                editScreen.repaint();
+            });
+            blueLineTimer.start();
+
+            editScreen.revalidate();
+            editScreen.repaint();
+        });
+        customizeButton(startBtn);
+        editScreen.add(startBtn);
+
+        JButton stopBtn = new JButton();
+        stopBtn.setBounds(353, 305, 80, 25);
+        stopBtn.addActionListener(ev -> {
+            if (blueLineTimer != null && blueLineTimer.isRunning()) {
+                blueLineTimer.stop();
+            }
+
+            if (redLine != null && blueLine != null) {
+                int redX = redLine.getX();
+                int blueX = blueLine.getX();
+                int threshold = 10;
+
+                if (Math.abs(blueX - redX) <= threshold) {
+                    if (winsMiniGame < 5) {
+                        winsMiniGame++;
+                        winLabel.setText(winsMiniGame + " / 5");
+                    }
+                } else {
+                }
+            }
+        });
+        customizeButton(stopBtn);
+        editScreen.add(stopBtn);
+
+        JLabel availableLabel = new JLabel(String.valueOf(player.getAds()));
+        availableLabel.setFont(pressStartFont.deriveFont(25f));
+        availableLabel.setForeground(Color.decode("#5d31b8"));
+        availableLabel.setBounds(675, 177, 500, 50);
+        editScreen.add(availableLabel);
+
+        editScreen.revalidate();
+        editScreen.repaint();
     }
 }

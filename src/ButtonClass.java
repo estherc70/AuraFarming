@@ -16,7 +16,7 @@ public class ButtonClass {
             endDay, accept, decline, next,
             ticTacToeApp, rpsGame, singleBtn, doubleBtn,
             shop, backBtnLS, backBtnRPS, backBtnTTT,
-            backBtnEdit, returnBtn, backBtnEndDay, hundredAura, thousandAura, twoThousandAura, yes, no;
+            backBtnEdit, returnBtn, backBtnEndDay, hundredAura, thousandAura, twoThousandAura, yes, no, mailback;
     private JButton tic1,tic2, tic3, tic4, tic5, tic6, tic7, tic8, tic9, checkWinner, shopback, miniGameBtn;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
@@ -57,6 +57,7 @@ public class ButtonClass {
         aura.setBounds(400, 400, 1000, 400);
 
         followersLS = new JLabel(String.valueOf(player.getFollowers()));
+        auraLS = new JLabel(String.valueOf(player.getAura()));
         auraLS = new JLabel(String.valueOf(player.getAura()));
         game0 = new JLabel(new ImageIcon("src/images/LSGame0.png"));
         game1 = new JLabel(new ImageIcon("src/images/LSGame1.png"));
@@ -117,6 +118,7 @@ public class ButtonClass {
         yes = new JButton();
         no = new JButton();
         miniGameBtn = new JButton();
+        mailback = new JButton();
 
         round = 1;
         wins = 0;
@@ -231,6 +233,8 @@ public class ButtonClass {
         //setButtonOpaque(miniGameBtn);
         customizeButton(miniGameBtn);
 
+        customizeButton(mailback);
+
         //customizeButton(next);
 
         livestreamChat.setEditable(true);
@@ -281,6 +285,7 @@ public class ButtonClass {
         returnBtn.setBounds(450,450,100,50);
         backBtnEndDay.setBounds(610,130,30,30);
         miniGameBtn.setBounds(200,450,100,50);
+        mailback.setBounds(40, 60, 270, 70);
 //       hundredAura.setBounds(60, 450, 40, 200);
 //        thousandAura.setBounds(150, 450, 40, 200);
 //        twoThousandAura.setBounds(250, 450, 40, 200);
@@ -382,11 +387,11 @@ public class ButtonClass {
             cardLayoutPanel.showCard("LoginInScreen");
         });
 
-        timer = new Timer(3000, e -> {
+        timer = new Timer(1500, e -> {
             int randomIncrement = (int) (Math.random() * 1001);
             player.addFollowers(randomIncrement);
             followersLS.setText(String.valueOf(player.getFollowers()));
-            spawnComment();
+            auraLS.setText(String.valueOf(player.getAura()));
         });
 
         backBtnLS.addActionListener(e -> {
@@ -416,11 +421,10 @@ public class ButtonClass {
             followersLS.setForeground(Color.decode("#31529b"));
             followersLS.setBounds(440, 365, 200, 60);
 
-            auraLS = new JLabel(String.valueOf(player.getAura()));
+            cardLayoutPanel.getLivestreamScreen().add(auraLS);
             auraLS.setFont(pressStartFont.deriveFont(15f));
             auraLS.setForeground(Color.decode("#31529b"));
             auraLS.setBounds(387, 383, 200, 60);
-            cardLayoutPanel.getLivestreamScreen().add(auraLS);
 
             timer.start();
 
@@ -432,14 +436,7 @@ public class ButtonClass {
 
             livestreamThread = new Thread(() -> {
                 while (!livestreamExited) {
-                    String textToAppend;
-                    int goodOrBad = (int) (Math.random() * 2);
-                    if (goodOrBad == 1) {
-                        textToAppend = livestream.getRandomGood() + "\n";
-                    } else {
-                        textToAppend = livestream.getRandomBad() + "\n";
-                    }
-                    String finalTextToAppend = textToAppend;
+                    spawnComment();
                     SwingUtilities.invokeLater(() -> {
                         livestreamChat.append(finalTextToAppend);
                         livestreamChat.setCaretPosition(livestreamChat.getDocument().getLength());
@@ -448,7 +445,7 @@ public class ButtonClass {
                     });
 
                     try {
-                        Thread.sleep(600);
+                        Thread.sleep(1000);
                     } catch (InterruptedException f) {
                         break;
                     }
@@ -794,6 +791,10 @@ public class ButtonClass {
         miniGameBtn.addActionListener(e -> {
 
         });
+
+        mailback.addActionListener(e -> {
+            cardLayoutPanel.showCard("AppScreen");
+        });
     }
 
     private void customizeButton(JButton button) {
@@ -989,6 +990,10 @@ public class ButtonClass {
 
     public JButton getShopback() {
         return shopback;
+    }
+
+    public JButton getMailback() {
+        return mailback;
     }
 
     public void addPassword() {
@@ -1297,6 +1302,12 @@ public class ButtonClass {
 
         comment.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
+                if (goodOrBad == 0) {
+                    player.deleteAura();
+                } else {
+                    player.addAura();
+                }
+
                 cardLayoutPanel.getLivestreamScreen().remove(comment);
                 comments.remove(comment);
                 repositionComments();

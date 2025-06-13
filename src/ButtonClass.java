@@ -438,8 +438,8 @@ public class ButtonClass {
                 while (!livestreamExited) {
                     spawnComment();
                     SwingUtilities.invokeLater(() -> {
-                        livestreamChat.append(finalTextToAppend);
-                        livestreamChat.setCaretPosition(livestreamChat.getDocument().getLength());
+//                        livestreamChat.append(finalTextToAppend);
+//                        livestreamChat.setCaretPosition(livestreamChat.getDocument().getLength());
                         cardLayoutPanel.getLivestreamScreen().revalidate();
                         cardLayoutPanel.getLivestreamScreen().repaint();
                     });

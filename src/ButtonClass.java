@@ -248,13 +248,9 @@ public class ButtonClass {
         livestreamChat.setEditable(true);
         livestreamChat.setLineWrap(true);
 
-
-        //set text field fonts
-        //usernameText.setFont(new Font("Serif", Font.BOLD, 60));
-//        usernameText.setFont(pressStartFont);
         usernameText.setFont(pressStartFont.deriveFont(45f));
         passwordText.setFont(pressStartFont);
-//        passwordText.setFont(new Font("Serif", Font.BOLD, 60));
+
         livestreamApp.setFont(new Font("Serif", Font.ITALIC, 15));
 
         //set button/text field size
@@ -1374,7 +1370,7 @@ public class ButtonClass {
         winLabel.setBounds(230, 420, 200, 30);
         editScreen.add(winLabel);
 
-        JButton uploadBtn = new JButton("Upload");
+        JButton uploadBtn = new JButton();
         uploadBtn.setBounds(390, 380, 165, 50);
         uploadBtn.addActionListener(ev -> {
             if (winsMiniGame >= 5) {

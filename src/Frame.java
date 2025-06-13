@@ -14,7 +14,6 @@ public class Frame extends JFrame implements ActionListener {
             ticTacToe, gamesScreen, appScreen, roundScreen, shopScreen, shop, endDay,
             rpsWinPage, rpsLoseScreen, editAppScreen;
     private JScrollPane scrollPane;
-    //private JLabel username;
     private ButtonClass buttonClass;
     private CardLayout cardLayout;
     private JPanelAnimation mailPanel;
@@ -165,12 +164,6 @@ public class Frame extends JFrame implements ActionListener {
         switcher2.setBounds(450, 175, 200, 100);
         backgroundScreen.add(switcher2);
 
-//        ArrayList<BufferedImage> arrowAnimation = new ArrayList<>();
-//        BufferedImage img3 = ImageIO.read(new File("src/DesktopPetImages/arrow0.png"));
-//        arrowAnimation.add(img3);
-//        BufferedImage img4 = ImageIO.read(new File("src/DesktopPetImages/arrow1.png"));
-//        arrowAnimation.add(img4);
-
         ArrayList<BufferedImage> arrowAnimation = new ArrayList<>();
         try {
             BufferedImage img3 = ImageIO.read(new File("src/DesktopPetImages/arrow0.png"));
@@ -195,15 +188,12 @@ public class Frame extends JFrame implements ActionListener {
                 backgroundScreen.revalidate();
                 backgroundScreen.repaint();
 
-                // Your existing stuff
                 animation2.updateLocation(450, 265);
                 animation2.updateFrames(animationFrames6);
                 switcher2.setBounds(700, 275, 200, 100);
                 switcher2.setSwitcherActive(false);
             }
         });
-
-
 
         buttonClass.getBookBtn().addActionListener(e -> {
             switcher.setSwitcherActive(true);  // or switcher.setEnabled(true); if you didn't rename
@@ -276,7 +266,6 @@ public class Frame extends JFrame implements ActionListener {
         mailScreen.add(buttonClass.getNext());
         auraInfo.add(buttonClass.getNext());
         rpsWinPage.add(buttonClass.getReturnBtn());
-        //rpsLosePage.add(buttonClass.getReturnBtn());
         rpsLoseScreen.add(buttonClass.getReturnBtn());
         areyousure.add(buttonClass.getYes());
         areyousure.add(buttonClass.getNo());

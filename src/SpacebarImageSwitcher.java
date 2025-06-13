@@ -51,7 +51,6 @@ public class SpacebarImageSwitcher extends JPanel {
                 repaint();
 
                 spacePressCount++;
-                System.out.println("[DEBUG] spacePressCount = " + spacePressCount);
 
                 if (dialogueChangeListener != null) {
                     dialogueChangeListener.onSpacePressed(spacePressCount);
@@ -63,15 +62,6 @@ public class SpacebarImageSwitcher extends JPanel {
     public void setDialogueChangeListener(DialogueChangeListener listener) {
         this.dialogueChangeListener = listener;
     }
-
-//    public void updateImages(ArrayList<BufferedImage> newImages) {
-//        images = new ImageIcon[newImages.size()];
-//        for (int i = 0; i < newImages.size(); i++) {
-//            images[i] = new ImageIcon(newImages.get(i));
-//        }
-//        currentIndex = 0;
-//        repaint();
-//    }
 
     public void setSwitcherActive(boolean active) {
         this.isSwitcherActive = active;

@@ -731,7 +731,7 @@ public class ButtonClass {
                 cardLayoutPanel.showCard("notenough");
                 new javax.swing.Timer(1000, ex -> {
                     cardLayoutPanel.showCard("shop");
-                    ((javax.swing.Timer) e.getSource()).stop();
+                    ((javax.swing.Timer) ex.getSource()).stop();
                 }).start();
             }
             else {
@@ -746,7 +746,7 @@ public class ButtonClass {
                 cardLayoutPanel.showCard("notenough");
                 new javax.swing.Timer(1000, ex -> {
                     cardLayoutPanel.showCard("shop");
-                    ((javax.swing.Timer) e.getSource()).stop();
+                    ((javax.swing.Timer) ex.getSource()).stop();
                 }).start();
             }
             else {

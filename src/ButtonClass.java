@@ -58,6 +58,7 @@ public class ButtonClass {
 
         followersLS = new JLabel(String.valueOf(player.getFollowers()));
         auraLS = new JLabel(String.valueOf(player.getAura()));
+        auraLS = new JLabel(String.valueOf(player.getAura()));
         game0 = new JLabel(new ImageIcon("src/images/LSGame0.png"));
         game1 = new JLabel(new ImageIcon("src/images/LSGame1.png"));
         game2 = new JLabel(new ImageIcon("src/images/LSGame2.png"));
@@ -382,11 +383,11 @@ public class ButtonClass {
             cardLayoutPanel.showCard("LoginInScreen");
         });
 
-        timer = new Timer(3000, e -> {
+        timer = new Timer(1500, e -> {
             int randomIncrement = (int) (Math.random() * 1001);
             player.addFollowers(randomIncrement);
             followersLS.setText(String.valueOf(player.getFollowers()));
-            spawnComment();
+            auraLS.setText(String.valueOf(player.getAura()));
         });
 
         backBtnLS.addActionListener(e -> {
@@ -416,11 +417,10 @@ public class ButtonClass {
             followersLS.setForeground(Color.decode("#31529b"));
             followersLS.setBounds(440, 365, 200, 60);
 
-            auraLS = new JLabel(String.valueOf(player.getAura()));
+            cardLayoutPanel.getLivestreamScreen().add(auraLS);
             auraLS.setFont(pressStartFont.deriveFont(15f));
             auraLS.setForeground(Color.decode("#31529b"));
             auraLS.setBounds(387, 383, 200, 60);
-            cardLayoutPanel.getLivestreamScreen().add(auraLS);
 
             timer.start();
 
@@ -432,23 +432,14 @@ public class ButtonClass {
 
             livestreamThread = new Thread(() -> {
                 while (!livestreamExited) {
-                    String textToAppend;
-                    int goodOrBad = (int) (Math.random() * 2);
-                    if (goodOrBad == 1) {
-                        textToAppend = livestream.getRandomGood() + "\n";
-                    } else {
-                        textToAppend = livestream.getRandomBad() + "\n";
-                    }
-                    String finalTextToAppend = textToAppend;
+                    spawnComment();
                     SwingUtilities.invokeLater(() -> {
-                        livestreamChat.append(finalTextToAppend);
-                        livestreamChat.setCaretPosition(livestreamChat.getDocument().getLength());
                         cardLayoutPanel.getLivestreamScreen().revalidate();
                         cardLayoutPanel.getLivestreamScreen().repaint();
                     });
 
                     try {
-                        Thread.sleep(600);
+                        Thread.sleep(1000);
                     } catch (InterruptedException f) {
                         break;
                     }
@@ -1300,6 +1291,12 @@ public class ButtonClass {
 
         comment.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
+                if (goodOrBad == 0) {
+                    player.deleteAura();
+                } else {
+                    player.addAura();
+                }
+
                 cardLayoutPanel.getLivestreamScreen().remove(comment);
                 comments.remove(comment);
                 repositionComments();

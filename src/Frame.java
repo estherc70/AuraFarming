@@ -256,7 +256,7 @@ public class Frame extends JFrame implements ActionListener {
         editAppScreen.add(buttonClass.getMiniGameBtn());
         gamesScreen.add(buttonClass.getTicTacToeApp());
         livestreamScreen.add(buttonClass.getBackBtnLS());
-        livestreamScreen.add(buttonClass.getScrollPane(), BorderLayout.CENTER);
+//        livestreamScreen.add(buttonClass.getScrollPane(), BorderLayout.CENTER);
         gamesScreen.add(buttonClass.getRpsGame());
         ticTacToe.add(buttonClass.getBackBtnTTT());
         ticTacToe.add(buttonClass.getTic1());
@@ -316,7 +316,7 @@ public class Frame extends JFrame implements ActionListener {
         mainPanel.add(victoryScreen, "VictoryScreen");
         mainPanel.add(losingScreen, "LosingScreen");
 
-        livestreamScreen.add(scrollPane);
+//        livestreamScreen.add(scrollPane);
 
         ArrayList<BufferedImage> currentSponsor = sponsors.getRandomSponsors();
         ArrayList<Integer> usedSponsor = sponsors.getUsedSponsors();

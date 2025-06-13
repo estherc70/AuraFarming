@@ -1,6 +1,7 @@
 import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -25,6 +26,7 @@ public class ButtonClass {
     private JPanel btnPanel, mainPanel;
     private Frame cardLayoutPanel;
     private JPanelAnimation animation;
+    private java.util.List<JLabel> comments = new ArrayList<>();
     private Livestream livestream;
     private Sponsors sponsors;
     private Font pressStartFont;
@@ -384,6 +386,7 @@ public class ButtonClass {
             int randomIncrement = (int) (Math.random() * 1001);
             player.addFollowers(randomIncrement);
             followersLS.setText(String.valueOf(player.getFollowers()));
+            spawnComment();
         });
 
         backBtnLS.addActionListener(e -> {
@@ -1274,6 +1277,55 @@ public class ButtonClass {
                 }
             }
         });
+    }
+
+    public void spawnComment() {
+        String textToAppend;
+        int goodOrBad = (int) (Math.random() * 2);
+        if (goodOrBad == 0) {
+            textToAppend = livestream.getRandomGood();
+        } else {
+            textToAppend = livestream.getRandomBad();
+        }
+        String finalTextToAppend = textToAppend;
+        JLabel comment = new JLabel(finalTextToAppend);
+        comment.setOpaque(true);
+        comment.setSize(178, 24);
+
+        if (goodOrBad == 0) {
+            comment.setBackground((Color.decode("#f5fff3")));
+        } else {
+            comment.setBackground(Color.decode("#fff0f0"));
+        }
+
+        comment.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                cardLayoutPanel.getLivestreamScreen().remove(comment);
+                comments.remove(comment);
+                repositionComments();
+                cardLayoutPanel.getLivestreamScreen().repaint();
+            }
+        });
+
+        comments.add(0, comment); // New comments go to the top of the list
+        cardLayoutPanel.getLivestreamScreen().add(comment);
+
+        if (comments.size() > 13) {
+            JLabel removed = comments.remove(comments.size() - 1);
+            cardLayoutPanel.getLivestreamScreen().remove(removed);
+        }
+
+        repositionComments();
+        cardLayoutPanel.getLivestreamScreen().repaint();
+    }
+
+    private void repositionComments() {
+        int startY = 110;
+        int centerX = 606;
+        for (int i = 0; i < comments.size(); i++) {
+            JLabel comment = comments.get(i);
+            comment.setLocation(centerX, startY + i * (24 + 1));
+        }
     }
 
     public JButton getBackBtnEndDay() {

@@ -16,7 +16,7 @@ public class ButtonClass {
             endDay, accept, decline, next,
             ticTacToeApp, rpsGame, singleBtn, doubleBtn,
             shop, backBtnLS, backBtnRPS, backBtnTTT,
-            backBtnEdit, returnBtn, backBtnEndDay, hundredAura, thousandAura, twoThousandAura, yes, no;
+            backBtnEdit, returnBtn, backBtnEndDay, hundredAura, thousandAura, twoThousandAura, yes, no, mailback;
     private JButton tic1,tic2, tic3, tic4, tic5, tic6, tic7, tic8, tic9, checkWinner, shopback, miniGameBtn;
     private JTextArea livestreamChat;
     private JScrollPane scrollPane;
@@ -117,6 +117,7 @@ public class ButtonClass {
         yes = new JButton();
         no = new JButton();
         miniGameBtn = new JButton();
+        mailback = new JButton();
 
         round = 1;
         wins = 0;
@@ -231,6 +232,8 @@ public class ButtonClass {
         //setButtonOpaque(miniGameBtn);
         customizeButton(miniGameBtn);
 
+        customizeButton(mailback);
+
         //customizeButton(next);
 
         livestreamChat.setEditable(true);
@@ -281,6 +284,7 @@ public class ButtonClass {
         returnBtn.setBounds(450,450,100,50);
         backBtnEndDay.setBounds(610,130,30,30);
         miniGameBtn.setBounds(200,450,100,50);
+        mailback.setBounds(40, 60, 270, 70);
 //       hundredAura.setBounds(60, 450, 40, 200);
 //        thousandAura.setBounds(150, 450, 40, 200);
 //        twoThousandAura.setBounds(250, 450, 40, 200);
@@ -797,6 +801,10 @@ public class ButtonClass {
         miniGameBtn.addActionListener(e -> {
 
         });
+
+        mailback.addActionListener(e -> {
+            cardLayoutPanel.showCard("AppScreen");
+        });
     }
 
     private void customizeButton(JButton button) {
@@ -992,6 +1000,10 @@ public class ButtonClass {
 
     public JButton getShopback() {
         return shopback;
+    }
+
+    public JButton getMailback() {
+        return mailback;
     }
 
     public void addPassword() {

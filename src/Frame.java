@@ -280,6 +280,7 @@ public class Frame extends JFrame implements ActionListener {
         rpsLoseScreen.add(buttonClass.getReturnBtn());
         areyousure.add(buttonClass.getYes());
         areyousure.add(buttonClass.getNo());
+        mailScreen.add(buttonClass.getMailback());
 
         mainPanel.add(startScreen, "StartScreen");
         mainPanel.add(tutorialScreen, "TutorialScreen");
